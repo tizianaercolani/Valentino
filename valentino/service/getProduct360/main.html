@@ -1,0 +1,30 @@
+
+   [boundary]inner:prod3d[/boundary]
+   [#if list.size()>0]<img id="product-3d"
+			class="product-3d"
+			src="${BC.getTenantBaseUrl(serviceItem)}store_app/product-3d.png" onclick="productHandler.prod360Show()" /> 
+	[#else]
+	<!-- NO 360 -->
+    [/#if]
+
+  [boundary]script[/boundary]
+
+productHandler.current360=[
+[#list list as l]
+[#if l_index>0 ],[/#if]
+{
+   "model":"${l.model}",
+   "color":"${l.color}",
+   "fabric":"${l.fabric}",
+   "url":"${l.url}"
+}
+[/#list]
+];
+
+
+        		   
+   	
+
+
+
+

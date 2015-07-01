@@ -1,0 +1,106 @@
+[#assign last_username=BC.getParamOrCookie(ctx,'cookie_username')!""]
+[#assign last_region=BC.getParamOrCookie(ctx,'cookie_region')!""]
+[#assign last_brand=BC.getParamOrCookie(ctx,'brand')!""]
+[#assign barCodeAlias=BC.getParamOrCookie(ctx,'barCodeAlias')!""]
+[#include "../../TENANT-INF/version.html"]
+<html>
+<head>
+<script>
+[#include "../../TENANT-INF/dialogs.html"]
+</script>
+<script src="${this.request.contextPath}/res/widget.js"></script>    
+<link href="${widget.baseUrl}render.css?v=${scriptversion!}" rel="stylesheet">
+
+<script src="${this.request.contextPath}/res/run.js"></script>
+<script src="${this.request.contextPath}/res/widget.js"></script>
+<script src="${this.request.contextPath}/res/jquery/jquery.min.js"></script>
+<link href="${this.request.contextPath}/res/font-awesome.css" rel="stylesheet">
+<link href="${widget.tenantBaseUrl}render.css?v=${scriptversion!}" rel="stylesheet">
+<script src="${widget.tenantBaseUrl}script.js?v=${scriptversion!}"></script>
+<script src="${widget.tenantBaseUrl}changepassword.js?v=${scriptversion!}"></script>
+<script src="${widget.tenantBaseUrl}roller.js?v=${scriptversion!}"></script>
+<script src="${widget.baseUrl}script.js?v=${scriptversion!}"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<style type="text/css">
+
+#imgBackground{
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0;
+	z-index:11;
+	left:0;
+	background:url("${widget.tenantBaseUrl}store_app/wallpaper.jpg");
+	background-repeat:no-repeat;
+	background-size: 100% 100%;
+	opacity:0.3;
+	}
+	@font-face {
+    font-family: 'DIN_Medium'; 
+   
+    src:url('${widget.tenantBaseUrl}store_app/DINRg.ttf') format('truetype'); /* Safari, Android, iOS */
+    }
+  </style>
+</head>
+<body>
+ <div id="imgBackground"></div>
+<div id="centerDiv">
+<div id="spanElement"><span >CREDENTIAL</span></div>
+<form id="form-login" onsubmit="return validate(event)" action="run.app" method="POST" autocorrect="off" autocapitalize="off" autocomplete="off">
+	
+	<center>
+	<p id="name-logo"></p>
+	  <center>     <div id="logo" >
+        		<span ><img src="${widget.tenantBaseUrl}store_app/VAL-logo.png" /></span>
+        	</div>   </center>
+	<input id="username" class="inputText" name="username" type="text" placeholder="Username" value="${last_username}" onfocus="csText(this);rePos(this)" onblur="fsText(this)"><br><br>
+	<input class="inputText" id="password" name="password" type="password" placeholder="Password" ><br/><br/>
+ 	
+
+
+	
+	<input id="brand" class="inputText" name="brand" type="hidden" placeholder="Brand"
+	[#if last_brand?has_content]
+		 value="${last_brand!}">
+	[#else]
+		value="">
+	[/#if]
+	
+	<input id="region" class="inputText" name="region" type="hidden" placeholder="Brand" value="FAREAST">
+
+	<button id="loginButton" >LOGIN</button><br>
+	<p id="changePwLogin" onclick="changePw.show()">CHANGE PASSWORD</p>
+	</center>
+</form>
+<br>
+	<center>
+	<!--  >label id="errorLabel" class="errorLabel">[#if authError??]${authError?js_string}[/#if]</label-->
+	</center>
+</div>
+	
+<script>
+	setLastUser();
+	var barCodeAlias="${barCodeAlias}";
+	var lastRegion='${last_region}';
+
+</script>
+[#include "../../TENANT-INF/changepassword.html"]
+<div id="ajaxBusy"><div id="spinner" style="z-index:11;"><img src="${widget.tenantBaseUrl}store_app/loading1.gif" style="width:200%;margin-left:30%;"></div></div>
+<div id="modal"><div id="modal-content"></div></div>
+[#if authError??]
+	[#assign now = new("it.dsgroup.warp.util.Datetime")]
+	<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+
+	RESPONSE
+	result:  ${resp.getResult()?string!}
+	code: ${resp.getCode()!}
+	description: ${resp.getDescription()!}
+
+	-->
+	<script>
+	shake('centerDiv');
+	hideActInd();
+	showBasicDialog("${authError?js_string}");
+	</script>[/#if]
+</body>	
+</html>

@@ -1,0 +1,12 @@
+<div class="user" >
+	<i class="${renderItem.spec.icon!}"></i> ${renderItem.pathName!?html}
+	<i onclick="window.parent.edit()" class="icon-pencil edit"></i>
+	<div class="extra">
+		Full path name <b>[#list renderItem.path as item][#if item_index != 0]/[/#if]${item.pathName!}[/#list]</b><br>
+		[#list renderItem.attributeList as attribute]
+			[#if attribute.spec?? && attribute.spec.visible && attribute.type != 'resource']
+				${attribute.name}[#if attribute.spec.multiLang] (${attribute.lang})[/#if] <b>${attribute.value!?html}</b><br>
+			[/#if]	
+		[/#list]
+	</div>
+</div>

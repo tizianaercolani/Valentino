@@ -1,0 +1,24 @@
+[#compress] 
+<html>
+<head>
+	<link href="${this.request.contextPath}/res/font-awesome.css" rel="stylesheet">
+	<link href="${widget.baseUrl}render.css" rel="stylesheet">
+</head>
+<body class="view">
+[#if !renderItem.useWidget]
+	[#include "raw-info.html"]
+[#elseif renderItem.type == "user"]
+	[#include "user.html"]	
+[#elseif renderItem.type == "users"]
+	[#include "users.html"]	
+[#elseif renderItem.type == "group"]
+	[#include "group.html"]	
+[#elseif renderItem.type == "groups"]
+	[#include "groups.html"]	
+[#else]
+	[#include "raw-info.html"]
+[/#if]
+</body>
+</html>
+[/#compress]
+

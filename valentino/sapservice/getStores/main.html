@@ -1,0 +1,19 @@
+[boundary]inner:infoStore[/boundary]
+
+<table border="0" cellpadding="0">
+[#list info as row]
+		
+		[#list row.keySet() as k]
+	    [#if k=="KUNWE_INSEGNA"]
+		<tr><td>${row.get(k)}</td></tr>
+		[/#if]
+		 [#if k=="KUNWE_STRAS"]
+		<tr><td>${row.get(k)}</td></tr>
+		[/#if]
+		[#if k=="ID_REGION"]
+		<tr><td>${row.get(k)}</td></tr>
+		[/#if]
+	[/#list]
+	
+[/#list]
+</table>

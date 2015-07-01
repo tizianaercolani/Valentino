@@ -1,0 +1,122 @@
+[#include "../../TENANT-INF/macro.html"]
+[#assign crm = renderItem.createChild("crm")]
+${crm.selfSpecify()!}
+[@page]
+<!-- [@getGraphic "HOME"  /] -->
+
+<div id="cardHeader">
+valentino 
+</div>
+<div id="containerProfile_Client">
+<img id="backgroundImg-profileClient" src="http://valentino-view.4me.it/api/xcontents/resources/delivery/getThumbnail/valentino/640x480/66b6f64f-c5e6-4340-89ba-ddea38fb173c.jpg">
+<div id="profile_Client">
+
+		<div id="search_client">
+			<p>PROFILE CLIENT</p>
+			<hr width='95%' size='1' color='ffffff'>
+			<div id="inputSearch">
+				<table align="right" id="table_search">
+					<tr id="row_clientId" class="tr_showHide">
+						<td><label class="label_search" >CLIENT ID</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="10" class="client_id" type="text" id="clientId"></td>
+			            
+					</tr>
+					 <tr id="row_lastName" class="tr_showHide">
+						<td><label class="label_search">LAST NAME</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="10"  class="client_id" type="text" id="lastName"></td>
+						 
+					 </tr>
+					 <tr id="row_firstName" class="tr_showHide">
+						<td><label class="label_search">FIRST NAME</label></td>
+						<td style="width:72%"><input autocorrect="off" maxlength="10" autocomplete="off" class="client_id" type="text"id="firstName"></td>
+						
+					</tr>
+					 <tr id="row_otherAlphabet" class="tr_showHide">
+						<td><label class="label_search">OTHER ALPHABET</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" class="client_id" type="text"id="otherAlphabet"></td>
+						 
+					</tr>
+					
+					 <tr id="row_company" class="tr_showHide">
+						<td><label class="label_search">COMPANY</label></td>
+						<td style="width:72%"><input autocorrect="off" maxlength="40" autocomplete="off" class="client_id" type="text"id="company"></td>
+						 
+					</tr>
+					 <tr  id="row_mainPhone" class="tr_showHide">
+						<td><label class="label_search">MAIN PHONE</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="30" class="client_id" type="text"id="mainPhone"></td>
+						
+					</tr>
+					 <tr id="row_zip" class="tr_showHide">
+						<td><label class="label_search">ZIP</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="10" class="client_id" type="text" id="zip"></td>
+						 
+					</tr>
+					 <tr id="row_country" class="tr_showHide">
+						<td><label class="label_search">COUNTRY</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" class="client_id" type="text"id="country"></td>
+						
+					</tr>
+					
+					
+				</table>
+			</div>
+		[#assign children= renderItem.children]
+        [#list children as child]
+             [#assign childId= child.id]
+        [/#list]	
+		<img id="store_clientSearch" src="${widget.tenantBaseUrl}store_app/store-client.png" onclick="SearchCustomers(${childId})"/>	
+		<img id="add_clientSearch" src="${widget.tenantBaseUrl}store_app/add-client.png"/>
+		</div>
+
+
+    	</div>
+</div>
+
+<div id="list_alphabet" >
+
+<hr width='90%' size='1' color='ffffff'>
+<div id="scrollerRoller" onscroll="scrollLetter()">
+<table id="rollingTable" cellpadding=0 cellspacing=0>
+<tr><td><div style="width:40px;">&nbsp;</div></td><td><div style="width:40px;">&nbsp;</div></td><td><div style="width:40px;">&nbsp;</div></td>
+[#list crm.getAttribute("alphabetic_list").spec.getResolvedOptions(crm) as list]
+<td class="font_inactive"  target="${list.label!?html}" class="letter"><div style="width:40px;">${list.label!?html}</div></td>
+[/#list]
+<td><div style="width:40px;">&nbsp;</div></td><td><div style="width:40px;">&nbsp;</div></td>
+</tr>
+</table>
+</div>
+<div style="left:6%;position:absolute;color:#ffffff; z-index:10; top:26%; width:90%">
+<span style="left:30%; top:26%;  "class="descriptionButton">SWIPE TO SELECT LETTER</span>
+<br><hr width='100%' size='1' color='#ffffff' ></div>
+<div id="item-star" onclick="searchAssociate(${childId})">
+<i class="icon-star"></i><br>
+<span class="descriptionButton">TAP HERE TO SHOW ONLY MY ADDRESS BOOK</span>
+
+</div>
+
+<div style="position:absolute; left: 6%; color:#ffffff; z-index:2; top:66%; width:90%"><hr width='100%' size='1' color='#ffffff'></div>
+<div id="searchRubrica"><input autocorrect="off" autocomplete="off" type="text" id="input-searchRubrica" onkeyup="activeSearch(${childId})"> <br>
+<span style="left:30%; padding-bottom:2%;"class="descriptionButton">TAP HERE TO SELECT CUSTOMER</span>
+<br>
+<img style="width:105% ; margin-top:14px" src="${widget.tenantBaseUrl}store_app/search_crm_1.png">
+</div>
+
+</div>
+
+<div id="rubrica_Consumers">
+
+</div>
+
+
+[/@page]
+[#include "newprospect.html"]
+<script>
+
+
+$("#row_lastName").offset()
+
+getById('rollingTable').rows[0].cells[3].setAttribute("class", "font_active");
+getFilterCustomers('');
+
+</script>

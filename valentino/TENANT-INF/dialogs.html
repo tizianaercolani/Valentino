@@ -1,0 +1,70 @@
+[#-- dialogs.hml  contiene tutti i dialog che possono servire all'interno dell'applicazione. Da includere all'interno di un tag script --]
+
+[#assign waitingDialog]
+	<div id="done">
+		<div class="txt">
+			[MESSAGE]
+		</div>
+		
+	</div>
+[/#assign]
+
+var waitingDialog = "${waitingDialog?js_string}"
+
+[#assign basicDialog]
+	<div id="done">
+		<div class="txt">
+			[MESSAGE]
+		</div>
+		<div class="dactions">
+			<button class="daction" onclick="hideModal()"><span>ok</span></button>
+		</div>
+	</div>
+[/#assign]
+
+
+var basicDialog = "${basicDialog?js_string}";
+
+[#assign waitBarcodeDialog]
+	<div id="done">
+		<div class="txt" id="waitBarcode">
+			Hardware INFINEA connected.<br>Please press the button on the hardware and scan the barcode.
+		</div>
+		<div class="dactions">
+			<button class="daction" onclick="hideModal()"><span>Cancel </span></button>
+		</div>
+	</div>
+[/#assign]
+
+
+var waitBarcodeDialog = "${waitBarcodeDialog?js_string}"
+
+[#assign yesnoDialog]
+	<div id="done">
+		<div class="txt">
+			[MESSAGE]
+		</div>
+		<div class="dactions">
+			<button class="daction" onclick="[YES]"><span>YES</span></button><button class="daction" onclick="hideModal()"><span>NO</span></button></button>
+		</div>
+	</div>
+[/#assign]
+
+
+var yesnoDialog = "${yesnoDialog?js_string}"
+
+
+
+[#assign yesnocancelDialog]
+	<div id="done">
+		<div class="txt">
+			[MESSAGE]
+		</div>
+		<div class="dactions">
+			<button class="daction" onclick="[YES]"><span>YES</span></button><button class="daction" onclick="[NO]"><span>NO</span></button><button class="daction" onclick="hideModal()"><span>CANCEL</span></button>
+		</div>
+	</div>
+[/#assign]
+
+
+var yesnocancelDialog = "${yesnocancelDialog?js_string}"

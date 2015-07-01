@@ -1,0 +1,167 @@
+.checkboxN{
+	background-image:url(../store_app/checkbox-false.png);
+	width:30px;
+	height:30px;
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.checkboxN.checked{
+	background-image:url(../store_app/checkbox-true.png);
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+	
+}
+
+#fakeNew, 
+#realNew {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#realNew{
+    z-index: 10;
+    background-color:transparent;
+color:transparent
+}
+#mandatory{
+
+position:absolute;
+top:730px;
+left:10px;
+z-index:11;
+width:50px;
+color:white;
+
+
+}
+#BirthdtNew{
+position:absolute;
+z-index:2;
+width:50px;
+height: 45px;
+left:5;
+background-color:transparent;
+color:transparent !IMPORTANT;
+}
+
+#BirthdtCheckNew{
+	position:absolute;
+    top: 0;
+    z-index: 700;
+   margin-left:182px;
+}
+
+#dateContainerNew {
+   width: 100%;
+    height: 30px;
+    position: relative;
+    background-color:white;
+}
+
+#newProspect{
+	-webkit-animation: fadeIn 1s;
+	position: absolute;
+	display:none;
+	top:160px;
+	width:450px;
+	left:160px;
+	
+}
+#newProspect p{
+	color:white;
+	font-weight:10;
+	font-size:35px;
+		font-family: 'DIN_Medium' ;
+	line-height:10px;
+	right:0px;
+	margin-bottom:13px;
+	
+	
+}
+
+
+#newProspect input{
+	color:black;
+	font-size:15px;
+	font-family: 'DIN_Medium' ;
+	width:100%;
+	height:30px;
+	border:none;
+	border-style:none;
+	border-radius:0px;	
+	margin-right:0px;
+}
+#newProspect select{
+	color:black;
+	font-size:15px;
+	font-family: 'DIN_Medium' ;
+	background-color:white;
+	width:100%;
+	height:30px;
+	border:none;
+	border-style:none;
+	border-radius:0px;	
+	margin-right:0px;
+}
+
+#newTable tr td:first-child{
+	color: white;
+font-size: 15px;
+ text-transform: uppercase;
+}
+#newTable tr td:nth-child(2){
+	
+}
+
+#newTable td{
+	padding-top:3px;
+	padding-bottom:3px;
+}
+#inputNew{
+	overflow-x:hidden;
+	overflow-y: scroll;
+	height: 620px;
+	width:100%;
+	-webkit-overflow-scrolling: touch;
+	position:relative;
+   top:5%;
+    right:0px;
+   left:-70px;
+}
+
+
+
+
+
+
+.label_new{
+	
+	color:white;
+	font-size:15px;
+	font-width:20px;
+	
+}
+
+#store_clientNew{
+margin-left: 155px ;
+width:170px;
+display: inline-block;
+text-align:center;
+}
+#ImTelNumpreMoN,#ImTelNumpreMaN
+{
+	width:35% !IMPORTANT;
+	margin-right:3% !IMPORTANT;
+	display:inline-block;
+	
+}
+#SimTelNumberMoN,#SimTelNumberMaN
+{
+	width:60% !IMPORTANT;
+	display:inline-block;
+	
+}
+

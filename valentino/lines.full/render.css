@@ -1,0 +1,76 @@
+
+*{
+
+	
+	-webkit-user-select: none;
+}
+#logo{
+	position : fixed;
+	z-index:11;
+	width:20%;
+	top:50px;
+	left:23%;
+	color:white;
+	font-size: 600%;
+	-webkit-animation: fadeIn 1s;
+}
+#background_image{
+		position : fixed;
+	    z-index:1;
+	    opacity:0.3;
+	    top:0px;
+	    left:0px;
+}
+#background_image img{
+	    width: 120%;
+	    heigth:130%;
+	       -webkit-filter: blur(1px);
+	   -webkit-transform:traslate3d(0,0,0);
+	   -webkit-animation: fadeIn 0.3s;
+}
+#background_image{
+		position : fixed;
+	    z-index:1;
+	    opacity:0.6;
+	    top:0px;
+	    left:0px;
+}
+#background_image img{
+	    width: 120%;
+	    heigth:130%;
+}
+
+
+
+
+.description_collection{
+	position:absolute;
+	center;
+	z-index: 11;
+    top:600px;
+    left:14%;
+    width:70%;
+    color:white;
+    font-size:300%;
+    text-align:center;
+    font-family:  AmericanGIBT;
+     text-shadow: 1px 2px 3px #111111;
+}
+
+
+
+
+#slider_elementx6 {
+	position: relative;
+	z-index: 10;
+    margin-top:20%;
+
+}
+
+#slider_elementx6 table td img{
+	width:200px;
+}
+.box-collection{
+	position:relative;
+	
+}

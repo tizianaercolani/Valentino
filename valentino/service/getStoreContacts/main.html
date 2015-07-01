@@ -1,0 +1,29 @@
+<!-- 
+
+title: ${ctx.getParameter("title")!}
+store: ${ctx.getParameter("store")!}
+cardId: ${ctx.getParameter("cardId")!}
+currentAssociate : ${ctx.getParameter("currentAssociate")!}
+associate : ${ctx.getParameter("associate")!}
+
+ -->
+
+[boundary]outer:rubrica_Consumers[/boundary]
+[#assign cardId=ctx.getParameter("cardId")]
+[#assign currentAssociate=ctx.getParameter("currentAssociate")]
+<div id="rubrica_Consumers">
+<table id="rubrica" >
+[#list contacts as cust]
+<tr><td onclick='showClientCard(
+{
+		 clientId:"${cust.code}",
+		 callerMode:"ADDRESS",
+		 label:"${cust.title!?html}"
+		 })'>
+[#if cust.associate?? && currentAssociate==cust.associate]
+<i class="icon-star"></i>
+[/#if]
+${cust.title!?html}</td></tr>
+[/#list]
+</table>
+</div>

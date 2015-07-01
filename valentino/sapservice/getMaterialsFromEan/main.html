@@ -1,0 +1,12 @@
+[#assign material=""]
+[#if info??]
+[#list info as row]
+[#assign material=row.get("MATNR")!]
+[/#list]
+[/#if]
+{
+   "error": "${error!}",
+   "material": "${material!}"
+}
+
+

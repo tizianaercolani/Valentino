@@ -1,0 +1,4 @@
+[#assign flavour = BC.getParamOrCookie(ctx,"flavour")]
+[#if flavour?has_content]
+	${renderItem.setFlavour(flavour)!}
+[/#if]

@@ -1,0 +1,5 @@
+{
+	"synchId": ${entitySynchInfo.id},
+	"save" :  [ [#list entitySynchInfo.saveEntities as item][#if item_index > 0],[/#if]"${item.chiave}"[/#list] ],
+	"delete" : [ [#list entitySynchInfo.deleteChecksums as cs][#if cs_index > 0],[/#if]"${cs.split("\\|")[0]}"[/#list] ]
+}

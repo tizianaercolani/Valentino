@@ -1,0 +1,135 @@
+[#include "../../TENANT-INF/macro.html"]
+[#include "../../TENANT-INF/crmmacros.html"]
+[@page]
+[#assign children= renderItem.children]
+        [#list children as child]
+             [#assign cardId= child.id]
+        [/#list]
+
+<style>
+#bgDiv{
+	
+  content: url("${widget.tenantBaseUrl}store_app/crm_bg.jpg");
+  
+
+background-repeat: no-repeat;
+background-position: -200px 0px;
+  
+  top: 50;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width:100%;
+  height:95%;
+  position: absolute;
+  z-index: -1; 
+  opacity: 0.3;
+  
+
+}
+</style>
+<script>
+
+var cardId=${cardId};
+var startMode="${ctx.getParameter('startMode')!}"
+
+</script>
+
+<div  id="bgDiv"></div>
+<div id="logo" onclick="window.location.assign('run.app')">
+        		<span ><img src="${widget.tenantBaseUrl}store_app/VAL-logo.png" /></span>
+        	</div>
+<div id="storeInfo">
+<span>All informations are referred to this store:</span>
+<div id="storeDesc">${authUser.stores.get(currentStoreIndex?number).getName()}<br><span class="indirizzoStore">${authUser.stores.get(currentStoreIndex?number).getStreet()}</span></div>
+[#if authUser.getDistinctStores().size()>1]
+
+
+
+
+<select id="storeSelect" onchange="changeStore()">
+[#list authUser.getDistinctStores() as store]
+<option value="${store_index}" [#if store_index==currentStoreIndex?number]selected[/#if]>${store.getName()!}, ${store.getBrand()!}</option>
+
+[/#list]
+</select>
+
+<div id="tapToSelect" class="arrowedText">TAP HERE TO CHANGE</div>
+[/#if]
+
+
+</div>
+<div id="homeCRM" >
+<div class="homeButton">
+<img id="store_addressButton" style="margin-left:-12px; margin-bottom:5px;"src="${widget.tenantBaseUrl}store_app/rubrica.png" onclick="changeMode('ADDRESS')"/>	
+<div  class="arrowedText">ADDRESS BOOK OF THIS STORE</div>
+</div>
+<div class="homeButton">
+<img id="store_searchButton" src="${widget.tenantBaseUrl}store_app/store-client.png" onclick="changeMode('SEARCH')"/>	
+<div  class="arrowedText">FIND CUSTOMER IN ALL STORES</div>
+</div>
+<!-- ${authUser.role?lower_case} -->
+[#if authUser.role?lower_case!="storeassistant"]
+<div class="homeButton">
+<img id="add_clientButton" src="${widget.tenantBaseUrl}store_app/add-client.png" onclick="changeMode('NEW')"/>
+<div  class="arrowedText">ADD NEW CUSTOMER TO THIS STORE</div>
+</div>
+[/#if]
+
+</div>
+
+[#include "search.html"]
+[#include "addressbook.html"]
+[#include "results.html"]
+[#include "newprospect.html"]
+
+<link href="${widget.tenantBaseUrl}customerCard/render.css?v=${scriptversion!}" rel="stylesheet">
+<script src="${widget.tenantBaseUrl}customerCard/cardHandler.js" ></script>
+[#include "../../customerCard/WIDGET-INF/card.html"]
+[#include "../../customerCard/WIDGET-INF/productDetail.html"]
+
+[#if ctx.getParameter('display')?? && ctx.getParameter('display')=="quest"]
+<link href="${widget.baseUrl}quest.css?v=${scriptversion!}" rel="stylesheet">
+<style>
+#bgDiv{
+	
+  content: url("${widget.tenantBaseUrl}store_app/crm_bg.jpg");
+  
+
+background-repeat: no-repeat;
+background-position: -200px 0px;
+  
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width:100%;
+  height:100%;
+  position: absolute;
+  z-index: -1; 
+  opacity: 0.3;
+  
+
+}
+</style>
+
+
+[/#if]
+[/@page]
+<script>
+
+cardHandler.onDocumentReady();
+if(startMode)
+{
+	changeMode(startMode);
+}
+else
+{
+	changeMode("HOME");
+}
+[#if !ctx.getParameter('display')?? || ctx.getParameter('display')!="quest"]
+var bgUrl="[@getGraphic "CRM"  /]";
+
+refreshAlphabet()
+[/#if]
+</script>

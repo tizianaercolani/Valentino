@@ -1,0 +1,81 @@
+[#compress]
+<!-- 
+Carica la pagina del prodotto
+
+-logo
+-dati four me nella scheda dettaglio
+-slide con tutte le varianti di colore
+
+
+ -->
+
+[#assign brand=prodInfo.get("brand")]
+
+[boundary]inner:logo[/boundary]
+<span><img src="${BC.getTenantBaseUrl(serviceItem)}store_app/${brand}-logo.png" /></span>
+<style>
+[#if brand=='VAL' || brand=='VMA']
+#logo img{
+width:150px;		
+-webkit-filter: invert(1);
+}
+
+[#else]
+#logo img{
+width:150px;	
+}
+[/#if]
+</style>
+
+
+[boundary]inner:FourMeData[/boundary]
+
+<table border="0" cellpadding="0">
+	
+	<tr>
+		<td><b> SEASON:</b></td>
+		<td><b> ${prodInfo.season!'N.D.'}<b></td>
+	</tr>
+	<tr>
+		<td><b> COLLECTION:</b></td>
+		<td><b> ${prodInfo.collection!'N.D.'}<b></td>
+	</tr>
+	<tr>
+		<td><b> LINE:</b></td>
+		<td><b> ${prodInfo.line!'N.D.'}</b></td>
+	</tr>
+
+</table>
+[boundary]inner:slider_element[/boundary]
+ <!-- div u="slides" style="background-color:white; position: absolute; left: 0px; top: 0px; width:768px; height:1024px; overflow: hidden;"-->   
+[#assign colore=ctx.getParameter("color")!]
+
+[#list listProd as item]
+     [#if item.color==colore]
+        		   [#assign id_color=item_index]
+     [/#if]
+  
+        		  <div id='${item_index!}' class="prodSlide">
+        		   <center><img id='${item.color!}' class="prodImg" style="max-width:768px; max-height:1024px; overflow:hidden " fabric="${item.fabric!''}" color="${item.color!''}"  src2="${item.thumb!''}"src="${item.full!''}"/></center> 
+        		  </div>
+
+[/#list]
+<!--  /div -->
+[#if !id_color?has_content]
+[#assign id_color='0']
+[/#if]
+
+[boundary]script[/boundary]
+
+
+
+//jssor_slider1_starter('slider_element');
+//jssor_slider1.$GoTo('${id_color}');
+productHandler.brand="${brand}";
+
+
+productHandler.openCallback(${id_color});
+
+hideActInd();
+
+[/#compress]

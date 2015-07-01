@@ -1,0 +1,71 @@
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+
+clientId:${ctx.getParameter("clientId")!}
+username:${ctx.getParameter("username")!}
+
+-->
+
+[#assign cli= ctx.getParameter("clientId")!]
+[#assign username= ctx.getParameter("username")!]
+[#if cli?? && username??]
+[#assign lookCriteria]
+{
+        "type":"wishitem",
+		"parentId":${renderItem.getIdByPath("wishlist")!0},
+		"order":
+    	{
+    	"name":"insertionDate",
+    	 "direction":"desc"
+    	},
+    	attributes:
+    	[
+	    	
+	    	{
+			        "name":"clientId",
+			        "string_value": "${cli!}"
+			},
+			{
+			        "name":"username",
+			        "string_value": "${username!}"
+			}
+			
+		]
+}
+
+[/#assign]
+
+<!-- ${lookCriteria} -->
+${renderItem.setCriteriaJson(lookCriteria)!}
+${renderItem.setLimit(-1)!}
+[#assign wishlist= renderItem.search]
+
+[boundary]outer:wishTable[/boundary]
+<table id="wishTable" >
+[#if wishlist.size()==0]
+<tr><td>NO ITEM IN WISHLIST FOR THIS CUSTOMER</td></tr>
+
+[#else]
+
+
+[#list wishlist as wish]
+[#if wish_index%2==0]<tr>[/#if]
+<td class="outerTd">
+<div class="wishTitle">${wish.prodId!}</div>
+<table class="wishInnerTable">
+<tr>
+	<td onclick="cardHandler.toggleWishItem('${wish.id!}')"><img class="wishSelect" targetId="${wish.id!}" id="wishSelect${wish.id!}" src="${widget.tenantBaseUrl}store_app/select_empty_icon.png"></td>
+					<td class="wishListThumbContainer"><img  src="${wish.thumbUrl}"></td>
+					<td>COLOR:${wish.color!}<br> SIZE:${wish.size!}<br>STATUS:${wish.status!}  </td>
+				</tr>
+</table>
+
+</td>
+[#if wish_index%2==1]</tr>[/#if]
+[/#list]
+[/#if]
+</table>
+[#else]
+No client id or username specified
+[/#if]

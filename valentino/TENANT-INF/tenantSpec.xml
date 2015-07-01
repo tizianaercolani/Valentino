@@ -1,0 +1,293 @@
+<tenant>
+
+    <collection type="homepage" name="homepage">
+		<editor flavours="grid,full" childs="catalogs,crm,quest,link" icon="icon-tablet" label="Homepage" />
+		<deploy allowed="yes" />
+	</collection>
+
+	<collection type="workbench" name="workbench">
+		<editor icon="icon-wrench" label="Workbench" />
+		<deploy allowed="yes" />
+	</collection>
+	
+	<item type="link">
+		<editor  label="${item.title}" icon="icon-external-link">
+			<validate>
+				${err.assertNotEmpty("urlLink", "urlLink is mandatory")}
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.title)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+		<attribute name="urlLink" type="string" />
+		<attribute name="urlThumb" type="string" />
+	</item>
+	
+	<item type="catalogs">
+		<editor flavours="grid,full" childs="lines"  label="${item.title}" icon="icon-camera">
+			<validate>
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.title)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+		<attribute name="urlThumb" type="string" />
+	</item>
+	<item type="lines">
+		<editor flavours="grid,full" childs="looks"  label="${item.title}" icon="icon-book">
+			<validate>
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.title)!}
+				[/#if]
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+	</item>
+	<item type="looks">
+		<editor flavours="grid,full" childs="product"  label="${item.title}" icon="icon-book">
+			<validate>
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.title)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+	</item>
+	<item type="product">
+		<editor   label="${item.title}"  icon="icon-book">
+			<validate>
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.title)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+	</item>
+	
+	<item type="crm">
+		<editor childs="customerCard"  label="${item.title}" icon="icon-hdd">
+			<validate>
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.title)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+		<attribute name="urlThumb" type="string" />
+		<attribute name="store" type="string"/>
+		<attribute name="alphabetic_list" type="list">
+			<editor editable="yes" visible="yes" options="@alphabetic_list"></editor>
+		</attribute>
+	</item>
+	<item type="customerCard">
+		<editor  label="${item.title}" icon="icon-list-alt">
+			<validate>
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.title)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+		
+	</item>
+	<item type="quest">
+		<editor  label="${item.title}" icon="icon-search">
+			<validate>
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.title)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+		<attribute name="urlThumb" type="string" />
+	</item>
+	<collection type="customers" name="customers" editorial="no">
+		<editor childs="customer" label="Customers" icon="icon-book" />
+		<deploy allowed="yes" />
+	</collection>
+	<item type="customer">
+		<editor  label="${item.title}" icon="icon-female">
+			<validate>
+				${err.assertNotEmpty("title", "title is mandatory")}
+				${err.assertNotEmpty("code", "code is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.code)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="title" type="string"  />
+		<attribute name="code" type="string"  />
+		<attribute name="associate" type="string"  />
+		<attribute name="store" type="string"  />
+		
+	</item>
+	
+	<collection type="graphics" name="graphics" editorial="no">
+		<editor childs="graphic" label="Graphics" icon="icon-folder-close-alt" />
+		<deploy allowed="yes" />
+	</collection>
+	
+	<item type="graphic">
+		<editor  label="${item.brand!} - ${item.code!}" icon="icon-picture">
+			<validate>
+				${err.assertNotEmpty("brand", "category is mandatory")}
+				${err.assertNotEmpty("code", "code is mandatory")}
+							
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.brand+"_"+item.code)!}
+				[/#if]
+				
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="brand" type="string"  >
+		<editor options="RED,VAL,MAN"/>
+		</attribute>
+		<attribute name="code" type="string"  />
+		<attribute name="graphUrl" type="string"  />
+		<attribute name="attachment" type="resource">
+			<editor mimetypes="image/png, image/jpeg"/>
+		</attribute>
+		
+	</item>
+	
+	<collection type="lookups" name="lookups" editorial="no">
+		<editor childs="entry" label="Lookups" icon="icon-list-ul" />
+		<deploy allowed="yes" />
+	</collection>
+	
+	
+	
+	<item type="lookup">
+		<editor  childs="lookup, entry" label="${item.code} - ${item.name}" icon="icon-plus">
+			<validate>
+				${err.assertNotEmpty("code", "type is mandatory")}
+				${err.assertPath("pathName", "only valid URL chars")}
+				[#if !err.hasErrors() &amp;&amp; !item.pathName?has_content]
+					${item.pathify(item.code)!}
+				[/#if]
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="code" type="string"  />
+		<attribute name="name" type="string"  />
+	</item>
+	
+	<item type="entry">
+		<editor  label="${item.code} - ${item.value}" icon="icon-minus">
+			<validate>
+				${err.assertNotEmpty("code", "code is mandatory")}
+				[#if !err.hasErrors()]
+					${item.pathify(item.code)!}
+				[/#if]
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="code" type="string"  />
+		<attribute name="value" type="string"  />
+	</item>
+	
+	<collection type="wishlist" name="wishlist" editorial="no">
+		<editor childs="wishitem" label="Wishlist" icon="icon-suitcase" />
+		<deploy allowed="yes" />
+	</collection>
+	
+	<item type="wishitem">
+		<editor  label="${item.prodId} ${item.color} ${item.size}- ${item.clientId} -${item.username}" icon="icon-heart">
+			<validate>
+				${err.assertNotEmpty("username", "username is mandatory")}
+				${err.assertNotEmpty("clientId", "clientId is mandatory")}
+				${err.assertNotEmpty("prodId", "prodId is mandatory")}
+				${err.assertNotEmpty("color", "color is mandatory")}
+				${err.assertNotEmpty("size", "size is mandatory")}
+				[#if !err.hasErrors()]
+					[#if !item.pathName?has_content]
+						${item.setPathName(item.prodId+":"+item.color+":"+item.size+":"+item.clientId+":"+item.username+":")!}
+					[/#if]	
+					[#if !item.insertionDate?has_content]
+						${item.set("insertionDate",new("it.dsgroup.warp.util.Datetime"))!}
+					[/#if]
+					[#if !item.status?has_content]
+						${item.set("status","inserted")!}
+					[/#if]
+				[/#if]
+			</validate>
+		</editor>
+		<deploy allowed="yes" />
+		<attribute name="username" type="string"  />
+		<attribute name="clientId" type="string"  />
+		<attribute name="prodId" type="string"  />
+		<attribute name="color" type="string"  />
+		
+		<attribute name="size" type="string"  />
+		<attribute name="description" type="string"  />
+		<attribute name="thumbUrl" type="string"  />
+		<attribute name="insertionDate" type="date" />
+		<attribute name="status" type="string"  >
+		   <editor control="select" options="inserted,available, notAvailable, closed"/>	
+		</attribute>
+	</item>
+	
+	
+
+	<collection type="users" name="user" editorial="no">
+		<editor childs="user" label="Utenti" icon="icon-group" />
+		<deploy allowed="yes" />
+	</collection>
+	<user>
+		<editor childs="" icon="icon-user" label="${item.username}" >
+		</editor>
+		<attribute name="username" type="string">
+			<editor tooltip="username" highlighted="yes" />
+		</attribute>
+		<attribute name="password" type="string">
+			<editor tooltip="password" highlighted="yes" control="password" />
+		</attribute>
+		<attribute name="passes" type="list">
+			<editor options="developer,admin"/>
+		</attribute>
+	</user>
+    <options name="alphabetic_list" type="sql">
+		select 
+		DISTINCT SUBSTRING(string_value, 1, 1) as label
+		from 
+		${this.tenant}_attribute a join ${this.tenant}_item i where a.item_id=i.item_id and i.type='customer' and name="title"
+		ORDER BY SUBSTRING(string_value, 1, 1)
+	</options>
+</tenant>

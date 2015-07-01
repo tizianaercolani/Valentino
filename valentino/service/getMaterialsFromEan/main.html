@@ -1,0 +1,15 @@
+[#assign material=""]
+[#assign color=""]
+[#if info??]
+[#list info as row]
+[#assign material=row.get("sapid")!]
+[#assign color=row.get("color")!]
+[/#list]
+[/#if]
+{
+   "error": "${error!}",
+   "material": "${material!}",
+   "color":"${color!}"
+}
+
+

@@ -1,0 +1,44 @@
+[#if colors.size()==0]
+[boundary]inner:wishcolor[/boundary]
+<center>
+	<span class="classText" style="font-size:20px; margin-bottom:800px; text-align:center">NO DATA AVAILABLE</span><br>
+	<br>
+	<br>
+</center>
+[/#if]
+
+
+[boundary]outer:scrollRollerColor[/boundary]
+<div id="scrollRollerColor" onscroll="colorsRollerwl.onScroll()">
+<table id="rollTableColor" cellpadding=0 cellspacing=0 style="height:100%">
+	
+<tr><td><div style="width:60px;">&nbsp;</div></td>
+	[#list colors as col]
+	
+		    <td target="${col}" class="[#if col_index==0]blackwl [/#if]whitewl"><div style="width:60px;">${col}</div></td>
+		
+	[/#list]
+   
+		<td><div style="width:80px;">&nbsp;</div>
+		</tr>
+</table>
+</div>
+[boundary]outer:scrollRollerSize[/boundary]
+<div id="scrollRollerSize" onscroll="sizesRollerwl.onScroll()">
+<table align="center"id="rollTableSize" cellpadding=0 cellspacing=0 style="height:100%">
+	
+<tr><td><div style="width:60px;">&nbsp;</div></td>
+	[#list sizes as size]	
+		    <td target="${size}"   class="[#if size_index==0]blacksizewl [/#if]whitewl"><div style="width:60px;">${size}</div></td>
+		
+	[/#list]
+		<td><div style="width:80px;">&nbsp;</div></td>
+		</tr>
+</table>
+</div>
+
+[boundary]script[/boundary]
+$("#wishcolor").show();
+hideActInd();
+
+

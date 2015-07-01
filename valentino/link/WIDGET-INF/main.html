@@ -1,0 +1,15 @@
+[#include "../../TENANT-INF/macro.html"]
+[@page]
+<iframe id="linkFrame" src=""></iframe>
+ <script>
+
+var user = getCookie('cookie_username');
+
+var value='${renderItem.urlLink!}?username='+user.toUpperCase()+'';
+
+$('#linkFrame').attr('src',value)
+
+</script> 
+
+
+[/@page]

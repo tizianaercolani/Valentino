@@ -1,0 +1,137 @@
+[boundary]inner:slider_elementx4[/boundary]
+
+[#assign view=ctx.getParameter("view")!]
+[#assign brand=ctx.getParameter("brand")!]
+
+[#if view=="first_view"]
+[#assign idlook=ctx.getParameter('idlook')!]
+[#assign _page=ctx.getParameter('page')?number]
+[#assign c=0]
+<!-- ${_page} -->
+<div class="scroll-content" >
+ <center>
+[#list list as item]
+ 
+ [#assign chindex4=item_index%4]
+    [#assign chindex=item_index%2]
+ 	 [#if chindex4==0]<table class="pageSlide" border-collapse="collapse" border-spacing="0" margin='0'cellpadding='0' cellspacing='0' pageIndex=${c} id="div_${c}">
+ 	
+ 	 [/#if]
+     	
+     	   [#if chindex==0 ]   <tr>[/#if]
+        		    <td   onclick="navigateSingleLook(${item_index});">
+        		    <center>
+        		    [#if c==_page]
+        		    <img class="scroll" llindex="${item_index}"    style="height:512px; margin:0;" src2="${item.staticUrl!''}" src="${item.staticUrl!''}"/>
+        		    [#else]
+        		    <img class="scroll" llindex="${item_index}"    style="height:512px; margin:0;" src="" src2="${item.staticUrl!''}"/>
+        		    [/#if]
+        		    </td>
+        		</center>
+				[#if chindex!=0 ]
+				</tr>
+				[/#if]
+                [#if chindex4==3]
+                 
+                [#assign c=c+1]
+                </table>
+              
+               
+                [/#if]
+                 [#if item_has_next]
+                 [#else]
+                
+                 [#if chindex4==0]
+                  <td>
+        		  
+        		  </td>
+        		</tr>
+        		
+        		   
+                 </table>
+                
+                 [/#if]
+                 [#if chindex4==1]
+                 <td >
+        		    <center>
+        		    <img  style="height:512px; margin:0; border-color:black;opacity:0.5" src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		    
+                   <td >
+        		    <center>
+        		    <img  style="height:512px; margin:0;  border-color:black;opacity:0.5"  src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		<td >
+        		    <center>
+        		    <img  style="height:512px; margin:0;  border-color:black;opacity:0.5" src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		</tr>
+        		
+        		   
+                 </table>
+                 
+                 [/#if]
+                  [#if chindex4==2]
+                  <td >
+        		    <center>
+        		    <img  style="height:512px; margin:0;  border-color:black; opacity:0.5" src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		<td >
+        		    <center>
+        		    <img  style="height:512px; margin:0;  border-color:black;opacity:0.5" src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		
+        		
+        		</tr>
+        		 </table>
+                 [/#if]
+                [/#if]
+              
+[/#list]
+
+</div>
+</center>
+[boundary]script[/boundary]
+goTo(${_page});
+hideActInd();
+
+[#else]
+
+
+
+
+[#assign idlook=ctx.getParameter('idlook')!]
+
+
+
+[#list list as item]
+
+  [#assign look_index=item_index]   	
+        		   [#assign childId=ctx.getParameter('child_id')]  
+        		   <center>
+        		    <div class="lookSlide" id="look_${look_index}"  look_index=${look_index}  onclick="getProd('${item.materials!}',${childId}, ${look_index},'${brand}');traceLook(${look_index});" >
+        		     <img llindex=${look_index}  style=" margin:0; " src="" src2="${item.staticUrl!''}" />
+
+        		    </div>
+    </center> 
+[/#list]
+
+[boundary]script[/boundary]
+goTo(${idlook});
+showNearSlides(${idlook});
+hideActInd();
+
+
+[/#if]
+
+[#if list?size<=0]
+[boundary]script[/boundary]
+showBasicDialog('No look available','goBack()');
+[/#if]
+
+

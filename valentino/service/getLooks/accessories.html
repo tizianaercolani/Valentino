@@ -1,0 +1,99 @@
+[boundary]inner:slider_elementx4[/boundary]
+<style>
+#logo img{
+         	-webkit-filter: invert(1);
+         	}
+         	</style>
+[#assign id=ctx.getParameter('childId')]
+[#assign c=0]
+[#assign _page=ctx.getParameter('page')?number]
+<div class="scroll-content" >
+ <center>
+[#list list as item]
+ [#assign chindex4=item_index%4]
+    [#assign chindex=item_index%2]
+ 	 [#if chindex4==0]<table class="pageSlide" border-collapse="collapse" border-spacing="0" margin='0'cellpadding='0' cellspacing='0' pageIndex=${c} id="div_${c}">
+ 	
+ 	 [/#if]
+     	
+     	   [#if chindex==0 ]   <tr>[/#if]
+        		    <td onclick="navigateProduct('${item.sapid!}', '${item.color!}');">
+        		    <center>
+        		       [#if c==_page]
+        		    <img class="scroll" llindex="${item_index}"    style="height:512px; margin:0;" src2="${item.staticUrl!''}" src="${item.staticUrl!''}"/>
+        		    [#else]
+        		    <img class="scroll" llindex="${item_index}"    style="height:512px; margin:0;" src="" src2="${item.staticUrl!''}"/>
+        		    [/#if]
+        		    </td>
+        		</center>
+				[#if chindex!=0 ]
+				</tr>
+				[/#if]
+                [#if chindex4==3]
+                 [#assign c=c+1]
+              
+                </table>
+              
+               
+                [/#if]
+                 [#if item_has_next]
+                 [#else]
+                
+                 [#if chindex4==0]
+                  <td>
+        		  
+        		  </td>
+        		</tr>
+        		
+        		   
+                 </table>
+                
+                 [/#if]
+                 [#if chindex4==1]
+                 <td >
+        		    <center>
+        		    <img  style="height:512px; margin:0; border-color:black;opacity:0.5" src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		    
+                   <td >
+        		    <center>
+        		    <img  style="height:512px; margin:0;  border-color:black;opacity:0.5"  src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		<td >
+        		    <center>
+        		    <img  style="height:512px; margin:0;  border-color:black;opacity:0.5" src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		</tr>
+        		
+        		   
+                 </table>
+                 
+                 [/#if]
+                  [#if chindex4==2]
+                  <td>
+        		    <center>
+        		    <img  style="height:512px; margin:0;width:0px;  border-color:black; opacity:0.5" src="${BC.getTenantBaseUrl(serviceItem)}store_app/black.jpg"/>
+        		    </center>
+        		    </td>
+        		
+        		
+        		
+        		</tr>
+        		 </table>
+                 [/#if]
+                [/#if]
+              
+[/#list]
+
+</div>
+</center>
+
+[boundary]script[/boundary]
+
+$('#slider_elementx4').show();
+ $('#choseAccessories').hide();
+mode='LIST';
+goTo(0);

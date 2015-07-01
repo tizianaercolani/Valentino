@@ -1,0 +1,48 @@
+[#include "../../TENANT-INF/macro.html"]
+[#assign childs=renderItem.children] [@page]
+
+
+
+<div id="container">
+
+<center>
+    <div id="logo" onclick="window.location.assign('run.app')">
+	    <span><img src="${widget.tenantBaseUrl}store_app/VAL-logo.png" /></span>
+	</div>
+</center>
+	<div id="background_image">
+		<img src="${widget.tenantBaseUrl}store_app/wallpaper.jpg" />
+	</div>
+	<div id="slider_elementx4"  style="position: relative; width: 460px; height: 710px; z-index:10;">
+    
+ <div u="slides" style=" position: absolute; left:150px; top: 200px; width:480px; height:710px; overflow: hidden;">
+		 [#list childs as child]
+		   [#assign flavour="full"]
+		   [#if  child.type=="catalogs"]
+		   [#assign url="run.app?id=${child.id}&forceExecutionName=setFlavour.txt&flavour=full"]
+		   [#else]
+		   [#assign url="run.app?id=${child.id}"]
+		   [/#if]
+		   <div [#if child_index==0] class="first"[/#if] onclick="navStack.navigate({url:'${url}', label:'${child.title!}', type:'${child.type!}'})"><tr >
+		 
+		    
+				  <td>
+						<span class="description_collection">${child.title!?html}</span>
+						[#if child.urlThumb!?has_content]<img style="width:480px;height:710px" src="${child.urlThumb!}" />[#else]<img style="width:480px;height:710px"  src="${widget.tenantBaseUrl}store_app/black.jpg" />[/#if]
+				  
+				
+				</td>
+			</tr></div>	
+		[/#list]
+			
+	</div>
+</div>
+</div>
+
+<script >
+jssor_slider1_starter('slider_elementx4');
+
+
+</script>
+
+[/@page]

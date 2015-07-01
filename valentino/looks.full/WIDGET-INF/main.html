@@ -1,0 +1,69 @@
+[#include "../../TENANT-INF/macro.html"]
+
+<script>
+var start=${ctx.getParameter('lookid')!'0'};
+
+[#include "lookSlide.html"]
+</script>
+<script src="${this.request.contextPath}/res/widget.js"></script>
+[#compress]
+
+
+<script src="${widget.tenantBaseUrl}mailer.js?v=${scriptversion!}"></script>
+[/#compress]
+[@page]
+[#assign brand=ctx.getParameter('brand')!'VAL']
+[#assign collection=ctx.getParameter('collection')!]
+
+[#assign childs=renderItem.children]
+
+  <div id="container">
+        	 <div id="logo" onclick="window.location.assign('run.app')">
+        		<span ><img src="${widget.tenantBaseUrl}store_app/${brand}-logo.png" /></span>
+        	</div>
+        	
+     	
+ <div id="background_image">
+        		<img src="${widget.tenantBaseUrl}store_app/wallpaper.jpg" />
+        </div>
+      [#if brand!='VMA']  <img class="product-share" id="product-share"
+			src="${widget.tenantBaseUrl}store_app/new_product-share.png"  onclick="sendMail()" /> <br>
+			[/#if]
+         [#list childs as child]
+        [#assign child_id=child.id]
+       [#assign flavour="full"]
+         [/#list] 
+          <center>
+        	<div  id="slider_elementx4"  style="[#if brand=='VMA']left:6%;[/#if] [#if collection=='PRE']left:4%; [/#if]position: absolute;  height: 1024px; z-index:10;">
+        	 	
+     		</div>
+     		 <center>
+     		<div id="prod-Fixed" onclick="hideProduct();$('#product-share').hide();">
+     		<img style="width:769px;height:600px"src="${widget.tenantBaseUrl}store_app/black.jpg"/>
+             </div>
+     		   <div id="materials">
+             
+     		   </div>
+     		 
+       </div>
+      
+<script>
+showActInd();
+var collection="${ctx.getParameter('collection')!}";
+var season_number="${ctx.getParameter('season_number')!}";
+var line_id="${ctx.getParameter('line_id')!}";
+
+var child_id=${child_id};
+
+getLooks(
+		{
+			collection: "${ctx.getParameter('collection')!}",
+			season_number:"${ctx.getParameter('season_number')!}",
+			line_id:"${ctx.getParameter('line_id')!}",
+		     
+		
+		},${child_id},${ctx.getParameter('lookid')!'0'},'${brand}');
+
+</script>
+[#include "../../TENANT-INF/mailer.html"]
+[/@page]

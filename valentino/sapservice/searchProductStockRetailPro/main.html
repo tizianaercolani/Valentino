@@ -1,0 +1,15 @@
+[boundary]inner:productStock[/boundary]
+
+[#assign stockDetails = resp.getPayload()]
+[#if stockDetails.size()==0]
+<br>EMPTY
+[#else]
+[#list stockDetails as stockDetail]
+
+<table class="innerTable" >
+<tr><td>EAN CODE</td><td>${stockDetail.get("ean")!}</td></tr>
+<tr><td>STOCK QTY</td><td>${stockDetail.get("stockQty")!}</td></tr>
+<tr><td>RESERVED QTY</td><td>${stockDetail.get("committedQty")!}</td></tr>
+</table>
+[/#list]
+[/#if]

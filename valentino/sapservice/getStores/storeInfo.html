@@ -1,0 +1,25 @@
+[boundary]inner:divStore[/boundary]
+
+<table border="0" cellpadding="0">
+<tr>
+<td>
+[#list info as row]
+		
+		[#list row.keySet() as k]
+	    [#if k=="KUNWE_INSEGNA"]
+		${row.get(k)}, 
+		[/#if]
+		 [#if k=="KUNWE_STRAS"]
+		${row.get(k)}
+		[/#if]
+		[#if k=="ID_REGION"]
+		${row.get(k)}, 
+		[/#if]
+		
+	[/#list]
+	</td>
+	</tr>
+[/#list]
+</table>
+[boundary]script[/boundary]
+$('#divStore').show();

@@ -1,0 +1,54 @@
+<link href="${widget.tenantBaseUrl}crm/newprospect.css" rel="stylesheet"/>
+<script src="${widget.tenantBaseUrl}crm/newprospect.js" ></script>
+
+
+
+
+<div id="newProspect">
+<div > 
+			<p>ADD NEW CUSTOMER</p>
+			<hr width='100%' size='1' color='ffffff'>
+			</div>
+<div id="inputNew">
+<table align="right" id="newTable">
+<tr><td>*GID</td><td>[@dropDownList "ImTitleN" "M_GENDER" "" "" /] </td></tr>
+<tr><td>Last Name</td><td><input  autocorrect="off" autocomplete="off" autocapitalize="on"   type="text" name="SimNameLastN" id="SimNameLastN" ></td></tr>
+<tr><td>First Name</td><td><input  autocorrect="off" autocomplete="off" autocapitalize="on"  type="text" name="SimNameFirstN" id="SimNameFirstN" ></td></tr>
+<tr><td>Other Alphabet</td><td><input  autocorrect="off" autocomplete="off"  autocapitalize="on" type="text" name="SmNamemiddleN" id="SmNamemiddleN" ></td></tr>
+<tr><td>Company Name</td><td><input  autocorrect="off" autocomplete="off"  autocapitalize="on" type="text" name="SimCompNameN" id="SimCompNameN" ></td></tr>
+<tr><td>*Date of Birth</td><td><div id="dateContainerNew"><div id="fakeNew"></div><div id="realNew"><input  autocorrect="off" autocomplete="off" autocapitalize="on"  type="date" onchange="newProspect.onBirthdayChange()" id="BirthdtNew" ></div><div id="BirthdtCheckNew" class="checkboxN" onclick="newProspect.toggleFakeYear()"></div></div> </td></tr>
+<tr><td>Estimated Age</td><td>[@dropDownList "ImEstAgeN" "IM_EST_AGE" "" "" /]</td></tr>
+<tr><td>*Source</td><td>[@dropDownList "ImSourceN" "IM_SOURCE" "" "" /]</td></tr>
+<tr><td>*Source description</td><td><input  autocorrect="off" autocomplete="off" autocapitalize="on"  type="text" name="ImSourceDescN" id="ImSourceDescN" ></td></tr>
+<tr><td>*Marketing</td><td>[@dropDownList "ImMktPermissN" "IM_MKT_PERMISS" "" "" /]</td></tr>
+<tr><td>*Profiling</td><td>[@dropDownList "ImPrfPermissN" "IM_PRF_PERMISS" "" "" /]</td></tr>
+<tr><td>Main Email</td><td><input  autocorrect="off" autocomplete="off"   type="email" style="text-transform: lowercase;" name="ImMainEmailN" id="ImMainEmailN" ></td></tr>
+<tr><td>Main Mobile</td><td>[@dropDownList "ImTelNumpreMoN" "IM_TEL_NUMPRE_MO" "" "" /]<input  autocorrect="off" autocomplete="off"   type="tel" name="SimTelNumberMoN" id="SimTelNumberMoN" ></td></tr>
+<tr><td>Main Phone</td><td>[@dropDownList "ImTelNumpreMaN" "IM_TEL_NUMPRE_MA" "" "" /]<input  pattern="^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$" autocorrect="off" autocomplete="off"   type="tel" name="SimTelNumberMaN" id="SimTelNumberMaN" title=" ^(\([0-9]{3}\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"></td></tr>
+<tr><td>Mailing Address</td><td><input  autocorrect="off" autocapitalize="on" autocomplete="off"   type="text" name="ImStreetN" id="ImStreetN" ></td></tr>
+<tr><td>App./Floor/Building</td><td><input  autocorrect="off" autocomplete="off"   type="text" name="ImStrSuppl1N" id="ImStrSuppl1N" ></td></tr>
+<tr><td>City</td><td><input  autocorrect="off" autocomplete="off" autocapitalize="on"  type="text" name="ImCityN" id="ImCityN" ></td></tr>
+<tr><td>Zip</td><td><input  autocorrect="off" autocomplete="off"   type="number" name="SimZipcodeN" id="SimZipcodeN" ></td></tr>
+<tr><td>*Country</td><td>[@dropDownList "SimCountryN" "SIM_COUNTRY" "" ""/]</td></tr>
+<tr><td>State</td><td id="regionTargetNew"><span style="color:white;">PLEASE CHOOSE COUNTRY</span></td></tr>
+
+</table>
+</div>
+<div id="store_clientNew" onclick="newProspect.onAddClick()">
+<img  src="${widget.tenantBaseUrl}store_app/add-client.png" />	
+<div  class="arrowedTextSearch">ADD NEW CUSTOMER TO THIS STORE</div>
+</div>
+<div id="mandatory"><span>*mandatory</span></div>
+</div>
+
+<script>
+//elenco di label che servono al new prospect
+ var npLabel={
+		 required_fields:"${label.alt_customer_check1}",
+		 alt_prospect_require2:"${label.alt_prospect_require2}",
+		 
+ }
+ var country=getById("SimCountryN");
+ country.addEventListener("change", newProspect.getRegion);
+</script>
+

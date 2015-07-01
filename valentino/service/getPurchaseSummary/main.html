@@ -1,0 +1,40 @@
+[boundary]inner:purchaseSummary[/boundary]
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+
+RESPONSE
+result:  ${resp.getResult()?string!}
+code: ${resp.getCode()!}
+description: ${resp.getDescription()!}
+
+-->
+
+[#if resp.getResult()]
+[#assign summaries = resp.getPayload()]
+[/#if]
+[#if !resp.getResult() || summaries.size()==0]
+<br>EMPTY
+[#else]
+[#list summaries as summary]
+<table class="innerTable" >
+<tr><td>Year</td><td>${summary.get("Calendaryear")!}</td></tr>
+<tr><td>Store</td><td>${summary.get("Store")!}</td></tr>
+<tr><td>Net Value</td><td>${summary.get("NetValue_LOCAL")!}</td></tr>
+<tr><td>n. of Transactions</td><td>${summary.get("Numberoftransactions")!}</td></tr>
+<tr><td>Sales QTY</td><td>${summary.get("SalesQTY")!}</td></tr>
+<tr><td>Average Bill</td><td>${summary.get("AverageBill")!}</td></tr>
+<tr><td>Average Spending</td><td>${summary.get("YTDSpending")!}</td></tr>
+</table>
+[#if summary_index< (summaries.size()-1)]
+<br>
+<br>
+<br>
+[/#if]
+[/#list]
+[/#if]
+[boundary]script[/boundary]
+cardHandler.setMode();
+
+
+

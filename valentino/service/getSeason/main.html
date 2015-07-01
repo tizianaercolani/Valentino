@@ -1,0 +1,85 @@
+
+
+
+[boundary]inner:slider_elementx4[/boundary]
+[#assign view=ctx.getParameter("view")!]
+
+[#if view=="first_view"]
+<center>
+
+<div u="slides" style=" position: absolute; left: 150px; top: 200px; width:480px; height:710px; overflow: hidden;">
+
+[#list list as item]
+
+   [#assign chindex4=item_index%4]
+   [#assign chindex=item_index%2]
+     	 [#if chindex4==0]<div><table align="center" cellpadding=2 cellspacing=2>[/#if]
+     	
+     	
+     	   [#if chindex==0 ]   <tr>[/#if]
+     	
+     	   [#assign url="run.app?id=${ctx.getParameter('child_id')}&season_number=${item.season_id}&collection=${item.collection_id}&forceExecutionName=setFlavour.txt&flavour=grid&brand=${item.brand}"]
+        		    <td onclick="navStack.navigate({
+					  url:'${url}',
+					  label:'${item.collection_desc} ${item.season_desc}',
+					  type:'collections',
+				  })">
+        		    <div style="position:relative;width:230px;">
+        		    <img style="width:230px;height:355px;"  src="${item.staticUrl!''}"/><span class="description_collection" >${item.collection_desc} <br>${item.season_desc}</span>
+        		    </div>
+        		    </td>
+        		  
+        		
+				[#if chindex!=0 ]
+				</tr>
+				[/#if]
+
+                [#if chindex4==3]
+                </table>
+                </div>
+                [/#if]
+                
+[/#list]
+</div>
+
+</center>
+[boundary]script[/boundary]
+
+[#if list?size>4]
+$('#frecciaScroll').show();
+jssor_slider1_starter('slider_elementx4');
+[#else]
+$('#frecciaScroll').hide();
+
+[/#if]
+
+[#else]
+<div u="slides" style=" position: absolute; left:150px; top: 200px; width:480px; height:710px; overflow: hidden;">
+
+
+[#list list as item]
+
+     	[#assign url="run.app?id=${ctx.getParameter('child_id')}&season_number=${item.season_id}&collection=${item.collection_id}&forceExecutionName=setFlavour.txt&flavour=full"]
+        	
+        		    <div onclick="navStack.navigate({
+					  url:'${url}',
+					  label:'${item.collection_desc} ${item.season_desc}',
+					  type:'collections',
+				  })">
+        		    <img style="width:480px;height:710px;" src="${item.staticUrl!''}"/><span class="description_collection" >${item.collection_desc}<br>${item.season_desc}</span>
+        		    </div>
+
+[/#list]
+</div>
+
+[boundary]script[/boundary]
+jssor_slider1_starter('slider_elementx4');
+
+[/#if]
+[#if list?size<=0]
+[boundary]script[/boundary]
+showBasicDialog('No season available','goBack()');
+
+[/#if]
+[boundary]script[/boundary]
+hideActInd();

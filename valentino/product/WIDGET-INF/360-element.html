@@ -1,0 +1,26 @@
+
+	<div id="product360-Element">
+		[#assign sapid=ctx.getParameter('sapid')!]
+		
+		<div id="patchWhite" style="position:absolute;z-index:11;bottom:0px;right:2px;width:100px;height:50px;">
+		<img style="position:absolute;z-index:11;bottom:0px;right:2px;width:100px;height:50px;"src="${widget.tenantBaseUrl}store_app/quadrato_bianco.png"/>
+		
+		</div>
+		<!--  >div id="productName360">
+			<span>${sapid!'NO-PRODUCT'}</span><br>
+			<span style="font-size: 18px;">PRODUCT 360°</span><br>
+			<span style="font-size: 11px;">SWIPE TO ROTATE</span>
+		</div >
+		<hr-->
+		<center>
+			<div id="product360">
+              <iframe id="iframe360" width="768px" height="1024px" src=""></iframe>
+				
+			</div>
+		</center>
+		<hr class="hrBasic" >
+	</div>
+	<style type="text/css">
+#iframe360 {overflow: auto; -ms-content-zooming: zoom; -ms-scroll-rails: none; -ms-content-zoom-limit-min: 100%; -ms-content-zoom-limit-max: 500%;}
+
+</style>

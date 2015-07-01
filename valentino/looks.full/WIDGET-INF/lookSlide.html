@@ -1,0 +1,7 @@
+[#assign lookSlideT]
+<div class="lookSlide" id="[LOOK_ID]" look_index=[INDEX]  onclick="getProd('[MAT]',[CHILD], [INDEX]);traceLook([INDEX]);" >
+<img   style="width:768px; margin:0; " src="[IMGURL]" />
+</div>
+[/#assign]
+
+var lookSlideT = "${lookSlideT?js_string}";

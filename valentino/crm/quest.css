@@ -1,0 +1,40 @@
+
+body{
+	overflow:hidden;
+ -webkit-user-select:none;
+ font-family: 'DIN_Medium' ; 
+  background-color:#333333;
+  background:#333333;
+}
+#logo img{
+width:200px;	
+opacity:1;
+}
+
+#cardTitle
+{
+	text-align: center;
+	color:white;
+	margin-top:12px;
+}
+
+
+#bgDiv{
+	
+  
+  
+  background-size: 1000px 1348px;
+background-repeat: no-repeat;
+background-position: -200px 0px;
+  
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: -1; 
+  opacity: 0.3;
+  
+
+}
+

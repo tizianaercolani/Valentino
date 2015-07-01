@@ -1,0 +1,72 @@
+[#include "../../TENANT-INF/macro.html"]
+
+
+			 [@page]
+
+ [#assign criteria]{"type":"product"}[/#assign]
+            ${renderItem.setCriteriaJson(criteria)!}
+	${renderItem.set("limit",-1)!}
+	[#assign prods=renderItem.search]
+			 [#list prods as prod]
+			    [#assign prod_id= prod.id]
+			 [/#list]
+<link href="${widget.tenantBaseUrl}/product/render.css?v=${scriptversion!}" rel="stylesheet">
+<script>
+var prodId=${prod_id};	
+</script>
+<script>
+var crmId=[@getIdByType type="crm" /]
+</script>
+<style>
+#bgQuest{
+	
+  content: url("${widget.tenantBaseUrl}store_app/quest_bkg.png");
+  
+  background-size: 1000px 1348px;
+background-repeat: no-repeat;
+background-position: -200px 0px;
+  
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  z-index: 0; 
+  opacity: 0.3;
+
+}</style>
+<div id="container">
+<div id='bgQuest'></div>
+ <div id="logoQuest" onclick="window.location.assign('run.app')">
+        		<span ><img src="${widget.tenantBaseUrl}store_app/VAL-logo.png" /></span>
+        	</div>
+<div id="prod-Fixed" onclick="goBack()">
+     		<img style="width:100%;height:100%"src="${widget.tenantBaseUrl}store_app/black.jpg"/>
+</div>
+<center>
+
+<div id="centralDiv">
+   <div id="productInfo" onclick="prodInfoShow()">
+   <img src="${widget.tenantBaseUrl}store_app/product_info.png" />
+   </div>
+   <div id="availabilityButton" onclick="storesListShow()">
+    <img src="${widget.tenantBaseUrl}store_app/availability.png" />
+   </div>
+   <div id="customers" onclick="goToCrm()">
+    <img src="${widget.tenantBaseUrl}store_app/customer.png" />
+   </div>
+   <br>
+<div id="tapElem">  
+   <hr class="hrQuest" >
+   <span id="spanElem">TAP ONE OF THE ABOVE TO FIND</span>
+</div> 
+</div>
+
+</center>
+<div id="divStore"></div>
+</div>
+[#include "product-info.html"]
+[#include "advanced-search.html"]
+[#include "storesList.html"]
+[#include "../../product/WIDGET-INF/product.html"]
+[/@page]

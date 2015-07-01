@@ -1,0 +1,130 @@
+.centeredMODE{
+	left:184px;
+}
+
+.leftMODE{
+	left:50px;
+}
+
+#searchClient{
+	-webkit-animation: fadeIn 1s;
+	position: absolute;
+	display:none;
+	top:200px;
+	width:400px;
+	
+	
+}
+#searchClient p{
+	color:white;
+	font-weight:10;
+	font-size:35px;
+	font-family: 'DIN_Medium' ;
+	line-height:10px;
+	right:0px;
+	margin-bottom:13px;
+	
+	
+}
+
+#searchClient hr{
+	
+	
+}
+#mandatoryLeast{
+
+ margin-top:150px;
+ margin-left:-12%;
+width:400px;
+color:white;		
+}
+#searchClient input{
+	color:black;
+	font-size:15px;
+	font-family: 'DIN_Medium' ;
+	width:100%;
+	height:36px;
+	border:none;
+	border-style:none;
+	border-radius:0px;
+	
+	margin-right:0px;
+}
+#searchClient select{
+	color:black;
+	font-size:15px;
+	font-family: 'DIN_Medium' ;
+	background-color:white;
+	width:100%;
+	height:36px;
+	border:none;
+	border-style:none;
+	border-radius:0px;
+	
+	margin-right:0px;
+}
+
+
+
+.tr_showHide{
+	visibility:hidden;
+	position:relative;
+	top:30px;
+	right:1850%;
+	width:20%;
+}
+.tr_showHide td{
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+#row_clientId, #row_lastName{
+	visibility:visible;
+}
+#toggleClick{
+	position: absolute;
+	top:170px;
+	left:0px;
+	width:100px;
+	__padding: 10px;
+	__padding-left: 20px;
+	z-index: 3;
+	
+}
+#toggleClick div{
+	color:white;
+	font-size:10;
+	position: absolute;
+top: 3px;
+left: 20px;
+	
+}
+
+.arrow{
+	position:relative;
+	top:20px;
+	right:1650%;
+	width:20%;
+	height:20%;
+	
+}
+#inputSearch{
+	position:relative;
+    margin-top:5%;
+    margin-right:0px;
+   
+}
+.label_search{
+	
+	color:white;
+	font-size:15px;
+	font-width:20px;
+	
+}
+
+#store_clientSearch{
+	 margin-left: 115px ;
+ 
+}
+ 
+

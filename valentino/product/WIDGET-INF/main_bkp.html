@@ -1,0 +1,77 @@
+[#include "../../TENANT-INF/macro.html"]
+
+
+[@page]
+[#compress]
+[#assign brand=ctx.getParameter('brand')!]
+[#assign color=ctx.getParameter('color')!]
+[#assign sapid=ctx.getParameter('sapid')!]
+<script src="${this.request.contextPath}/res/widget.js"></script>
+<script src="${widget.tenantBaseUrl}mailer.js?v=${scriptversion!}"></script>
+<script src="${widget.tenantBaseUrl}/product/productHandler.js?v=${scriptversion!}"></script>
+
+
+<style>
+[#if brand=='VAL' || brand=='VMA']
+#logo img{
+width:150px;	
+-webkit-filter: invert(1);
+}
+
+[#else]
+#logo img{
+width:150px;	
+}[/#if]</style>
+<div id="containerProduct">
+	<div id="logo" onclick="window.location.assign('run.app')">
+		
+	</div>
+	
+	   
+	<div id="background_image"></div>
+
+	<div id="slider_element"  style="position: relative; width:768px; height:1024px; z-index:10;">
+
+	</div>
+
+	<div id="optionList">
+	
+		<img class="product-share" id="product-share"
+			src="${widget.tenantBaseUrl}store_app/new_product-share.png"  onclick="productHandler.sendMail()" /> <br>
+		<img id="product-availability" class="product-availability"
+			src="${widget.tenantBaseUrl}store_app/product-availability.png" onclick="productHandler.availabilityShow()" /> <br>
+
+		<img id="product-listelem" class="product-listelem"
+			src="${widget.tenantBaseUrl}store_app/product-listelem.png"
+			onclick="productHandler.detailShow();" /> <br> 
+		<div id="prod3d"></div><br>	
+          <img id="product-favorite" class="product-favorite"
+			src="${widget.tenantBaseUrl}store_app/add_wishList.png"
+			onclick="productHandler.toggleFavourite()"/> 
+			<!-- div id="product-favorite" class="product-favorite"></div-->
+			<br> 
+			
+	</div>
+	<div id="prod-Fixed" onclick="productHandler.hideAll()">
+     		<img style="width:100%;height:100%"src="${widget.tenantBaseUrl}store_app/black.jpg"/>
+    </div>
+[#include "list-element.html"]
+[#include "360-element.html"]
+[#include "../../TENANT-INF/mailer.html"]
+</div>
+
+
+[#include "search_store_region.html"]
+[/#compress]
+[/@page]
+[#include "availability.html"]
+<script>
+
+productHandler.openProduct({
+	sapid:"${ctx.getParameter('sapid')!}",
+	brand:"${ctx.getParameter('brand')!}",
+	color:"${ctx.getParameter('color')!}",
+	store:"${ctx.getParameter('store')!}",
+		
+})
+</script>

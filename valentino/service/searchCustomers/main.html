@@ -1,0 +1,121 @@
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+[#assign cardcriteria]
+{
+	"type":"customerCard"
+	
+}
+[/#assign]
+${serviceItem.setCriteriaJson(cardcriteria)!}
+${serviceItem.setLimit(-1)!}
+
+[#assign cards= serviceItem.search]
+[#list cards as card]
+             [#assign cardId= card.id]
+[/#list]
+
+
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+
+RESPONSE
+result:  ${resp.getResult()?string!}
+code: ${resp.getCode()!}
+description: ${resp.getDescription()!}
+
+-->
+
+[#if resp.getResult()]
+
+	[#assign customers= resp.getPayload()]
+	
+	[#if customers.size()==1]
+		 [#assign customer=customers.get(0)]
+		<!-- Un solo cliente. Vado direttamente alla scheda cliente -->
+		[boundary]script[/boundary]
+	     hideActInd();
+	     /*
+ * params
+ * 	clientId= id scheda 
+ *  callerMode= modalità che ha chiamato la scheda 
+ *  label= descrizione cliente che serve per il trace
+ * 
+ * */
+		 showClientCard(
+		 {
+		 clientId:"${customer.get('Partner')}",
+		 callerMode:"SEARCH",
+		 label:"${customer.get("NameLast")!}  ${customer.get("NameFirst")!}"
+		 });
+		 
+		 
+
+	
+	[#else]
+	[boundary]inner:riepilogoInner[/boundary]
+<table class="tableRiepilogo">
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">CUSTOMER ID:</label></td>
+		<td style="width: 60%">${ctx.getParameter("clientId")!}</td>
+	</tr>
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">LAST NAME:</label></td>
+		<td style="width: 60%">${ctx.getParameter("lastName")!}</td>
+	</tr>
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">FIRST NAME:</label></td>
+		<td style="width: 60%">${ctx.getParameter("firstName")!}</td>
+	</tr>
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">OTHER ALPHABET:</label></td>
+		<td style="width: 60%">${ctx.getParameter("otherAlphabet")!}</td>
+	</tr>
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">COMPANY:</label></td>
+		<td style="width: 60%">${ctx.getParameter("companyName")!}</td>
+	</tr>
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">MAIN PHONE:</label></td>
+		<td style="width: 60%">${ctx.getParameter("phone")!}</td>
+	</tr>
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">MAIN MOBILE:</label></td>
+		<td style="width: 60%">${ctx.getParameter("mobile")!}</td>
+	</tr>
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">ZIP:</label></td>
+		<td style="width: 60%">${ctx.getParameter("zip")!}</td>
+	</tr>
+	<tr class="tr_riepilogo">
+		<td><label class="label_riepilogo">COUNTRY:</label></td>
+		<td style="width: 60%">${ctx.getParameter("country")!}</td>
+	</tr>
+</table>
+
+
+
+[boundary]outer:results[/boundary]	
+<div id="results">	
+	<table id="resultTable" >
+		[#list customers as customer]
+		<tr><td onclick='
+					 showClientCard(
+					 {
+					 clientId:"${customer.get('Partner')}",
+					 callerMode:"RESULTS",
+					 label:"${customer.get("NameLast")!}  ${customer.get("NameFirst")!}"
+					 })'>${customer.get("NameLast")!}  ${customer.get("NameFirst")!},<br> ${customer.get("Street")!} ${customer.get("City")!} </td></tr>
+		[/#list]
+	</table>
+</div>
+[boundary]script[/boundary]
+		hideActInd();
+		//funzione che nel crm cambia la modalità in search, implementare in quest
+		showResults();
+	
+	[/#if]
+[#else]
+<!-- error or no result -->
+[boundary]script[/boundary]
+hideActInd();
+showBasicDialog("${resp.getDescription()!}");
+
+[/#if]

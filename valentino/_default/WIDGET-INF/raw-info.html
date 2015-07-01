@@ -1,0 +1,51 @@
+<div class="item-info">
+	id <b>${renderItem.id}</b>[#if renderItem.locked()] - locked after deploy! <i class="icon-lock"></i>[/#if]<br>
+	Full path name <b>[#list renderItem.path as item][#if item_index != 0]/[/#if]${item.pathName!}[/#list]</b><br> 
+	Type <b>${renderItem.type!}</b>[#if renderItem.flavour?has_content] flavour <b>${renderItem.flavour}[/#if]</b><br>
+	Position among siblings <b>${renderItem.position}/${renderItem.siblings.size()}</b><br>
+	[#assign dt = new("it.dsgroup.warp.util.Datetime")]
+	Creation date: <b>${dt.setTimeInMillis(renderItem.creationTime)!}${dt.format("dd-MM-yyyy HH:mm:ss")}</b><br>
+	Modification date: <b>${dt.setTimeInMillis(renderItem.modificationTime)!}${dt.format("dd-MM-yyyy HH:mm:ss")}</b><br>
+	Touch date: <b>${dt.setTimeInMillis(renderItem.touchTime)!}${dt.format("dd-MM-yyyy HH:mm:ss")}</b><br>
+	Attribute # <b>${renderItem.attributeList.size()}</b><br>
+	<br>
+	deploy status<br>
+	- notify <b>[#if renderItem.notify??]yes[#else]no[/#if]</b><br>
+	- need deploy <b>[#if (!renderItem.liveId??) || (renderItem.liveId != renderItem.workingId)]yes[#else]no[/#if]</b><br>
+	[#assign di = renderItem.deployInfo!]
+	- deployed <b>[#if di?has_content]${dt.setTimeInMillis(di.deployTime)!}${dt.format("dd-MM-yyyy HH:mm:ss")}</b> by <b>${renderItem.getItemById(di.operatorId).username!?html}[#else]no[/#if]</b><br>
+</div><br>
+[#if renderItem.attributeList.size() > 0]
+<div class="attribute-info">
+[#list renderItem.attributeList as attribute]
+	[#if attribute.spec?? && attribute.spec.visible]
+		[#if attribute_index > 0]<div class="separator"></div>[/#if]
+		<b>${attribute.name}[#if attribute.spec.multiLang] (${attribute.lang!"?"})[/#if]</b> type <b>${attribute.type}</b><br>
+		[#if attribute.type == 'resource']
+			[#if attribute.resourceValue??]
+			[#assign resource = attribute.resourceValue]
+			name <b>${resource.name!?html}</b> <a href="${this.request.contextPath}/getResource.app?hash=${resource.hash}&WarpWindowId=${this.warpWindowId!}"><i class="icon-cloud-download"></i></a> <a href="${resource.url}" target="_blank"><i class="icon-external-link"></i></a><br>
+			mimetype <b>${resource.mimetype!}</b> size <b>${resource.size!}</b><br>
+			[#if resource.mimetype.contains('image')]
+				<div class="preview-box">
+					<img src="${resource.url!}">
+				</div>
+			[#elseif resource.mimetype.contains('video')]
+				<div class="preview-box">
+					<video controls src="${resource.url!}"></video>
+				</div>
+			[#elseif resource.mimetype.contains('pdf')]
+				<div class="preview-box">
+					<iframe src="${resource.url!}" seamless></iframe>
+				</div>
+			[/#if]
+			[/#if]
+		[#elseif attribute.type == 'boolean']
+			value <b>[#if (attribute.booleanValue!0)>0]true[#else]false[/#if]</b>
+		[#else]
+			value <b>${attribute.value!}</b>	
+		[/#if]
+	[/#if]	
+[/#list]
+</div>
+[/#if]

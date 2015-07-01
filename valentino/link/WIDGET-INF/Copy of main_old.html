@@ -1,0 +1,14 @@
+[#include "../../TENANT-INF/macro.html"]
+[@page]
+<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+
+<iframe id="linkFrame" src=""></iframe>
+ <script>
+var tokenGen= generateToken()
+var user = getCookie('cookie_username');
+var chiave = '87654321';
+var value='https://webapp.valentino.com/login.php?username='+user;
+alert(value)
+$('#linkFrame').attr('src',value)
+</script> 
+[/@page]

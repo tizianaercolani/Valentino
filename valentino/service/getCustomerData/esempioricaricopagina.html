@@ -1,0 +1,15 @@
+[#assign head]
+<style>
+ body {
+ background-color:#ff0000;
+ }
+</style>
+[/#assign]
+[#assign body]
+<div>
+prova prova
+</div>
+[/#assign]
+[boundary]script[/boundary]
+document.head.innerHTML = "${head?js_string}"
+document.body.innerHTML = "${body?js_string}"

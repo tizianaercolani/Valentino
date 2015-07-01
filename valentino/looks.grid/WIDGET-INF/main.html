@@ -1,0 +1,89 @@
+[#include "../../TENANT-INF/macro.html"]
+ [#assign flavour="grid"]
+ <link href="${widget.tenantBaseUrl}/product/render.css?v=${scriptversion!}" rel="stylesheet">
+<script src="${this.request.contextPath}/res/widget.js"></script>
+[@page]
+[#assign brand=ctx.getParameter('brand')!'VAL']
+[#assign myPage=ctx.getParameter('page')!0]
+
+[#assign pageHack=BC.getParamOrCookie(ctx,'pageHack')!""]
+[#if pageHack?has_content]
+	[#assign myPage=pageHack?number]
+[/#if]
+
+[#assign type=ctx.getParameter('type')!'0']
+  <div id="container">
+        	 <div id="logo" onclick="window.location.assign('run.app')">
+        		<span ><img src="${widget.tenantBaseUrl}store_app/${brand}-logo.png" /></span>
+        	</div>
+        	[#assign criteria]{"type":"product"}[/#assign]
+            ${renderItem.setCriteriaJson(criteria)!}
+	${renderItem.set("limit",-1)!}
+	[#assign prods=renderItem.search]
+			 [#list prods as prod]
+			    [#assign prod_id= prod.id]
+			 [/#list]
+			[#assign year=ctx.getParameter('year')!"0"]
+        	[#assign collection=ctx.getParameter('collection')!"0"]
+        	[#assign childs=renderItem.children]
+        	    [#list childs as child]
+                   [#assign child_id=child.id]
+                  
+                [/#list] 
+        	[#if type!='0']
+            <style>
+            #slider_elementx4{
+            background: white;
+            }
+            #logo img{
+         	-webkit-filter: invert(0);
+         	}
+            </style>
+           
+        	<div id='choseAccessories'>
+        	 
+        	  
+        	</div>
+        	[/#if]
+ <div id="background_image">
+        		<img src="${widget.tenantBaseUrl}store_app/wallpaper.jpg" />
+        </div>
+        
+        	<div id="slider_elementx4"  style="top:0;position: absolute; width:768px; height: 1024px; z-index:10;">
+        	 	
+     		</div>
+     		<div id="materials">
+     		
+     		</div>
+       </div>
+       <script>
+var prodId=${prod_id};	
+</script>
+<script>
+var show;
+var brand="${brand}"
+if(brand=='VAL'){
+	 show='W'
+}else{
+	show='Y'
+}
+var type="${ctx.getParameter('type')!'0'}";
+if(type!='accessories')
+	{
+getLooks(
+		{
+			collection: "${ctx.getParameter('collection')!}",
+			season_number:"${ctx.getParameter('season_number')!}",
+			line_id:"${ctx.getParameter('line_id')!}",
+			brand:'${brand}',
+			page: ${myPage!0}
+			
+		});
+	}else{
+		$('#slider_elementx4').hide();
+		setSeason('${year}','${collection}','${child_id}',0,show)
+	}
+</script>
+[#include "../../product/WIDGET-INF/product.html"]
+
+[/@page]

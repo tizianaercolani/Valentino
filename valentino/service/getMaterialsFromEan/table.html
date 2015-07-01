@@ -1,0 +1,21 @@
+${error!}
+[#assign printHeader = true]
+<table border="1" cellpadding="10">
+[#if info??]
+[#list info as row]
+	[#if printHeader]
+		<tr>
+		[#list row.keySet() as k]
+			<td><b>${k}</b></td>
+		[/#list]
+		</tr>
+		[#assign printHeader = false]
+	[/#if]
+	<tr>
+	[#list row.keySet() as k]
+		<td>${row.get(k)}</td>
+	[/#list]
+	</tr>
+[/#list]
+[/#if]
+</table>

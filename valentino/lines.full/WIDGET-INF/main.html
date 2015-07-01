@@ -1,0 +1,31 @@
+[#include "../../TENANT-INF/macro.html"]
+[#assign childs=renderItem.children]
+<script src="${this.request.contextPath}/res/widget.js"></script>
+[@page]
+ [#assign brand=ctx.getParameter('brand')!'VAL']
+  <div id="container">
+        	 <div id="logo" onclick="window.location.assign('run.app')">
+        		<span><img src="${widget.tenantBaseUrl}store_app/${brand}-logo.png" /></span>
+        	</div>
+ <div id="background_image">
+        		<img src="${widget.tenantBaseUrl}store_app/wallpaper.jpg" />
+ </div>
+        [#list childs as child]
+       [#assign flavour="full"]
+        [#assign child_id=child.id]
+        <center>
+        	<div id="slider_elementx4" style="position: relative; width: 480px; height: 710px; z-index:10;" >
+        	 	
+     		</div>
+     		</center>
+     	[/#list]
+       </div>
+<script>
+getLines(
+		{
+			collection: "${ctx.getParameter('collection')!}",
+			season_number:"${ctx.getParameter('season_number')!}"
+			
+		},${child_id},"second_view",'${brand}');
+</script>
+[/@page]

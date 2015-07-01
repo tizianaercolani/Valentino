@@ -1,0 +1,50 @@
+[#include "../../TENANT-INF/macro.html"]
+[#assign childs=renderItem.children] [@page]
+
+
+</div>
+<div id="container">
+
+<center>
+    <div id="logo" onclick="window.location.assign('run.app')">
+	    <span><img src="${widget.tenantBaseUrl}store_app/${authUser.brand}-logo.png" /></span>
+	</div>
+</center>
+	<div id="background_image">
+		<img src="${fourMeBaseUrl}640x480/bf552741-fc69-4f17-a7b0-b657a0667b0c.jpg" />
+	</div>
+	<div id="slider_elementx4">
+
+	<table align="center" cellpadding=2 cellspacing=2>
+		<tr>
+		
+		   [#list childs as child]
+		    [#if BC.getParamOrCookie(ctx,"flavour")?has_content]
+		       [#assign flavour=BC.getParamOrCookie(ctx,"flavour")]
+		    [#else]
+		         [#if renderItem.flavour?has_content]
+		         [#assign flavour=renderItem.flavour!]
+		         [#else]
+		         [#assign flavour="grid"]
+		         [/#if]
+		    [/#if]
+				<td [#if child_index==0] class="first"[/#if] onclick="window.location.assign('run.app?id=${child.id}&forceExecutionName=setFlavour.txt&flavour=${flavour}')">
+				  <div class="box-collection">
+						<span class="description_collection">${child.title!?html}</span>
+						[#if child.urlThumb!?has_content]<img src="${child.urlThumb!}" />[#else]<img style=" opacity:0.7 " src="${widget.tenantBaseUrl}store_app/black.jpg" />[/#if]
+				  </div>
+				</td>
+				[#assign chindex=child_index/2]
+				[#if chindex!=0 ]
+				</tr>
+				[/#if]
+			[/#list]
+			</tr>
+		</table>
+
+	</div>
+</div>
+
+
+</div>
+[/@page]

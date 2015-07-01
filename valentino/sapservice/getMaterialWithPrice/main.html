@@ -1,0 +1,30 @@
+[#compress]
+[boundary]inner:SAPData[/boundary]
+
+
+<table border="0" cellpadding="0">
+[#list info as row]
+[#if row.keySet().size()==0]
+<tr><td>NO DATA AVAILABLE</td></tr>
+[/#if]
+       [#list row.keySet() as k]
+		<tr>
+		<td>
+		<b>
+		[#if k=='COLLEZ_IPAD']
+			COLLECTION[#elseif k=='LINEA']
+		  LINE[#elseif k=='STAGIONE']
+			SEASON[#elseif k=='ZFAMIGLIA']
+			FAMILY[#elseif k=='COMPOSIZIONE']
+			COMPOSITION[#elseif k=='DESCR_MATR']
+			CLASS[#elseif k=='PRZ_RETAIL']
+			PRICE[#else]
+		 ${k}	     
+		 [/#if]:</b></td>
+		   <td><b>[#if row.get(k)!="" ]${row.get(k)}[#else]N.D.[/#if]</b></td>
+	    </tr>
+	[/#list]
+</table>
+
+[/#list]
+[/#compress]

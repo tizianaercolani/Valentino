@@ -1,0 +1,105 @@
+	<div id="advanced-search">
+		[#assign sapid=ctx.getParameter('sapid')!]
+		<div id="img-info">
+		  <img src="${widget.tenantBaseUrl}store_app/search-adv.png"/>
+		</div>
+		<div id="close-detail" onclick="goBack()">
+			<img src="${widget.tenantBaseUrl}store_app/close_layer.png" />
+		</div>
+		<div id="titleName">
+			<span>ADVANCED SEARCH</span><br>
+		</div>
+		<hr class="hrQuest" >
+		<center>
+
+
+	<div id="season" >
+	<center>
+	<span class="classText" >SWIPE TO SELECT </span><br>
+	<span class="classTile">SEASON</span><br>
+	<img style="width:30px" src="${widget.tenantBaseUrl}store_app/tap_to_check.png" />
+  
+	<div id="scrollerSeason" onscroll="seasonRoller.onScroll()">
+	
+	
+	</div>
+	</center>
+	</div>
+	
+	<hr  class="hrQuest" color="#ffffff">
+	
+	<div id="collection" >
+	<center>
+	<span class="classText" >SWIPE TO SELECT </span><br>
+	<span class="classTile">COLLECTION</span><br>
+	<img style="width:30px" src="${widget.tenantBaseUrl}store_app/tap_to_check.png" />
+  
+	<div id="scrollerCollection" onscroll="collectionRoller.onScroll()">
+	
+	
+	</div>
+	</center>
+	</div>
+	
+	<hr  class="hrQuest" color="#ffffff">
+	
+	
+	<div id="line" >
+	<center>
+	<span class="classText" >SWIPE TO SELECT </span><br>
+	<span class="classTile">LINE</span><br>
+   <img style="width:30px" src="${widget.tenantBaseUrl}store_app/tap_to_check.png" />
+	<div id="scrollerLine" onscroll="lineRoller.onScroll()">
+	<table id="rollingTableCollection" cellpadding=0 cellspacing=0 style="height:100%">
+	
+<tr><td><div style="width:0px;">&nbsp;</div></td><td  target="all" class="black filterList"><div style="width:200px;text-align:center" >ALL</div></td></tr></table>
+	</div>
+	</center>
+	</div>	
+		<hr  class="hrQuest" color="#ffffff">	
+
+	   <div id="typeCode">
+		<span class="labelProduct">MODEL</span>
+		
+		<input  id="inputclass" autocorrect="off" style='text-transform:uppercase'  type="text"/>
+		</div>	
+		<div id="typeCode">
+		<span class="labelProduct">FABRIC</span>
+	
+		<input  id="inputfabric"  autocorrect="off" style='text-transform:uppercase'  type="text"/>
+		</div>	
+		<div id="typeCode">
+		<span class="labelProduct">COLOR</span>
+		
+		<input  id="inputcolor" autocorrect="off"  style='text-transform:uppercase' type="text"/>
+		</div>	
+		
+<img id="loading" style=" position:absolute;z-index:11; top:70px;  left:225px; width:150px;"src="${widget.tenantBaseUrl}store_app/loading1.gif"/>
+<div id="CheckFind" onclick="getContent(0);">
+<hr  class="hrQuest" color="#ffffff">
+<span  id="findIn" >FIND IN</span>
+
+</div>
+		</center>
+	</div>
+	<center>
+<div id="content-List">
+<div id="list-search">
+		<div id="img-list">
+		  <img src="${widget.tenantBaseUrl}store_app/product_info.png"/>
+		</div>
+		<div id="close-detail" onclick="goBack()">
+			<img src="${widget.tenantBaseUrl}store_app/close_layer.png" />
+		</div>
+		<hr class="hrQuest" >
+</div>		
+
+<div id="content"></div>
+</div>	
+</center>
+<script>
+getSeasonFilters();
+getCollectionFilters();
+getLineFilters();
+var barCodeAlias="${BC.getParamOrCookie(ctx,'barCodeAlias')!}";
+</script>

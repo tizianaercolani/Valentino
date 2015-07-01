@@ -1,0 +1,49 @@
+[#compress]
+
+[boundary]inner:availNoData[/boundary]
+[#if colors.size()==0]
+<center>
+	<span class="classText" style="font-size:20px; text-align:center">NO DATA AVAILABLE</span>
+</center>
+[#else]
+<!-- NO CONTENT -->
+[/#if]
+
+
+[boundary]outer:scrollerRollerColor[/boundary]
+<div id="scrollerRollerColor"  onscroll="colorsRoller.onScroll()">
+<table id="rollingTableColor" cellpadding=0 cellspacing=0 style="height:100%">
+	
+<tr><td><div style="width:100px;">&nbsp;</div></td><td><div style="width:60px;">&nbsp;</div></td><td coldesc="" target="all" class="black white"><div style="width:100px;" >ALL</div></td>
+	[#list colorDesc as des]
+		[#assign parts = des?split("-")]
+		<td class="listColor" target="${parts[0]?trim}" coldesc="${parts[1]?trim}" class="white"><div style="width:100px;">${parts[0]?trim}</div></td> 
+	[/#list]
+
+         
+		<td><div style="width:80px;">&nbsp;</div></td><td><div style="width:60px;">&nbsp;</div></td>
+		</tr>
+</table>
+</div>
+[boundary]outer:scrollerRollerSize[/boundary]
+<div id="scrollerRollerSize" onscroll="sizesRoller.onScroll()">
+<table align="center"id="rollingTableSize" cellpadding=0 cellspacing=0 style="height:100%">
+	
+<tr><td><div style="width:60px;">&nbsp;</div></td><td><div style="width:100px;">&nbsp;</div></td><td target="all" class="blacksize white"><div style="width:100px;" >ALL</div></td>
+	[#list sizes as size]
+	
+		    <td target="${size}"  class="listColor" class="white"><div style="width:100px;">${size}</div></td>
+		
+	[/#list]
+   
+		<td><div style="width:80px;">&nbsp;</div></td><td><div style="width:60px;">&nbsp;</div></td>
+		</tr>
+</table>
+</div>
+
+[boundary]script[/boundary]
+[#if colors.size()>0]
+$("#color").show();
+[/#if]
+hideActInd();
+[/#compress]

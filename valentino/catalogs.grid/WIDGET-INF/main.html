@@ -1,0 +1,28 @@
+[#include "../../TENANT-INF/macro.html"]
+[#assign childs=renderItem.children]
+<script src="${this.request.contextPath}/res/widget.js"></script>
+[@page]
+
+  <div id="container">
+       <center>     <div id="logo" onclick="window.location.assign('run.app')">
+        		<span ><img src="${widget.tenantBaseUrl}store_app/VAL-logo.png" /></span>
+        	</div>   </center>
+ <div id="background_image">
+        	<img src="${widget.tenantBaseUrl}store_app/wallpaper.jpg" />
+        </div>
+        
+        [#list childs as child]
+        [#assign flavour="grid"]
+        [#assign child_id=child.id]
+        
+        	<div id="slider_elementx4"  style="position: relative; width: 480px; height: 1000px; z-index:10;">
+        	 	
+     		</div>
+       </div>
+       [/#list]
+        <div id="frecciaScroll"><img src="${widget.tenantBaseUrl}store_app/tap_to_check.png"></div>
+<script>
+getCollection(${child_id},"first_view");
+
+</script>
+[/@page]

@@ -1,0 +1,83 @@
+[#compress]
+<div id="availability">
+		
+		
+		<div id="img-detail">
+			<img src="${widget.tenantBaseUrl}store_app/product-availability.png" />
+		</div>
+		<div class="close-detailP" onclick="productHandler.availabilityHide()">
+			<img src="${widget.tenantBaseUrl}store_app/close_layer.png" />
+		</div>
+		<div  style=""id="productName">
+		   
+			<span class="sapidPlaceHolder"></span><br>
+			 <br>
+		</div>
+	<hr class="hrStyle" color="#ffffff" style="position:absolute;top:85px;width:80%">
+    <div id="availNoData"></div>
+	<div id="color" style="display:none;">
+         <span class="classText" style="font-size:12px; margin-left:50px;">SWIPE TO SELECT COLOR</span>
+         
+<center>
+    <div class="check-box"><img style="width:100px;" src="${widget.tenantBaseUrl}store_app/check.png" /></div>
+	<div id="scrollerRollerColor"  onscroll="colorsRoller.onScroll();saveColor()">
+	</div>
+	<div id='descrizioneColore'><span id='innerDescrizioneColor'></span></div>
+</center>   
+	
+	<hr  class="hrStyle" color="#ffffff">
+
+	<div id="size" >
+	<span class="classText" style="font-size:12px; margin-left:50px;">SWIPE TO SELECT SIZE</span>
+	<center>
+    <div class="check-box-size"><img style="width:100px;" src="${widget.tenantBaseUrl}store_app/check.png" /></div>
+	<div id="scrollerRollerSize" onscroll="sizesRoller.onScroll()">
+	</div>
+	</center>
+	</div>
+	
+	<hr class="hrStyle" color="#ffffff">
+
+
+	<div id="check-availability">
+	<center>
+	
+	<div onclick="productHandler.getAvailabilityCurrentStore()"> 
+	<span class="classText" style="font-size:12px;">TAP HERE TO CHECK</span ><br>
+	<img style="width:50px" src="${widget.tenantBaseUrl}store_app/tap_to_check.png" />
+	</div>
+	</center>
+	<br>
+	<br>
+	<center>
+	<span class="classText" id="avaliText" style="font-size:40px; text-align:center">AVAILABILITY</span>
+	<div id="showLabel">
+	<div  style=" position:fixed; z-index:10; top:636px; width:100px; color:white; height:20px; left:6px;" >ON HAND</div>
+	<div  style=" position:fixed; z-index:10; top:723px; width:100px; color:white; height:20px; left:4px;" >ON HOLD</div>
+	</div>
+	<center><img id="loading" style=" margin-left:7px; width:150px;z-index:11;"src="${widget.tenantBaseUrl}store_app/loading1.gif"/>	</center>
+	<div id="responseAvailability">
+	
+	<div id="innerGiacenze">
+	
+	</div>
+	</div>
+	</center>
+	</div>
+	<div id="storeDesc">
+	
+	<hr class="hrStyle" color="#ffffff">
+
+	<span class="classText" style="font-size:12px; margin-left:50px;">All informations are referred to this store: </span ><br>
+		<br>
+		<center>
+		   <div id="infoStore">
+	       </div>
+	    </center>
+		
+</div>
+
+<div id="search_in_region" onclick="productHandler.getAllStores();"><img style="position:relative;z-index:11;width:90px; top:240px; left:430px;" src="${widget.tenantBaseUrl}store_app/search_in_region.png" /></div>
+</div></div>
+
+[/#compress]	

@@ -1,0 +1,6 @@
+{
+[#list entitiesSynchInfo! as entitySynchInfo]
+[#if entitySynchInfo_index > 0],[/#if]
+"${entitySynchInfo.entity}":[#include entitySynchInfo.templateName]
+[/#list]
+}

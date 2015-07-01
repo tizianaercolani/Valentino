@@ -1,0 +1,40 @@
+ [boundary]inner:searchWl[/boundary]   
+     <div id="wish_searchClient" class="wish_centeredMODE">
+		   <div > 
+			<img id='searchimgcust'style="width:40px" src="${widget.tenantBaseUrl}store_app/link_customer_icon.png" /><p>LINK CUSTOMER</p>
+		
+			</div>
+			<div id="wish_inputSearch">
+				<table align="wish_right" id="wish_table_search">
+					<tr id="wish_row_clientId" class="wish_tr_showHide">
+						<td><label class="wish_label_search" >CUSTOMER ID</label><br></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="10" class="wish_client_id" type="text" id="wish_clientId" value='${ctx.getParameter("clientId")!}'  ></td>
+			            
+					</tr>
+					 <tr id="wish_row_lastName" class="wish_tr_showHide">
+						<td><label class="wish_label_search">LAST NAME</label><br></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="10"  class="client_id" type="text" id="wish_lastName" value='${ctx.getParameter("lastName")!}'  ></td>
+						 
+					 </tr>
+					 <tr id="wish_row_firstName" class="wish_tr_showHide">
+						<td><label class="wish_label_search">FIRST NAME</label><br></td>
+						<td style="width:72%"><input autocorrect="off" maxlength="10" autocomplete="off" class="wish_client_id" type="text"id="wish_firstName" value='${ctx.getParameter("firstName")!}'  ></td>
+					</tr>
+					
+					
+					 <tr id="wish_row_company" class="wish_tr_showHide">
+						<td><label class="wish_label_search">COMPANY</label><br></td>
+						<td style="width:72%"><input autocorrect="off" maxlength="40" autocomplete="off" class="wish_client_id" type="text" id="wish_companyName" value='${ctx.getParameter("companyName")!}'  ></td>
+						 
+					</tr>
+					
+				</table>
+			</div>
+			<div id="taptosearchClient" onclick='searchCust()'>
+	<span class="classText" style="font-size:12px;">TAP HERE TO SEARCH CUSTOMER</span ><br>
+	<img style="width:50px" src="${widget.tenantBaseUrl}store_app/tap_to_check.png" />
+</div>
+<div id="scrollerResults">
+
+</div>
+	

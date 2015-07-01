@@ -1,0 +1,6 @@
+[#list renderItem.getChildrenByType("group") as grp]
+<div class="usersmall">
+	<i onclick="${grp.actionUrl}" class="${grp.spec.icon!} open"></i> ${grp.pathName!?html}
+	<i onclick="window.parent.edit(${grp.id})" class="icon-pencil edit"></i>
+</div>
+[/#list]

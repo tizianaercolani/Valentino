@@ -1,0 +1,52 @@
+[#if list?has_content]
+
+[#assign c=ctx.getParameter('index')?number]
+[#assign lim=ctx.getParameter('limit')?number]
+
+[boundary]inner:content[/boundary]
+[#assign prodid=ctx.getParameter('idprod')]
+[#assign store=ctx.getParameter('store')]
+
+
+
+<table id="productsQuest" cellpadding=0 cellspacing=0>
+[#list list as item]
+
+ 	
+<tr onclick="navigateProduct('${item.sapid!}', '${item.color!}');">
+
+        		   <td style="width:160px;">
+        		    <div class="box-product" >
+        		        <img src="${item.staticUrl!}"/>
+        		    </div>
+        		     <div class="descript-product"> <span class="description_product" >${item.sapid!}</span><br><br>
+        		      <span class="description_info" >COLOR: ${item.color!}   FABRIC:${item.fabric!}</span>
+        		      <span class="description_info" ></span> </div>
+        		      
+        		   </td>
+                  
+                  
+                   
+ <tr><td><center><hr></center></td></tr>
+</tr>
+
+[/#list]
+
+</table>
+[#if list?size>(lim-1)]
+
+[#assign a=c+lim]
+<div id="arrow_${a}" style=""onclick="getContent(${a});"><img src="${BC.getTenantBaseUrl(serviceItem)}store_app/tap_to_check.png"/>
+</div>
+
+[/#if]
+[boundary]script[/boundary]
+contentListShow();
+hideActInd();
+[#else]
+[boundary]script[/boundary]
+  		showBasicDialog("No product found.");
+  		contentListHide();
+  		 $('#loading').hide();
+         
+[/#if]

@@ -1,0 +1,45 @@
+[boundary]inner:responseAvailability [/boundary]
+<div id="giacenzeHead">
+ ON HAND<br>
+ <br>
+  <br>
+ ON HOLD</div>
+
+[boundary]inner:innerGiacenze[/boundary]
+
+
+
+
+
+[#assign stockDetails = resp.getPayload()]
+[#if stockDetails.size()==0]
+<span class="classText" style="font-size:40px; text-align:center">AVAILABILITY</span>
+[#else]
+<table class="innerTable" >
+
+<tr>
+[#list stockDetails as stockDetail]
+[#list ctx.getParameter('eancode').split(',') as ean]
+[#if ean==stockDetail.get("EAN11")!]
+<td>${stockDetail.get("AVAIL")!}</td>
+
+
+[/#if]
+[/#list]
+[/#list]
+</tr>
+<tr>
+[#list stockDetails as stock]
+[#list ctx.getParameter('eancode').split(',') as eans]
+[#if eans==stock.get("EAN11")!]
+<td>${stock.get("RESER")!}</td>
+
+
+[/#if]
+[/#list]
+[/#list]
+</tr>
+
+
+</table>
+[/#if]

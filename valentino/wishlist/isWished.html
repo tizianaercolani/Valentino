@@ -1,0 +1,17 @@
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+    ${ctx.getParameter("wishpath")!} 
+-->
+
+[#assign wishpath=ctx.getParameter("wishpath")]
+[#assign wish= renderItem.getItemByPath(wishpath)!]
+
+[boundary]inner:wishButtonDiv[/boundary]
+[#if wish?has_content]
+<!-- Wish item esiste. Stampo bottone di rimozione -->
+
+[#else]
+<!-- Wish item non esiste. Stampo bottone di aggiunta -->
+[/#if]
+

@@ -1,0 +1,186 @@
+[#compress]
+
+<!-- verifico se sono presenti dati o meno -->
+[#assign value = ctx.getParameter('value')]
+[#assign check = ctx.getParameter('check')]
+[#assign isDataAvailable = false]
+<!-- colonne che stampo : ${check!}. Leggo l'inverso  valore: ${value!} -->
+[#if info?has_content]
+
+	[#if check =='color']
+	
+		[#list info as row]	
+		<!-- SIZE_DROP: ${row.get('SIZE_DROP')!}  COLORE: ${row.get('COLORE')!} committed ${row.get('committedQty')} stock ${row.get('stockQty')}-->
+		
+		[#if row.get('SIZE_DROP')?? && row.get('SIZE_DROP')==value]	
+				[#assign isDataAvailable = true]	
+		[/#if]	
+	[/#list]
+	[#elseif check =='size']
+		[#list info as row]		
+		<!-- SIZE_DROP: ${row.get('SIZE_DROP')!}  COLORE: ${row.get('COLORE')!} committed ${row.get('committedQty')} stock ${row.get('stockQty')}-->
+		[#if row.get('COLORE')?? && row.get('COLORE')==value]	
+			[#assign isDataAvailable = true]	
+		[/#if]
+		[/#list]
+	[#elseif check =='colsize']	
+	    [#list info as row]		
+		<!-- SIZE_DROP: ${row.get('SIZE_DROP')!}  COLORE: ${row.get('COLORE')!} committed ${row.get('committedQty')} stock ${row.get('stockQty')}-->
+		 [#if row.get('SIZE_COL')?? && row.get('SIZE_COL')==value]	
+			[#assign isDataAvailable = true]	
+		[/#if]
+		[/#list]	
+	[/#if]
+[/#if]
+<!-- isDataAvailable= ${isDataAvailable?c} -->
+
+[#assign store = ctx.getParameter('store')!]
+[#assign head=ctx.getParameter('head')!]
+[boundary]inner:${store}[/boundary]
+
+<center>
+<table  id="Table" border="0" cellspacing="0"cellpadding="0" style='padding-top:100px;'>	
+[#if isDataAvailable]	
+
+[#if check =='color']
+   [#if head=='yes']
+
+  <thead style="position:relative;top:0px;z-index:11; width:100%;">
+	<tr style="position:relative;top:0px;z-index:11; width:100%;">
+
+[#list info as row]
+
+		[#if row.get('SIZE_DROP')?? && row.get('SIZE_DROP')==value]	
+	
+		<td style="position:relative; z-index:11; padding-right:0px;">	<div style="width:100px">${row.get('COLORE')}</div></td>
+		
+		[/#if]	
+[/#list]
+	</tr>
+</thead>
+
+  [#else]
+ [/#if]
+<tr style="padding-top:50px;">
+[#list info as row]
+
+		[#if row.get('SIZE_DROP')?? && row.get('SIZE_DROP')==value]	
+	
+			<td><div style="width:100px">${row.get('stockQty')}</div></td>
+		[/#if]	
+
+[/#list]
+	
+</tr>	
+<tr>
+[#list info as row]
+
+		[#if row.get('SIZE_DROP')?? && row.get('SIZE_DROP')==value]	
+	
+			<td style="padding-top:40px;"><div style="width:100px">${row.get('committedQty')}</div></td>
+		[/#if]	
+
+[/#list]
+	
+</tr>		
+	
+</table>
+</center>
+
+
+
+[#else]
+[#if check=='size']
+<center>
+		<table id="Table" border="0" cellspacing="0"cellpadding="0" style=''>
+    [#if head=='yes']
+  <thead style="position:relative;top:0px;z-index:11; width:100%; ">
+		<tr style="position:relative;top:0px;z-index:11;">
+
+[#list info as row]
+
+[#if row.get('COLORE')?? && row.get('COLORE')==value]
+	
+			<td style="position:relative; z-index:11;padding-right:0px;"><div style="width:100px">${row.get('SIZE_DROP')}</div></td>
+		
+		[/#if]	
+
+
+
+[/#list]
+	</tr>
+</thead>
+  [#else]
+ [/#if]
+
+<tr style="padding-top:50px;">
+[#list info as row]
+
+[#if row.get('COLORE')?? && row.get('COLORE')==value]
+	
+			<td><div style="width:100px">${row.get('stockQty')}</div></td>
+		[/#if]	
+
+
+
+[/#list]
+	
+</tr>	
+<tr>
+[#list info as row]
+
+[#if row.get('COLORE')?? && row.get('COLORE')==value]
+	
+			<td style="padding-top:40px;">${row.get('committedQty')}</td>
+		[/#if]	
+
+
+[/#list]
+	
+</tr>		
+	
+</table>
+</center>
+
+
+[#else]
+<center>
+
+
+<table id="table"  border="0" cellspacing="30"cellpadding="0" style="">
+[#list info as row]
+
+		 [#if row.get('SIZE_COL')?? && row.get('SIZE_COL')==value]	
+	
+			<tr style="padding:0;"><td>${row.get('stockQty')}</td><td>${row.get('committedQty')}</td></tr>
+			<tr style="padding:0;"><td style="font-size:20px;">on hand</td><td style="font-size:20px;">on hold</td></tr>
+		[/#if]	
+		
+
+
+[/#list]
+
+
+
+
+[/#if]
+[/#if]
+
+[#else]
+	<tr><td><div style="font-size:14px;color:white; width:300px; height:150px;">SORRY, NO DATA AVAILABLE</div></td></tr>
+
+[/#if]
+</table>	
+[boundary]script[/boundary]
+[#if check =='color' || check=='size']
+$("#showLabel1").show();
+$("#showLabel2").show();
+$("#showLabel3").show();
+[#else]
+$("#showLabel1").hide();
+$("#showLabel2").hide();
+$("#showLabel3").hide();
+[/#if]
+
+
+ [/#compress]

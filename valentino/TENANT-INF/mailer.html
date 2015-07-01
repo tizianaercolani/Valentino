@@ -1,0 +1,38 @@
+
+<div class="overlay" id="mailer" onclick="mailer.close(event)">
+		<div id="mailerMask" >
+		   <div > 
+			<p>SEND EMAIL</p>
+			<hr width='100%' size='1' color='ffffff'>
+			</div>			
+				<table id="table_mailer">
+				<tr  class="tr_changePassword">
+						<td><label class="label_changePassword" >FROM</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" autocapitalize="off"  class="input_changePassword" type="text" id="mailer_from"   ></td>
+			            
+					</tr>
+					<tr  class="tr_changePassword">
+						<td><label class="label_changePassword" >TO</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off"  autocapitalize="off"  class="input_changePassword" type="text" id="mailer_to" value=''  ></td>
+			            
+					</tr>
+					 <tr  class="tr_changePassword">
+						<td><label class="label_changePassword">SUBJECT</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="50"  class="input_changePassword" type="text" id="mailer_subject" value=''  ></td>
+					 </tr>
+					 <tr  class="tr_changePassword">
+						<td><label class="label_changePassword">COMMENTS</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="80"  class="input_changePassword" type="text" id="mailer_body" value=''  ></td>
+					 </tr>	
+					 			
+				</table>
+
+		
+<center>     
+<div  id="mailer_submit" onclick="mailer.onSubmitClick()" >
+<i class="icon-envelope-alt"></i>
+<div id="mailer_action" >CHANGE PASSWORD FOR THIS USER</div>
+</div>	</center>  	
+		</div>
+	
+</div>	

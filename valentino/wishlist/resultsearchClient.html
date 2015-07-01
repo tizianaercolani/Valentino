@@ -1,0 +1,50 @@
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+[#assign cardcriteria]
+{
+	"type":"customerCard"
+	
+}
+[/#assign]
+${serviceItem.setCriteriaJson(cardcriteria)!}
+${serviceItem.setLimit(-1)!}
+
+[#assign cards= serviceItem.search]
+[#list cards as card]
+             [#assign cardId= card.id]
+[/#list]
+
+
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+
+RESPONSE
+result:  ${resp.getResult()?string!}
+code: ${resp.getCode()!}
+description: ${resp.getDescription()!}
+
+-->
+
+[#if resp.getResult()]
+
+	[#assign customers= resp.getPayload()]
+	
+	
+	[boundary]inner:scrollerResults[/boundary]
+
+<div id="wish_results">	
+	<table id="resultTable" >
+		[#list customers as customer]
+		<tr><td onclick=" wishManager.setCurrentCustomer('${customer.get('Partner')}','${customer.get('NameLast')!}  ${customer.get('NameFirst')!}');backToaddWishlist()">${customer.get("NameLast")!}  ${customer.get("NameFirst")!},<br> ${customer.get("Street")!} ${customer.get("City")!} </td></tr>
+		[/#list]
+	</table>
+</div>
+[boundary]script[/boundary]
+		hideActInd();
+		
+	
+[#else]
+<!-- error or no result -->
+[boundary]script[/boundary]
+hideActInd();
+showBasicDialog("${resp.getDescription()!}");
+
+[/#if]

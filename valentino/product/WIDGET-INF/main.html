@@ -1,0 +1,40 @@
+[#include "../../TENANT-INF/macro.html"]
+
+[@page]
+[#compress]
+[#assign brand=ctx.getParameter('brand')!]
+[#assign color=ctx.getParameter('color')!]
+[#assign sapid=ctx.getParameter('sapid')!]
+
+
+
+<style>
+body{
+  background-color:white;
+}
+[#if brand=='VAL' || brand=='VMA']
+#logo img{
+width:150px;	
+-webkit-filter: invert(1);
+}
+
+[#else]
+#logo img{
+width:150px;	
+}[/#if]</style>
+
+[#include "product.html"]
+[/#compress]
+[/@page]
+
+<script>
+$("#containerProduct").show();
+productHandler.openProduct({
+	sapid:"${ctx.getParameter('sapid')!}",
+	brand:"${ctx.getParameter('brand')!}",
+	color:"${ctx.getParameter('color')!}",
+	store:"${ctx.getParameter('store')!}",
+		
+})
+
+</script>

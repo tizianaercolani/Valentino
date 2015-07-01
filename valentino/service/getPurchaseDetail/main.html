@@ -1,0 +1,88 @@
+[boundary]inner:purchaseDetail[/boundary]
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+
+RESPONSE
+result:  ${resp.getResult()?string!}
+code: ${resp.getCode()!}
+description: ${resp.getDescription()!}
+
+-->
+[#if resp.getResult()]
+[#assign details = resp.getPayload()]
+[#if !resp.getResult() || details.size()==0]
+<br>EMPTY
+[/#if]
+[#list details as detail]
+<table class="innerTable" >
+<tr><td>Date</td><td>${detail.get("Calendarday")!}</td></tr>
+<tr><td>Store</td><td>${detail.get("Store")!}</td></tr>
+<tr><td>Associate</td><td>${detail.get("Associate")!}</td></tr>
+<tr><td>Currency</td><td>${detail.get("Currencykey")!}</td></tr>
+<tr><td>Season</td><td>${detail.get("Season")!}</td></tr>
+<tr><td>Line</td><td>${detail.get("Line")!}</td></tr>
+<tr><td>Code Collection</td><td>${detail.get("CodCollezione")!}</td></tr>
+<tr><td>Collection</td><td>${detail.get("AFSCollection")!}</td></tr>
+<tr><td>Prod. hier. Lv4</td><td>${detail.get("Prod.hier.level4")!}</td></tr>
+<tr><td>Material</td><td>${detail.get("Material")!}</td></tr>
+<tr><td>Color</td><td>${detail.get("AFSColorDim.")!}</td></tr>
+<tr><td>Size</td><td>${detail.get("AFSSizedim.")!}</td></tr>
+<tr><td>Drop</td><td>${detail.get("AFSDropdim.")!}</td></tr>
+<tr><td>Net Value (LOCAL)</td><td>${detail.get("NetValue_LOCAL")!}</td></tr>
+<tr><td>Sales QTY</td><td>${detail.get("SalesQTY")!}</td></tr>
+<tr><td>Discount</td><td>${detail.get("TotalNetDiscount")!}</td></tr>
+<tr><td>Gross Sales</td><td>${detail.get("Gross")!}</td></tr>
+
+</table>
+[#if detail_index< (details.size()-1)]
+<br>
+<br>
+<br>
+[/#if]
+[/#list]
+[/#if]
+
+[boundary]outer:productFooter[/boundary]
+
+<div id="productFooter">
+[#if resp.getResult() && details.size()>0]
+<table>
+<tr>
+[#list details as detail]
+<td class="imageHolder" onclick='cardHandler.showDetail({
+	        d_thumb:"${detail.get("thumbUrl")!}",
+			d_sapid:"${detail.get("sapid")!}",
+			d_date:"${detail.get("Calendarday")!}",
+			d_store:"${detail.get("Store")!}",
+			d_associate:"${detail.get("Associate")!}",
+			d_currency:"${detail.get("Currencykey")!}",
+			d_season:"${detail.get("Season")!}",
+			d_line:"${detail.get("Line")!}",
+			d_codeCollection:"${detail.get("CodCollezione")!}",
+			d_collection:"${detail.get("AFSCollection")!}",
+			d_prodHier:"${detail.get("Prod.hier.level4")!}",
+			d_material:"${detail.get("Material")!}",
+			d_color:"${detail.get("AFSColorDim.")!}",
+			d_size:"${detail.get("AFSSizedim.")!}",
+			d_drop:"${detail.get("AFSDropdim.")!}",
+			d_netValue:"${detail.get("NetValue_LOCAL")!}",
+			d_sales:"${detail.get("SalesQTY")!}",
+			d_discount:"${detail.get("TotalNetDiscount")!}",
+			d_gross:"${detail.get("Gross")!}"
+			}		
+		)'><div class="productImage" ><img id="img_${detail.get("sapid")!}"  src="${detail.get("thumbUrl")!}"/></div><!--  img src='${detail.get("thumbUrl")!}'/ --><div class="caption">${detail.get("Calendarday")!}</div></td>
+[/#list]
+</tr>
+</table>
+[/#if]
+</div>
+
+[boundary]script[/boundary]
+cardHandler.setMode();
+if(!$("#cardContent").is(":visible"))
+{
+	$("#productFooter").hide();
+}
+
+
+

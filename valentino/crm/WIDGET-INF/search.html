@@ -1,0 +1,77 @@
+<link href="${widget.tenantBaseUrl}crm/search.css" rel="stylesheet"/>
+<script src="${widget.tenantBaseUrl}crm/search.js" ></script>
+		<div id="searchClient" class="centeredMODE">
+		   <div > 
+			<p>FIND CUSTOMER</p>
+			<hr width='100%' size='1' color='ffffff'>
+			</div>
+			<div id="inputSearch">
+				<table align="right" id="table_search">
+					<tr id="row_clientId" class="tr_showHide">
+						<td><label class="label_search" >CUSTOMER ID *</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="10" class="client_id" type="text" id="clientId" value='${ctx.getParameter("clientId")!}'  ></td>
+			            
+					</tr>
+					 <tr id="row_lastName" class="tr_showHide">
+						<td><label class="label_search">LAST NAME *</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="10"  class="client_id" type="text" id="lastName" value='${ctx.getParameter("lastName")!}'  ></td>
+						 
+					 </tr>
+					 <tr id="row_firstName" class="tr_showHide">
+						<td><label class="label_search">FIRST NAME</label></td>
+						<td style="width:72%"><input autocorrect="off" maxlength="10" autocomplete="off" class="client_id" type="text"id="firstName" value='${ctx.getParameter("firstName")!}'  ></td>
+						
+					</tr>
+					 <tr id="row_otherAlphabet" class="tr_showHide">
+						<td><label class="label_search">OTHER ALPHABET *</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" class="client_id" type="text"id="otherAlphabet" value='${ctx.getParameter("otherAlphabet")!}'  ></td>
+						 
+					</tr>
+					
+					 <tr id="row_company" class="tr_showHide">
+						<td><label class="label_search">COMPANY *</label></td>
+						<td style="width:72%"><input autocorrect="off" maxlength="40" autocomplete="off" class="client_id" type="text" id="companyName" value='${ctx.getParameter("companyName")!}'  ></td>
+						 
+					</tr>
+					 <tr  id="row_mainPhone" class="tr_showHide">
+						<td><label class="label_search">MAIN PHONE</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="30" class="client_id" type="text" id="phone" value='${ctx.getParameter("phone")!}'  ></td>
+						
+					</tr>
+					<tr  id="row_mainPhone" class="tr_showHide">
+						<td><label class="label_search">MAIN MOBILE</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="30" class="client_id" type="text" id="mobile" value='${ctx.getParameter("mobile")!}'  ></td>
+						
+					</tr>
+					 <tr id="row_zip" class="tr_showHide">
+						<td><label class="label_search">ZIP</label></td>
+						<td style="width:72%"><input autocorrect="off" autocomplete="off" maxlength="10" class="client_id" type="text" id="zip" value='${ctx.getParameter("zip")!}'  ></td>
+						 
+					</tr>
+					 <tr id="row_country" class="tr_showHide">
+						<td><label class="label_search">COUNTRY</label></td>
+						<td style="width:72%">[@dropDownList "country" "SIM_COUNTRY" "" "" /]</td>
+						
+					</tr>
+					
+					
+				</table>
+			</div>
+		[#assign children= renderItem.children]
+        [#list children as child]
+             [#assign childId= child.id]
+        [/#list]
+        
+<div class="addressButton" id="store_clientSearch" onclick="searchHandler.search()">
+<img  src="${widget.tenantBaseUrl}store_app/store-client.png" />	
+<div  class="arrowedTextSearch">FIND CUSTOMER IN ALL STORES</div>
+</div>
+	<div id="mandatoryLeast"><span> * please insert at least one of these</span></div>
+		<div id="toggleClick" onclick="searchHandler.toggleFields()"><img id="toggleArrow" src="${widget.tenantBaseUrl}store_app/arrowup.png"><div>MORE FIELDS</div></div>
+		</div>
+	[#if  ctx.getParameter("fullSearch")??]
+	<script>
+	searchHandler.showFields();
+	</script>
+	[/#if]	
+	

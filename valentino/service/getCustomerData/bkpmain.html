@@ -1,0 +1,324 @@
+
+[#macro dropDownList tagModify category subcategory selectedValue]
+[#assign lookCriteria]
+{
+        "type":"entry",
+		"parentId":${serviceItem.getIdByPath("lookups")},
+		"order":
+    	{
+    	"name":"value",
+    	 "direction":"asc"
+    	},
+    	attributes:
+    	[
+	    	
+	    	{
+			        "name":"category",
+			        "string_value": "${category!}"
+			}
+			[#if subcategory?has_content]
+			,{
+			        "name":"subcategory",
+			        "string_value": "${subcategory!}"
+			}
+			[/#if]
+		]
+}
+
+[/#assign]
+${serviceItem.setCriteriaJson(lookCriteria)!}
+${serviceItem.setLimit(-1)!}
+[#assign options= serviceItem.search]
+<select name="${tagModify!}" id=${tagModify!} >
+<option value=""> </option>
+[#list options as opt]
+<option value="${opt.code}" [#if selectedValue?has_content && (opt.code==selectedValue || opt.value==selectedValue)]selected[/#if]>${opt.value}</option>
+[/#list]
+</select>
+[/#macro]
+
+
+
+[boundary]inner:results[/boundary]
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+<h3>template: valentino\service\getClientData\main.html</h3>
+<b>${now.get("dd-MM-yyyy HH:mm:ss")}</b>
+<p>REQUEST
+<br>action:  ${ctx.getParameter("action")!}
+<br>brand: ${ctx.getParameter("brand")!}
+<br>clientId: ${ctx.getParameter("clientId")!}
+
+[@dropDownList "M_JOBGR" "M_JOBGR" "" "Z001" /]
+
+
+<p>RESPONSE
+<br>result:  ${resp.getResult()?string!}
+<br>code: ${resp.getCode()!}
+<br>description: ${resp.getDescription()!}
+
+
+
+[#if resp.getResult()]
+[#assign client= resp.getPayload()]
+<h3>${client.get("NameLast")!} ${client.get("NameFirst")!}</h3>
+<b>General Data</b>
+<table border="1" width="50%">
+<tr><td>Client id</td><td>${client.get("Partner")!}</td></tr>
+<tr><td>GID</td><td>[@dropDownList "ImTitle" "M_GENDER" "" client.get("Title") /] </td></tr>
+<tr><td>Last Name</td><td>${client.get("NameLast")!}</td></tr>
+<tr><td>First Name</td><td>${client.get("NameFirst")!}</td></tr>
+<tr><td>Other Alphabet</td><td>${client.get("Namemiddle")!}</td></tr>
+<tr><td>Company Name</td><td>${client.get("Zzafld000012")!}</td></tr>
+<tr><td>Type</td><td>${client.get("Bpkind")!}</td></tr>
+<tr><td>Domestic/Foreign</td><td>${client.get("V004S187")!}</td></tr>
+<tr><td>Country</td><td>${client.get("Country")!}</td></tr>
+<tr><td>Date of Birth</td><td>${client.get("Birthdt")!}</td></tr>
+<tr><td>Estimated Age</td><td>${client.get("Zzafld00000v")!}</td></tr>
+<tr><td>Profession</td><td>${client.get("Jobgr")!}</td></tr>
+<tr><td>Main Brand</td><td>${client.get("Zzafld000076Des")!}</td></tr>
+<tr><td>Assistant's name</td><td>${client.get("Zzafld00001d")!}</td></tr>
+<tr><td>Source description</td><td>${client.get("Zzafld00000w")!}</td></tr>
+<tr><td>Marketing</td><td>${client.get("ContactDesc")!}</td></tr>
+<tr><td>Profiling</td><td>${client.get("Attrib5")!}</td></tr>
+<tr><td>Notes</td><td>${client.get("NoteTx")!}</td></tr>
+</table>
+
+
+<br><b>Check</b>
+<table border="1" width="50%">
+<tr><td>Not Completed</td><td>${client.get("Zzafld00002r")!}</td></tr>
+<tr><td>Check Client Details</td><td>${client.get("Zzafld00000z")!}</td></tr>
+<tr><td>Unreachable Mail</td><td>${client.get("DontUseS")!}</td></tr>
+<tr><td>Unreachable Phone</td><td>${client.get("FlgNouseMa")!}</td></tr>
+<tr><td>Unreachable Mobile</td><td>${client.get("FlgNouseMo")!}</td></tr>
+<tr><td>Unreachable Email</td><td>${client.get("SmtpAddrNouse")!}</td></tr>
+</table>
+
+<br><b>Contact Info</b>
+<table border="1" width="50%">
+<tr><td>Mailing Address</td><td>${client.get("Street")!}</td></tr>
+<tr><td>App./Floor/\nBuilding/Block</td><td>${client.get("StrSuppl1")!}</td></tr>
+<tr><td>ZIP</td><td>${client.get("PostlCod1")!}</td></tr>
+<tr><td>City</td><td>${client.get("City")!}</td></tr>
+<tr><td>State/Province</td><td>${client.get("Region")!}</td></tr>
+<tr><td>Main e-mail</td><td>${client.get("SmtpAddr")!}</td></tr>
+<tr><td>Prefix Main Mobile</td><td>${client.get("TelNumpreMo")!}</td></tr>
+<tr><td>Main Mobile</td><td>${client.get("TelNumberMo")!}</td></tr>
+<tr><td>Prefix Main Phone</td><td>${client.get("TelNumpreMa")!}</td></tr>
+<tr><td>Main Phone</td><td>${client.get("TelNumberMa")!}</td></tr>
+<tr><td>(Office) - Flag</td><td>${client.get("Zzafld00002b")!}</td></tr>
+<tr><td>FAX</td><td>${client.get("FaxNo")!}</td></tr>
+</table>
+
+<br><b>Highlights</b>
+<table border="1" width="50%">
+<tr><td>Dedicated Store</td><td>${client.get("DedicStore")!}</td></tr>
+<tr><td>Associate</td><td>${client.get("AssociateDes")!}</td></tr>
+<tr><td>Discount %</td><td>${client.get("Zzafld00002n")!}</td></tr>
+<tr><td>Store Credit</td><td>${client.get("Stcredit")!}</td></tr>
+<tr><td>Special Treatments</td><td>${client.get("V002S058")!}</td></tr>
+<tr><td>Frozen</td><td>${client.get("Zzafld00006i")!}</td></tr>
+<tr><td>Passed Away</td><td>${client.get("DtDate")!}</td></tr>
+</table>
+<br><b>Purchasing Data Global </b>
+<table border="1" width="50%">
+<tr><td>Loyalty</td><td>${client.get("Attribute")!}</td></tr>
+<tr><td>Monetary</td><td>${client.get("Attrib2")!}</td></tr>
+<tr><td>Monetary Dedicated Store</td><td>${client.get("V004S080")!}</td></tr>
+<tr><td>Spending YTD</td><td>${client.get("V004S087")!}</td></tr>
+<tr><td>Last Purchase Date</td><td>${client.get("V004S085")!}</td></tr>
+<tr><td>First Purchase Date</td><td>${client.get("V004S086")!}</td></tr>
+<tr><td>First Purchase Amount</td><td>${client.get("V004S090")!}</td></tr>
+<tr><td>Product Type</td><td>${client.get("V004S238Des")!}</td></tr>
+<tr><td>Spending Contribution</td><td>${client.get("Classific")!}</td></tr>
+<tr><td>N. Transactions</td><td>${client.get("V004S083")!}</td></tr>
+<tr><td>N. Items</td><td>${client.get("V004S095")!}</td></tr>
+<tr><td>Avg Price</td><td>${client.get("AvgPrice")!}</td></tr>
+<tr><td>Preferred Prod. Season Type</td><td>${client.get("V004S181Des")!}</td></tr>
+<tr><td>Preferred Semester</td><td>${client.get("V004S198Des")!}</td></tr>
+<tr><td>Purchase Type</td><td>${client.get("V004S194Des")!}</td></tr>
+
+
+</table>
+
+<br>
+<b>Purchasing Data Red vs Valentino </b>
+<table border="1" width="50%">
+    <tr>
+		<td>Purchasing Data</td>
+		<td>RED</td>
+		<td>VALENTINO</td>
+	</tr>
+	<tr>
+		<td>First Purchase Amount</td>
+		<td>${client.get("V009S217")!}</td>
+		<td>${client.get("V008S216")!}</td>
+	</tr>
+	<tr>
+		<td>First Purchase Date</td>
+		<td>${client.get("V009S213")!}</td>
+		<td>${client.get("V008S212")!}</td>
+	</tr>
+	<tr>
+		<td>Last Purchase Date</td>
+		<td>${client.get("V009S211")!}</td>
+		<td>${client.get("V008S210")!}</td>
+	</tr>
+	<tr>
+		<td>Monetary Dedicated Store</td>
+		<td>${client.get("V009S205")!}</td>
+		<td>${client.get("V008S204")!}</td>
+	</tr>
+	<tr>
+		<td>Monetary</td>
+		<td>${client.get("V009S207")!}</td>
+		<td>${client.get("V008S206")!}</td>
+	</tr>
+	<tr>
+		<td>Number of Items</td>
+		<td>${client.get("V009S237")!}</td>
+		<td>${client.get("V008S236")!}</td>
+	</tr>
+	<tr>
+		<td>Number of Transactions</td>
+		<td>${client.get("V009S209")!}</td>
+		<td>${client.get("V008S208")!}</td>
+	</tr>
+	<tr>
+		<td>Preferred Prod. Season Type CY</td>
+		<td>${client.get("V009S221Des")!}</td>
+		<td>${client.get("V008S220Des")!}</td>
+	</tr>
+	<tr>
+		<td>Preferred Prod. Season Type PY</td>
+		<td>${client.get("V009S223Des")!}</td>
+		<td>${client.get("V008S222Des")!}</td>
+	</tr>
+	<tr>
+		<td>Preferred Prod. Season Type</td>
+		<td>${client.get("V009S219Des")!}</td>
+		<td>${client.get("V008S218Des")!}</td>
+	</tr>
+	<tr>
+		<td>Preferred Semester CY</td>
+		<td>${client.get("V009S233Des")!}</td>
+		<td>${client.get("V008S232Des")!}</td>
+	</tr>
+	<tr>
+		<td>Preferred Semester PY</td>
+		<td>${client.get("V009S235Des")!}</td>
+		<td>${client.get("V008S234Des")!}</td>
+	</tr>
+	<tr>
+		<td>Preferred Semester</td>
+		<td>${client.get("V004S181Des")!}</td>
+		<td>${client.get("V008S230Des")!}</td>
+	</tr>
+	<tr>
+		<td>Product Type CY</td>
+		<td>${client.get("V009S241Des")!}</td>
+		<td>${client.get("V008S242Des")!}</td>
+	</tr>
+	<tr>
+		<td>Product Type PY</td>
+		<td>${client.get("V009S245Des")!}</td>
+		<td>${client.get("V008S244Des")!}</td>
+	</tr>
+	<tr>
+		<td>Product Type</td>
+		<td>${client.get("V009S239Des")!}</td>
+		<td>${client.get("V008S240Des")!}</td>
+	</tr>
+	<tr>
+		<td>Purchase type CY</td>
+		<td>${client.get("V009S227Des")!}</td>
+		<td>${client.get("V008S226Des")!}</td>
+	</tr>
+	<tr>
+		<td>Purchase type PY</td>
+		<td>${client.get("V009S229Des")!}</td>
+		<td>${client.get("V008S228Des")!}</td>
+	</tr>
+	<tr>
+		<td>Purchase type</td>
+		<td>${client.get("V009S225Des")!}</td>
+		<td>${client.get("V008S224Des")!}</td>
+	</tr>
+	<tr>
+		<td>Spending CY</td>
+		<td>${client.get("V009S215")!}</td>
+		<td>${client.get("V008S214")!}</td>
+	</tr>
+	<tr>
+		<td>Status - Loyalty</td>
+		<td>${client.get("V009S247Des")!}</td>
+		<td>${client.get("V008S248Des")!}</td>
+	</tr>
+	<tr>
+		<td>Status - Monetary</td>
+		<td>${client.get("V009S249Des")!}</td>
+		<td>${client.get("V008S250Des")!}</td>
+	</tr>
+	<tr>
+		<td>Status - Spend. Contribution</td>
+		<td>${client.get("V009S251Des")!}</td>
+		<td>${client.get("V008S252Des")!}</td>
+	</tr>
+</table>
+
+
+
+<br><b>Size attributes </b>
+<table border="1" width="50%">
+<tr><td>Jacket</td><td>${client.get("V001S001")!}</td><tr>
+<tr><td>Drs. Shrt.</td><td>${client.get("V001S004")!}</td><tr>
+<tr><td>Top</td><td>${client.get("V001S005")!}</td><tr>
+<tr><td>Trs. Waist</td><td>${client.get("V001S006")!}</td><tr>
+<tr><td>Shoe</td><td>${client.get("V001S007")!}</td><tr>
+<tr><td>Knit</td><td>${client.get("V001S008")!}</td><tr>
+<tr><td>Pant/Skirt</td><td>${client.get("V001S009")!}</td><tr>
+<tr><td>Notes on sizes</td><td>${client.get("V001S010")!}</td><tr>
+</table>
+
+<br><b>Tailor </b>
+<table border="1" width="50%">
+<tr><td>Shoulder to Shoulder</td><td>${client.get("V003S073")!}</td><tr>
+<tr><td>Bottom Size</td><td>${client.get("V003S115")!}</td><tr>
+<tr><td>Neck/Sleeve/\nInseam</td><td>${client.get("V003S074")!}</td><tr>
+<tr><td>Bust/Waist/Hip</td><td>${client.get("V003S075")!}</td><tr>
+</table>
+
+
+<br><b>Interaction History </b>
+
+[#assign interactions = client.get("interactions")]
+[#if interactions.size()==0]
+<br>EMPTY
+[/#if]
+[#list interactions as interaction]
+<table border="1" width="50%">
+<tr><td>Description</td><td>${interaction.get("Description")!}</td><tr>
+<tr><td>End date</td><td>${interaction.get("To")!}</td><tr>
+
+</table>
+[/#list]
+<br><b>Planned activities </b>
+
+[#assign activities = client.get("activities")]
+[#if activities.size()==0]
+<br>EMPTY
+[/#if]
+
+[#list activities as activity]
+<table border="1" width="50%">
+<tr><td>Description</td><td>${activity.get("Description")!}</td><tr>
+<tr><td>Start date</td><td>${activity.get("From")!}</td><tr>
+
+</table>
+[/#list]
+
+</table>
+
+[/#if]
+
+

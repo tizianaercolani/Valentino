@@ -1,0 +1,130 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+body.view {
+	padding: 8px;
+	color: #222222;
+	background-color: #888890;
+	text-align: center;
+	font-size: 13px;
+}
+
+body.view div {
+	text-align: left;
+}
+
+body.view a {
+	display: inline-block;
+	text-decoration: none;
+	color: #666666;
+}
+
+body.view .item-info,body.view .attribute-info {
+	width: 710px;
+	background-color: #e0e8f0;
+	display: inline-block;
+	border-radius: 4px;
+	padding: 8px;
+	margin-bottom: 8px;
+	box-shadow: 0px 1px 2px rgba(100, 100, 100, 0.8);
+}
+
+body.view .attribute-info {
+	background-color: #e0e0e0;
+}
+
+body.view .preview-box {
+	margin-top: 8px;
+	text-align: center;
+}
+
+body.view .preview-box video {
+	width: 100%;
+}
+
+body.view .preview-box img,body.view .preview-box video {
+	max-width: 100%;
+}
+
+body.view .preview-box iframe {
+	margin: auto;
+	width: 512px;
+	height: 512px;
+}
+
+body.view .separator {
+	margin-top: 8px;
+	margin-bottom: 8px;
+	height: 1px;
+	background-color: #d0d0d0;
+}
+
+.user {
+	text-align: left;
+	width: 500px;
+	background-color: #e0e8f0;
+	display: inline-block;
+	border-radius: 4px;
+	padding: 8px;
+	margin-bottom: 8px;
+	margin-left: 8px;
+	box-shadow: 0px 1px 2px rgba(100, 100, 100, 0.8);
+	position: relative;
+}
+
+.user i.edit {
+	position: absolute;
+	top: 8px;
+	color: #666666;
+	right: 8px;
+	cursor: pointer;
+}
+
+.user i.edit:hover {
+	color: #222222;
+}
+
+.user i.edit:active {
+	top: 9px;
+}
+
+body.view div.usersmall {
+	width: 200px;
+	background-color: #e0e8f0;
+	display: inline-block;
+	border-radius: 4px;
+	padding: 8px;
+	margin-bottom: 8px;
+	margin-left: 8px;
+	box-shadow: 0px 1px 2px rgba(100, 100, 100, 0.8);
+	position: relative;
+	text-align: center;
+}
+
+.usersmall i {
+	color: #666666;
+	position: absolute;
+	cursor: pointer;
+	top: 8px;
+}
+
+.usersmall i.open {
+	left: 8px;
+}
+
+.usersmall i.edit {
+	right: 8px !important;
+}
+
+.usersmall i:hover {
+	color: #222222;
+}
+
+.usersmall i:active {
+	top: 9px;
+}

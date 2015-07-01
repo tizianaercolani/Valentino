@@ -1,0 +1,28 @@
+[#include "../../TENANT-INF/macro.html"]
+[#assign childs=renderItem.children]
+<script src="${this.request.contextPath}/res/widget.js"></script>
+[@page]
+  <div id="container">
+        	<div id="logo" >
+        		<span>VALENTINO</span>
+        	</div>
+ <div id="background_image">
+        	<img src="${fourMeBaseUrl}640x480/bf552741-fc69-4f17-a7b0-b657a0667b0c.jpg" />
+ </div>
+        [#list childs as child]
+        <center>
+        	<div id="slider_elementx4" onscroll="sliderX4Scroll()" onclick="${child.actionUrl}">
+        	 	
+     		</div>
+     		</center>
+     	[/#list]
+       </div>
+<script>
+getLines(
+		{
+			collection: "${ctx.getParameter('collection')!}",
+			season_number:"${ctx.getParameter('season_number')!}"
+			
+		});
+</script>
+[/@page]

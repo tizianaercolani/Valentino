@@ -1,0 +1,19 @@
+<!-- 
+
+store: ${ctx.getParameter("store")!}
+
+ -->
+
+[boundary]outer:scrollerRoller[/boundary]
+<div id="scrollerRoller" onscroll="alphabetRoller.onScroll()" onclick="void()" >
+<table id="rollingTable" cellpadding=0 cellspacing=0 style="height:100%">
+<tr><td><div style="width:40px;">&nbsp;</div></td><td><div style="width:40px;">&nbsp;</div></td><td><div style="width:40px;">&nbsp;</div></td>
+[#list alphabet as list]
+<td class="[#if list_index=0]font_active[#else]font_inactive[/#if]"  target="${list.letter!?html}" class="letter"><div style="width:40px;">${list.letter!?html}</div></td>
+[/#list]
+<td><div style="width:40px;">&nbsp;</div></td><td><div style="width:40px;">&nbsp;</div><div style="width:40px;">&nbsp;</div><div style="width:80px;">&nbsp;</div></td>
+</tr>
+</table>
+</div>
+[boundary]script[/boundary]
+refreshStoreContacts();

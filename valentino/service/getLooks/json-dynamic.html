@@ -1,0 +1,13 @@
+
+[
+[#list list as meta]
+[#if meta_index>0],[/#if]
+{
+   "id":"${meta.get('id')?js_string}",
+   "look_index":"${meta.get('look_index')?js_string}",
+   "imgUrl":"http://valentino-view.4me.it/api/xcontents/resources/delivery/getThumbnail/valentino/1024x0/${meta.get('id')!''}.jpg",
+  "look_materials":"${meta.get('look_materials')?js_string}"
+
+}       
+[/#list]
+]

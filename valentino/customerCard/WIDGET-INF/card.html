@@ -1,0 +1,73 @@
+<script src="${widget.tenantBaseUrl}mailer.js"></script>
+
+<div id="cardHeader">
+<div id="cardTitle"></div>
+</div>
+
+<table id="cardContent" cellpadding=0 cellspacing=0>
+<tr><td id="menu">
+<div id="leftMenu" onscroll="cardRoller.onScroll()">
+
+<table id="rollingTableCard" cellpadding=0 cellspacing=0>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr class="active"><td class="menuItem" onclick="cardHandler.goToPosition(this.id)"id='0' target="generalData">GENERAL DATA</td></tr>
+<tr><td class="menuItem"onclick="cardHandler.goToPosition(this.id)" id='1' target="manageWishlist">MANAGE WISHLIST</td></tr>
+<tr><td class="menuItem" onclick="cardHandler.goToPosition(this.id)"id='2' target="redVsVal">PURCHASING DATA Red vs Valentino</td></tr>
+<tr><td class="menuItem" onclick="cardHandler.goToPosition(this.id)"id='3' target="purchaseSummary">PURCHASE YEAR/SEASON</td></tr>
+<tr><td class="menuItem"onclick="cardHandler.goToPosition(this.id)" id='4' target="purchaseDetail">PURCHASE DATA - DETAILS</td></tr>
+<tr><td class="menuItem" onclick="cardHandler.goToPosition(this.id)" id='5'target="purchasingGlobal">PURCHASING DATA GLOBAL</td></tr>
+<tr><td class="menuItem" onclick="cardHandler.goToPosition(this.id)"id='6'target="sizeAtt">SIZE ATTRIBUTES</td></tr>
+<tr><td class="menuItem"onclick="cardHandler.goToPosition(this.id)"id='7' target="tailor">TAILOR</td></tr>
+<tr><td class="menuItem" onclick="cardHandler.goToPosition(this.id)"id='8' target="interactions">INTERACTION HISTORY</td></tr>
+<tr><td class="menuItem" onclick="cardHandler.goToPosition(this.id)"id='9'target="check">CHECK</td></tr>
+<tr><td class="menuItem" onclick="cardHandler.goToPosition(this.id)"id='10' target="contactInfo">CONTACT INFO</td></tr>
+<tr><td class="menuItem"onclick="cardHandler.goToPosition(this.id)"id='11' target="highlights">HIGHLIGHTS</td></tr>
+<tr><td class="menuItem" onclick="cardHandler.goToPosition(this.id)"id='12'target="activities">PLANNED ACTIVITIES</td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+
+
+</table>
+</div>
+</td>
+<td id="mainTd">
+
+<div id="mainContent">
+<div class="card" id="generalData"></div>
+<div class="card" id="manageWishlist">
+[#include "/valentino/wishlist/manageWishCard.html"]
+</div>
+<div class="card" id="check"></div>
+<div class="card" id="contactInfo"></div>
+<div class="card" id="highlights"></div>
+<div class="card" id="purchasingGlobal"></div>
+<div class="card" id="redVsVal"></div>
+<div class="card" id="purchaseSummary"></div>
+<div class="card" id="purchaseDetail"></div>
+<div class="card" id="sizeAtt"></div>
+<div class="card" id="tailor"></div>
+<div class="card" id="interactions"></div>
+<div class="card" id="activities"></div>
+
+</div>
+
+
+</td>
+</tr>
+</table>
+<div id="segnalibro"></div>
+[#if authUser.role?lower_case!="storeassistant"]
+<div id="cardEdit" onclick="cardHandler.onPencilClick()"></div>
+[/#if]
+<div id="productFooter" style="display:none;"></div>
+[#include "../../TENANT-INF/mailer.html"]

@@ -1,0 +1,39 @@
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+
+RESPONSE
+
+
+-->
+
+[#assign cli= ctx.getParameter("clientId")!]
+[#if cli??]
+[#assign lookCriteria]
+{
+        "type":"wishitem",
+		"parentId":${renderItem.getIdByPath("wishlist")!0},
+		"order":
+    	{
+    	"name":"insertionDate",
+    	 "direction":"desc"
+    	}
+    
+}
+
+[/#assign]
+
+<!-- ${lookCriteria} -->
+${renderItem.setCriteriaJson(lookCriteria)!}
+${renderItem.setLimit(-1)!}
+<body style="background-color:white">
+<p>Items in wishlist: </p>
+[#assign wishlist= renderItem.search]
+[#list wishlist as wish]
+id: ${wish.id} prodId: ${wish.prodId} color: ${wish.color} size: ${wish.size}<br>
+
+[/#list]
+</body>
+[#else]
+No client id specified
+[/#if]

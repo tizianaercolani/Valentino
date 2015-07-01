@@ -1,0 +1,32 @@
+[boundary]outer:storesList[/boundary]
+
+[#assign region=ctx.getParameter('region')]
+
+<div id="storesList">
+<!--  ${region}-->
+<div id="storesListFull" >
+
+[#list info as row]
+
+
+[#list row.keySet() as k]
+
+[#if k=='ID_REGION' && row.get(k)==region]
+[#assign store=row.get('KUNWE')]
+
+<center><div onclick="saveStore('${store}')" class="descr_storeList"style="color:white" ><hr >${row.get('KUNWE_INSEGNA')}<br>${row.get('KUNWE_STRAS')}<br>${row.get('COUNTRY')} </div></center>
+
+[/#if]
+	
+  
+
+  [/#list]
+
+[/#list]
+</div>
+ 
+</div>
+
+ 
+
+

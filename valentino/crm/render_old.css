@@ -1,0 +1,250 @@
+body{
+ overflow:hidden;
+ -webkit-user-select:none;
+}
+#cardHeader
+{
+	background-color:white;
+	width:99%;
+	height: 5%;
+	position:absolute;
+	z-index:11;
+	top:0;
+}
+
+#containerProfile_Client{
+	border-right: 7px solid #000000;
+	position: absolute;
+	z-index:11;
+	top:5%;
+	left:0px;
+	width:64%;
+	height:95%;
+	
+}
+#backgroundImg-profileClient{
+	z-index:2;
+	width:100%;
+	height:100%;
+	opacity:0.3;
+}
+#profile_Client{
+	position: absolute;
+	z-index:11;
+	top:0px;
+	width:100%;
+	left:0px;
+	height:100%;
+    background-color:rgba(0,0,0,0.2);
+}
+#rubrica_Consumers{
+	background-color:white;
+	position: absolute;
+	z-index:10;
+	top:40%;
+	right:0px;
+	width:35%;
+	height:60%;
+	overflow:auto;
+	overflow-x:hidden;
+	-webkit-overflow-scrolling: touch;
+}
+
+#rubrica_Consumers table td{
+	background-color:white;
+	border-top:thin solid #cccccc;
+	font-size:100%;
+	text-align:center;
+	font-family: Geneva, ‘Lucida Sans’, ‘Lucida Grande’, ‘Lucida Sans Unicode’, Verdana, sans-serif;
+}
+#list_alphabet{
+	background-color:black;
+	position: absolute;
+	z-index:11;
+	top:5%;
+	right:0px;
+	height:30%;
+	width:36%;
+	padding: 0;
+	color:white;
+	
+}
+#scrollerRoller{
+	position: absolute;
+	z-index: 10;
+    top:10%;
+    width:260px;
+    height:16%;
+    overflow: auto;
+    overflow-y:hidden;
+   -webkit-overflow-scrolling: touch;	
+}
+.font_inactive{
+	font-size:20px;
+}
+.font_active{
+	font-size:40px;
+}
+#rollingTable td{
+text-align:center;
+color:white;
+height:100%
+font-family: Geneva, ‘Lucida Sans’, ‘Lucida Grande’, ‘Lucida Sans Unicode’, Verdana, sans-serif;
+}
+#item-star{
+    position: absolute;
+	top:40%;
+	left:20%;
+    width:70%;
+    height:30%;
+	color:white;
+	overflow:auto;
+	overflow-y:hidden;
+    font-size:50px;
+    text-align:center;
+  
+	}
+
+#search_client{
+	position: absolute;
+	z-index:15;
+	top:20%;
+	width:90%;
+	right:5%;
+	
+}
+#search_client p{
+	color:white;
+	font-weight:10;
+	font-size:35px;
+	font-family:"Times New Roman", Times, Georgia, serif;
+	line-height:10px;
+	right:0px;
+	margin-bottom:13px;
+	margin-left:5%;
+	
+}
+#search_client hr{
+	margin-right:20px;
+	margin-left:5%;
+}
+#inputSearch{
+	position:relative;
+    margin-top:5%;
+    margin-right:0px;
+   
+}
+.label_search{
+	top:10%;
+	color:white;
+	font-size:15px;
+	font-width:20px;
+	font-family: Geneva, ‘Lucida Sans’, ‘Lucida Grande’, ‘Lucida Sans Unicode’, Verdana, sans-serif;
+}
+.client_id{
+	color:#aaaaaa;
+	font-size:15px;
+	font-family: Geneva, ‘Lucida Sans’, ‘Lucida Grande’, ‘Lucida Sans Unicode’, Verdana, sans-serif;
+	width:100%;
+	height:36px;
+	border:none;
+	border-style:none;
+	border-radius:0px;
+	margin-bottom:5%;
+	margin-right:0px;
+}
+#store_clientSearch{
+	margin-top:5%;
+	margin-left:5%;
+	margin-right:25%;
+}
+.descriptionButton{
+	position:relative;
+	z-index:11;
+	top:12px;
+	height:50px;
+	color:white;
+	font-size:8px;
+	font-family: Geneva, ‘Lucida Sans’, ‘Lucida Grande’, ‘Lucida Sans Unicode’, Verdana, sans-serif;
+	text-align:center;
+	
+}
+.tr_showHide{
+	visibility:hidden;
+	position:relative;
+	top:30px;
+	right:1850%;
+	width:20%;
+}
+
+#row_clientId, #row_lastName{
+	visibility:visible;
+}
+
+#toggleClick{
+	position: absolute;
+	top:410px;
+	left:105px;
+	padding: 10px;
+	padding-left: 20px;
+	z-index: 3000
+	
+}
+
+.arrow{
+	position:relative;
+	top:20px;
+	right:1650%;
+	width:20%;
+	height:20%;
+	
+}
+#searchRubrica{
+	position:absolute;
+	top:76%;
+	width:95%;
+	height:36px;
+}
+#input-searchRubrica{
+	position:relative;
+	top:6%;
+	background-color:#cccccc;
+	font-size:15px;
+	font-family: Geneva, ‘Lucida Sans’, ‘Lucida Grande’, ‘Lucida Sans Unicode’, Verdana, sans-serif;
+	width:99%;
+	height:36px;
+	left:3%;
+	border:none;
+	border-style:none;
+	border-radius:0px;
+	margin-right:0px;
+}
+
+
+#npModal{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: none;
+	
+	-webkit-transition: opacity 240ms;
+	z-index: 900;
+	
+}
+#npBkg{
+	width: 80%;
+	height: 100%;
+	position: fixed;
+	left: 10%;
+	top: 0px;
+	background-color: red;
+	
+	z-index: 900;
+}
+
+#newProspect{
+	
+}

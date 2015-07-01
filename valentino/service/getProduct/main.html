@@ -1,0 +1,29 @@
+[boundary]inner:materials[/boundary]
+[#setting url_escaping_charset="UTF-8"]
+<table>
+[#assign brand=ctx.getParameter('brand')]
+<tr id="products" >
+
+[#list list as item]
+
+
+[#assign id=ctx.getParameter('child_id')]
+        		    <td>
+        		    <div class="box-materials" onclick="navigateProd({url:'run.app?id=${id}&sapid=${item.sapid}&color=${item.color}&brand=${brand}', label:'${item.sapid}'})">
+        		     <img src="${item.staticUrl!}"/>
+        		     <span class="description_collection" >${item.sapid}<br>ART. ${item.ean!}</span>
+        		   
+        		    </div>
+        		    </td>
+ 
+
+[/#list]
+
+</tr>
+
+</table>
+
+<div id="imgleft"><img src="${BC.getTenantBaseUrl(serviceItem)}store_app/product-listL.png"/></div>
+<div id="imgRight"><img src="${BC.getTenantBaseUrl(serviceItem)}store_app/prod-listR.png"/></div>
+[boundary]script[/boundary]
+hideActInd();

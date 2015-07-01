@@ -1,0 +1,8 @@
+[#list renderItem.getChildrenByType("user") as usr]
+<div class="usersmall" >
+	<i onclick="${usr.actionUrl}" class="${usr.spec.icon!} open"></i> ${usr.username!?html}
+	[#if usr.getProfile(ctx).edit]
+	<i onclick="window.parent.edit(${usr.id})" class="icon-pencil edit"></i>
+	[/#if]
+</div>
+[/#list]

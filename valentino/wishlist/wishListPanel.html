@@ -1,0 +1,91 @@
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+-->
+
+[boundary]inner:innerHtmlWL[/boundary]
+
+<div id="productWishList">
+	<img id="verticalLine2"
+		src="${widget.tenantBaseUrl}store_app/vertical_lines.png"><img
+		id="verticalLine"
+		src="${widget.tenantBaseUrl}store_app/vertical_lines.png">
+	<div id="insertWishlist">
+		<span>INSERT IN WISHLIST</span> <img id="backWl"
+			onclick="closewishList()"
+			src="${widget.tenantBaseUrl}store_app/back_bt.png"><br>
+		<div id="insertProduct_wl">
+			<div id="0" target="0" idprod="" urlprod="" class="productinWishlist">
+				<span id="wishPanel_title"
+					style="font-size: 20px; margin-top: 10px; margin-left: -70px; text-align: center">IW2S0291HLC</span><br>
+				<img  id="wishPanel_img" src="">
+			</div>
+			<div id="divcolorSize">
+				<hr style="margin-left: 50px; width: 90%">
+				<div id="wishcolor">
+					<span class="classText"
+						style="font-size: 12px; margin-left: 110px;">SWIPE TO
+						SELECT COLOR</span>
+					<center>
+						<div class="check-boxwl">
+							<img style="width: 60px; margin-top: 6px;"
+								src="${widget.tenantBaseUrl}store_app/check.png">
+						</div>
+						<hr style="position: absolute; top: 100px; width: 90%; left: 50px;">
+						<div id="scrollRollerColor" onscroll="colorsRollerwl.onScroll()">
+
+
+
+						</div>
+					</center>
+
+					<div id="size">
+						<span class="classText"
+							style="font-size: 12px; margin-left: 110px;">SWIPE TO
+							SELECT SIZE</span>
+						<center>
+							<div class="check-box-sizewl">
+								<img style="width: 60px; margin-top: 6px;"
+									src="${widget.tenantBaseUrl}store_app/check.png">
+							</div>
+							<div id="scrollRollerSize" onscroll="sizesRollerwl.onScroll()">
+
+							</div>
+						</center>
+					</div>
+				</div>
+				<hr style="margin-top: -10px; margin-left: 50px; width: 90%">
+				<center>
+					<div id="client_to_wishlistSet" onclick="searchFormClient()">
+						<span class="classText wishTapToLink"
+							style="font-size: 12px; margin-left: 50px; margin-bottom: 20px;"></span><br>
+						<img style="width: 50px; margin-left: 20px;"
+							src="${widget.tenantBaseUrl}store_app/link_customer_icon.png"'=""><span
+							class="classText wishCustomer"
+							style="font-size: 20px; margin-left: 2px; margin-bottom: 20px;"></span>
+					</div>
+					<center>
+						<hr style="margin-top: 5px; margin-left: 50px; width: 90%">
+					</center>
+				</center>
+			</div>
+		</div>
+		<div id="containerWl">
+			<div id="prevWl" onclick="changePagewl('back')">
+				<img src="${widget.tenantBaseUrl}store_app/previous_layer.png"'="">
+			</div>
+			<div id="addwishlist" onclick="addToWishlist()">
+				<img src="${widget.tenantBaseUrl}store_app/add-client.png"'=""><span
+					id="insertWlspan" class="classText" style="font-size: 12px;">INCLUDE
+					IN WISHLIST</span>
+			</div>
+			<div id="nextWl" onclick="changePagewl('next')">
+				<img src="${widget.tenantBaseUrl}store_app/next_layer.png"'="">
+			</div>
+		</div>
+		<div id="searchWl"></div>
+	</div>
+</div>
+[boundary]script[/boundary]
+wish_refreshCurrentCustomer();
+wish_refreshItem(0);

@@ -1,0 +1,45 @@
+
+
+[boundary]inner:listDetail[/boundary]
+
+
+<table border="0" cellpadding="0">
+[#list info as row]
+
+		<tr>
+		[#list row.keySet() as k]
+		[#if  row.get(k)?has_content ]
+		[#if k=='COLLEZ_IPAD']
+			<td><b style="text-align:left;">COLLECTION:</b></td>
+		    <td><b style="text-align:right;">${row.get(k)}</b></td>
+		 [/#if]
+		 </tr>
+		 [#if k=='LINEA']
+			<td><b style="text-align:left;">LINES:</b></td>
+		    <td><b style="text-align:right;">${row.get(k)}</b></td>
+		 [/#if] 
+		 </tr>   
+		  [#if k=='STAGIONE']
+			<td><b style="text-align:left;">SEASON:</b></td>
+		    <td><b style="text-align:right;">${row.get(k)}</b></td>
+		 [/#if] 
+		 </tr>
+		  [#if k=='ZFAMIGLIA']
+			<td><b style="text-align:left;">FAMILY:</b></td>
+		    <td style="text-align:right;"><b>${row.get(k)}</b></td>
+		 [/#if]   
+		</tr>
+		  [#if k=='COMPOSIZIONE']
+			<td><b style="text-align:left;">COMPOSITION:</b></td>
+		    <td><b style="text-align:right;">${row.get(k)}</b></td>
+		 [/#if]
+		 </tr>   
+		   [#if k=='DESCR_MATR']
+			<td><b style="text-align:left;">CLASS:</b></td>
+		    <td><b style="text-align:right;">${row.get(k)}</b></td>
+		 [/#if] 
+		 </tr>
+	[/#if]	 
+	[/#list]
+</table>
+[/#list]

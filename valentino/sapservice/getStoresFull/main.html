@@ -1,0 +1,52 @@
+[#compress]
+
+[#assign region=ctx.getParameter('region')]
+[#assign sapid=ctx.getParameter('sapid')]
+[#assign brand=ctx.getParameter('brand') ]
+
+[boundary]inner:availabilityStores[/boundary]
+
+[#assign c=0]
+[#list info as row]
+[#if row.get('ID_REGION')?has_content && row.get('ID_REGION')==region  && row.get('BRAND')?has_content && row.get('BRAND')==brand]
+[#assign store=row.get('KUNWE')]
+
+[#assign c_mod=c%3]
+[#if c_mod==0]
+<div id='scrollableDiv-${c}' target="${c}"  visited=[#if c==0]true[#else]false[/#if] class='[#if c==0]visibleDiv[#else] hiddenDiv[/#if] scrollableDiv'>
+[/#if]
+<center><div style="position:fixed;z-index:11;width:80%;margin-top:45px;color:white; margin-left:-45px; font-weight:bold; font-size:15px;"><hr >${row.get('KUNWE_INSEGNA')},${row.get('KUNWE_STRAS')}<hr> </div></center>
+
+<div id='${store}' class="storeDiv" store="${store!}" store_retail='${row.get("STO_RETAIL")}' wsRetailPro='${row.get("ZIND_WEBSERVICE")}' region="${region!}">
+ <center><img class="loadingAvail"  src="${BC.getTenantBaseUrl(serviceItem)!}store_app/loading1.gif"/>	</center>
+</div>
+
+	[#if c_mod==2]
+	</div>
+    [/#if]
+     [#assign c=c+1]
+[/#if]
+  
+[/#list]
+</div>
+
+[boundary]script[/boundary]	 
+productHandler.searchRegionShow();
+[#assign c=0]
+[#list info as row]
+[#if row.get('ID_REGION')?has_content && row.get('ID_REGION')==region  && row.get('BRAND')?has_content && row.get('BRAND')==brand]
+[#assign store=row.get('KUNWE')]
+
+[#if c<3]
+    productHandler.getAvailabilityStores({
+            store:"${store}",
+            store_retail: "${row.get("STO_RETAIL")}",
+			wsRetailPro: "${row.get("ZIND_WEBSERVICE")}",
+			region: "${row.get("ID_REGION")}" });
+	
+[/#if]
+[#assign c=c+1]
+[/#if]
+[/#list]
+
+[/#compress]

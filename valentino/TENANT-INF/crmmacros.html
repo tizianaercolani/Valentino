@@ -1,0 +1,101 @@
+<!-- MACRO CHE VENGONO USATE NEL CRM -->
+
+
+
+[#macro dropDownList tagModify category subcategory="" selectedValue=""]
+[#if subcategory??]
+[#assign path="lookups/${category}/${subcategory}"]
+[#else]
+[#assign path="lookups/${category}"]
+[/#if]
+
+[#if serviceItem??]
+	[#assign item=serviceItem]
+[#else]
+	[#assign item=renderItem]
+[/#if]
+
+[#assign lookup= item.getItemByPath(path)!]
+[#if lookup??]
+[#assign lookCriteria]
+{
+        "type":"entry",
+		"parentId":${item.getIdByPath(path)!0},
+		"order":
+    	{
+    	"name":"value",
+    	 "direction":"asc"
+    	}
+}
+
+[/#assign]
+${item.setCriteriaJson(lookCriteria)!}
+${item.setLimit(-1)!}
+[#assign selectedOptValue=""]
+[#assign options= item.search]
+<select name="${tagModify!}" id=${tagModify!} >
+	<option value=""> </option>
+	[#list options as opt]
+	[#if category=="IM_TEL_NUMPRE_MA" || category=="IM_TEL_NUMPRE_MO"]
+	<option value="${opt.code}" [#if selectedValue?has_content && (opt.code==selectedValue || opt.value==selectedValue)]
+	selected
+	[#assign selectedOptValue="${opt.value}(${opt.code})"]
+	[/#if]>${opt.value}(${opt.code})</option>
+	
+	[#else]
+	<option value="${opt.code}" [#if selectedValue?has_content && (opt.code==selectedValue || opt.value==selectedValue)]
+	selected
+	[#assign selectedOptValue=opt.value]
+	[/#if]>${opt.value}</option>
+	
+	[/#if]
+	[/#list]
+</select>
+<label id="l_${tagModify!}">${selectedOptValue}</label>
+[/#if]
+[/#macro]
+
+[#macro checkbox tagModify="" value=""]
+[#if value=="X"]
+<label id="l_${tagModify!}">Yes</label>
+<div id="${tagModify!}"  class="checkbox checked" onclick="cardHandler.toggleCheckbox(this)"></div>
+
+[#else]
+<label id="l_${tagModify!}">No</label>
+<div id="${tagModify!}"  class="checkbox"  onclick="cardHandler.toggleCheckbox(this)"></div>
+[/#if]
+[/#macro]
+
+[#macro input inputType="text" tagModify="" value=""]
+[#if inputType=="date" && value?has_content ]
+	[#assign year= value?substring(0,4) ]
+	[#assign month= value?substring(4,6) ]
+	[#assign day= value?substring(6,8) ]
+	[#assign processedValue= year + "-" + month + "-" + day]
+[#else]
+	[#assign processedValue=value]
+[/#if]
+<label id="l_${tagModify!}">${processedValue!}</label>
+<input autocorrect="off" autocomplete="off" [#if inputType=="text"]autocapitalize="on"[/#if] type="${inputType!}" name="${tagModify!}" id="${tagModify!}" value="${processedValue!}">
+
+[/#macro]
+
+[#macro checkDate  tagModify="" value=""]
+[#if value?has_content ]
+	[#assign year= value?substring(0,4) ]
+	[#assign month= value?substring(4,6) ]
+	[#assign day= value?substring(6,8) ]
+	[#assign processedValue= year + "-" + month + "-" + day]
+[#else]
+	[#assign processedValue=value]
+[/#if]
+<label id="l_${tagModify!}">${processedValue!}</label>
+
+<input type="${inputType!}" name="${tagModify!}" id="${tagModify!}" value="${processedValue!}">
+
+[/#macro]
+
+
+
+
+

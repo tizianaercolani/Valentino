@@ -1,0 +1,187 @@
+
+[#assign currentBrand=BC.getParamOrCookie(ctx,'brand')!""]
+[#assign prop= ctx.getAppBean("valentinoProperties")]
+[#assign fourMeBaseUrl=prop.getProperty("FourMe.getThumbnail")]
+
+[#macro getGraphic code="" size="1024x0"]
+[#-- restituisce l'url di una risorsa grafica brandizzata  --]
+
+[#assign prettyId=currentBrand+"_"+code+".jpg"]
+[#assign graphUrl=fourMeBaseUrl+size+"/"+prettyId?lower_case]
+${graphUrl!}[/#macro]
+
+[#macro getIdByType type]
+	[#-- restituisce l'id di un oggetto di combenia con tipo=type  --]
+	[#assign typeId=0]
+	[#assign typeCriteria]
+	{
+	        "type":"${type}"
+			
+	}
+	
+	[/#assign]
+	${renderItem.setCriteriaJson(typeCriteria)!}
+	${renderItem.setLimit(-1)!}
+	[#assign items= renderItem.search]
+	[#list items as item]
+		[#assign typeId=item.id]
+	[/#list]
+	${typeId!}
+[/#macro]
+
+[#assign currentStoreIndex=BC.getParamOrCookie(ctx,'currentStoreIndex')!0]
+
+
+[#include "version.html"]
+
+[#assign jsessionid=BC.getParamOrCookie(ctx,'JSESSIONID')!0]
+
+
+[#macro page back=""  ]
+[#compress]
+<html>
+<head>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+    <meta name="format-detection" content="telephone=no">
+    <script src="https://www.google-analytics.com/analytics.js"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">    
+	<title>${renderItem.root.title!?html}</title>
+	<script src="${this.request.contextPath}/res/jquery/jquery.min.js"></script>
+	<script src="${this.request.contextPath}/res/widget.js"></script>    
+    <script src="${widget.tenantBaseUrl}jquery.doubletap.js"></script>
+	<link href="${this.request.contextPath}/res/font-awesome.css" rel="stylesheet">
+	<script type="text/javascript" src="${widget.tenantBaseUrl}jssor.slider.js"></script>
+    <script type="text/javascript" src="${widget.tenantBaseUrl}jssor.js"></script>
+    <script type="text/javascript" src="${widget.tenantBaseUrl}sha1.js?v=${scriptversion!}"></script>
+    <script type="text/javascript" src="${widget.tenantBaseUrl}navStack.js?v=${scriptversion!}"></script>
+	<script type="text/javascript" src="${widget.tenantBaseUrl}favourite.js?v=${scriptversion!}"></script>
+	<link href="${widget.tenantBaseUrl}render.css?v=${scriptversion!}" rel="stylesheet">
+	<script src="${widget.tenantBaseUrl}script.js?v=${scriptversion!}"></script>
+	<script src="${widget.tenantBaseUrl}changepassword.js?v=${scriptversion!}"></script>
+	<script src="${widget.tenantBaseUrl}roller.js?v=${scriptversion!}"></script>
+	<script src="${widget.tenantBaseUrl}wishManager.js?v=${scriptversion!}"></script>
+	<link href="${widget.baseUrl}render.css?v=${scriptversion!}" rel="stylesheet">
+	<script src="${widget.baseUrl}script.js?v=${scriptversion!}"></script>
+	
+     
+	<script>
+		var WarpWindowId = '${this.warpWindowId!}';
+		var baseUrl = '${widget.tenantBaseUrl}';
+		var renderId = ${renderItem.id};
+		var console_flavour='${renderItem.flavour!}';
+		var preview = [#if renderItem.previewMode()]true[#else]false[/#if];
+		var currentStoreIndex=${currentStoreIndex!0};
+		var jsessionid="${jsessionid!}"
+		var authUser={
+				username:'${authUser.username!}',
+				brand:"${currentBrand!}",
+				region:"${authUser.region!}",
+				brand_crm:'${authUser.brand_crm}',
+				associate: leftPad('${authUser.sapcrm}',10, "0") //associate is in the form 0000044396
+		}
+		var stores=[
+			[#list authUser.stores as store]
+			[#if store_index>0],[/#if]
+			{
+				crm: "${store.sto_crm!}",
+				desc:"${store.getName()}",
+				indirizzo:"${store.getStreet()}",
+				sto_r3:"${store.sto_r3!}"
+			}
+			[/#list]   
+		       ] 
+		
+		
+		[#include "dialogs.html"]
+		
+		var extra_param={}
+		[#list ctx.request.parameterNames as name]
+		extra_param['${name?js_string}']='${ctx.getParameter(name)?js_string}'
+		[/#list]
+		
+		
+	</script>
+ 
+</head>
+
+<body >
+
+
+[#nested]
+      <div id='blackScreen' onclick="hideNavigationPanel()"><img src='${widget.tenantBaseUrl}store_app/black-windows.jpg'/></div>
+	  <div id="navigation-div">
+		<div id="navigation_Panel" class="smallNavigationPanel">
+			<div id="icon-panel"><img id="panel-button-fw" src="${widget.tenantBaseUrl}store_app/frw_button.png"/>
+			<img id="panel-button-bk" src="${widget.tenantBaseUrl}store_app/back_button.png"/> </div>
+			<!-- <img id="panel-button-fw" src="${widget.tenantBaseUrl}store_app/frw_button.png"/>
+			<img id="panel-button-bk" src="${widget.tenantBaseUrl}store_app/back_button.png"/> -->
+			
+			<div id="logo-panel" onclick="window.history.back()">
+				<span></span>
+			</div>
+			<div id="favourite-Stack"><div id="taptoopenfavourite" onclick="favouriteStack()"><hr class="hrStyle" color="#ffffff"><img class="tapHereImg" src="${widget.tenantBaseUrl}store_app/tap_here_to_open_favourites.png"/><hr class="hrStyle" color="#ffffff"></div></div>
+			<div id="navigation_Scroll">
+			</div>
+           <div id='innerHtmlWL'></div>
+           
+           [#assign linkCriteria]
+	{
+	        "type":"link"
+			
+	}
+	
+	[/#assign]
+	${renderItem.setCriteriaJson(linkCriteria)!}
+	${renderItem.setLimit(-1)!}
+	[#assign links= renderItem.search]
+	[#if links?has_content && links?size>0]
+	<div id="evaluation" onclick="${links[0].actionUrl}"><hr style="width:95%;"><span>${links[0].title}</span> </div>
+    [/#if]
+            <div id="changePsw" onclick="changePw.show()"><hr style="width:95%;"><span>CHANGE PASSWORD</span>    <i class="icon-edit"></i></div>
+           <div id="logout" onclick="confirmLogout()"> <hr style="width:130%;"><span>LOGOUT</span>     <i class="icon-signout"></i></div>
+		</div>
+		<!--  [#if renderItem.type=='crm'][#elseif renderItem.type=='customerCard'][#elseif renderItem.type=='quest'][#elseif renderItem.type=='product'][#else]<img id="grid-icon" style="opacity:0.5" value="4view" onclick="changeView('${flavour!}',${renderItem.id},extra_param)" [#if renderItem.flavour?? && renderItem.flavour=="full" ]src="${widget.tenantBaseUrl}store_app/grid.png"[#else] src="${widget.tenantBaseUrl}store_app/full.png"[/#if]/>[/#if]
+		<img id="home-icon" style="opacity:0.5"onclick="viewChangepass()" src="${widget.tenantBaseUrl}store_app/home_quest.png"/>
+	    <img id="chpws-icon" style="opacity:0.5"onclick="changePw.show()" src="${widget.tenantBaseUrl}store_app/edit_profile_black.png"/>-->
+	   <!--   <img id="wishlist-icon" style="opacity:1" onclick="goToCrm()" src="${widget.tenantBaseUrl}store_app/manage_wishlist_icon.png"/>-->
+	</div>
+
+[#if widget.baseUrl!="${widget.tenantBaseUrl}/run.app"]
+[#if renderItem.type!='homepage']
+<div id="backPage" onclick="goBack()">
+<img  src="${widget.tenantBaseUrl}store_app/arrow_up_back_button.png"/></div>
+[/#if]
+
+[/#if]
+[#include "changepassword.html"]
+<div id="modal"><div id="modal-content"></div></div>	
+	
+</body>
+</html>
+<!-- Google Analytics -->
+<script>
+var userId=authUser.username;
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-44604635-5',  {'userId': userId});
+ga('require', 'displayfeatures');
+ga('set', 'dimension1', userId);          
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+[/#compress]
+[/#macro]
+<script>
+var crmId=[@getIdByType type="crm" /]
+var productId=[@getIdByType type="product" /]
+var customerId=[@getIdByType type="customerCard" /]
+</script>
+

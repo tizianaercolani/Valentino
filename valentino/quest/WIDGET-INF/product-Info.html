@@ -1,0 +1,35 @@
+	<div id="product-info">
+		[#assign sapid=ctx.getParameter('sapid')!]
+		
+		
+		<div id="img-info">
+			<img src="${widget.tenantBaseUrl}store_app/product_info.png" />
+			
+		</div>
+		
+		<div id="close-detail" onclick="goBack()">
+			<img src="${widget.tenantBaseUrl}store_app/close_layer.png" />
+		</div>
+		<div id="titleName">
+			<span>PRODUCT INFO</span><br>
+		</div>
+		<hr class="hrQuest" >
+		<center>
+		
+		<div id="barcode" onclick="barcodeHandler.checkStatus()">
+		<span class="labelProduct">BARCODE READER</span>
+		<br>
+	     <br>
+		<img src="${widget.tenantBaseUrl}store_app/barcode.png"/>
+		</div>
+			<div id="searchadv" onclick="advShow()">
+		<span class="labelProduct">ADVANCED SEARCH</span><br>
+	    <img src="${widget.tenantBaseUrl}store_app/search-adv.png"/>
+		</div>
+		</center>
+		<div id="divExist"></div>
+	</div>
+
+<script>
+
+</script>

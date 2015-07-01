@@ -1,0 +1,161 @@
+<!-- verifico se sono presenti dati o meno -->
+[#assign value = ctx.getParameter('value')]
+[#assign check = ctx.getParameter('check')]
+[#assign isDataAvailable = false]
+<!-- colonne che stampo : ${check!}. Leggo l'inverso  valore: ${value!} -->
+[#if info?has_content]
+
+	[#if check =='color']
+	
+		[#list info as row]	
+		<!-- SIZE_DROP: ${row.get('SIZE_DROP')!}  COLORE: ${row.get('COLORE')!} committed ${row.get('committedQty')} stock ${row.get('stockQty')}-->
+		
+		[#if row.get('SIZE_DROP')?? && row.get('SIZE_DROP')==value]	
+				[#assign isDataAvailable = true]	
+		[/#if]	
+	[/#list]
+	[#elseif check =='size']
+		[#list info as row]		
+		<!-- SIZE_DROP: ${row.get('SIZE_DROP')!}  COLORE: ${row.get('COLORE')!} committed ${row.get('committedQty')} stock ${row.get('stockQty')}-->
+		[#if row.get('COLORE')?? && row.get('COLORE')==value]	
+			[#assign isDataAvailable = true]	
+		[/#if]
+		[/#list]
+	[#elseif check =='colsize']	
+	    [#list info as row]		
+		<!-- SIZE_DROP: ${row.get('SIZE_DROP')!}  COLORE: ${row.get('COLORE')!} committed ${row.get('committedQty')} stock ${row.get('stockQty')}-->
+		 [#if row.get('SIZE_COL')?? && row.get('SIZE_COL')==value]	
+			[#assign isDataAvailable = true]	
+		[/#if]
+		[/#list]	
+	[/#if]
+[/#if]
+<!-- isDataAvailable= ${isDataAvailable?c} -->
+
+[#compress]
+[boundary]outer:responseAvailability[/boundary]
+<div id="responseAvailability">
+<div id="innerGiacenze">
+[#if isDataAvailable]		
+[#assign value = ctx.getParameter('value')]
+[#assign check = ctx.getParameter('check')]
+[#if check =='color']
+<center>
+<table  id="headTable" border="0" cellspacing="0"cellpadding="0">
+		<thead>
+		<tr>
+
+[#list info as row]	
+		[#if row.get('SIZE_DROP')?? && row.get('SIZE_DROP')==value]	
+			<td style="position:relative; width:100px; z-index:11">${row.get('COLORE')}</td>		
+		[/#if]	
+[/#list]
+	</tr>
+</thead>
+<tr>
+[#list info as row]
+		[#if row.get('SIZE_DROP')?? && row.get('SIZE_DROP')==value]		
+			<td>${row.get('stockQty')}</td>
+		[/#if]	
+[/#list]
+	
+</tr>	
+<tr>
+[#list info as row]
+[#if row.get('SIZE_DROP')?? && row.get('SIZE_DROP')==value]			
+			<td>${row.get('committedQty')}</td>
+[/#if]	
+[/#list]
+	
+</tr>		
+	
+</table>
+</center>
+[boundary]script[/boundary]
+ $('#innerGiacenze').show();
+$('#showLabel').show();
+[#else]
+[#if check=='size']
+
+<center>
+		<table id="headTable" border="0" cellspacing="0"cellpadding="0">
+<thead>
+		<tr>
+
+[#list info as row]
+
+		[#if row.get('COLORE')?? && row.get('COLORE')==value]
+	
+			<td style="position:relative; width:100px;z-index:11">${row.get('SIZE_DROP')}</td>
+		
+		[/#if]	
+		
+
+
+[/#list]
+	</tr>
+</thead>
+<tr>
+[#list info as row]
+		[#if row.get('COLORE')?? && row.get('COLORE')==value]
+	    <td>${row.get('stockQty')}</td>
+			
+		[/#if]	
+	
+[/#list]
+	
+</tr>	
+<tr>
+[#list info as row]
+
+		[#if row.get('COLORE')?? && row.get('COLORE')==value]
+	
+			<td>${row.get('committedQty')}</td>
+		[/#if]	
+		
+
+
+[/#list]
+
+</tr>		
+	
+</table>
+</center>
+[boundary]script[/boundary]
+ $('#innerGiacenze').show();
+  $('#showLabel').show();
+[#else]
+<center>
+
+
+
+<table id="headTable" style="position:absolute; width:100%;top:20px;" border="0" cellspacing="30"cellpadding="0">
+[#list info as row]
+		[#if row.get('SIZE_COL')?? && row.get('SIZE_COL')==value]	
+	         
+			<tr><td>${row.get('stockQty')}</td><td>${row.get('committedQty')}</td></tr>
+			<tr><td style="font-size:20px;">on hand</td><td style="font-size:20px;">on hold</td></tr>
+		[/#if]	
+
+
+[/#list]
+	
+
+	
+</table>
+</center>
+</div></div>
+[boundary]script[/boundary]
+ $('#innerGiacenze').show();
+$("#showLabel").hide();
+
+
+[/#if]
+[/#if]
+	[#else]
+	<div style="color:white">SORRY, NO DATA AVAILABLE</div>
+[/#if]	
+[boundary]script[/boundary]
+ $('#innerGiacenze').show();
+hideActInd();
+[/#compress]

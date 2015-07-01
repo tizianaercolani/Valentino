@@ -1,0 +1,90 @@
+[boundary]inner:slider_elementx4[/boundary]
+[#assign view=ctx.getParameter("view")!]
+[#assign brand=ctx.getParameter("brand")!]
+
+[#if view=="first_view"]
+
+<div u="slides" style=" position: absolute; left: 0px; top: 200px; width:480px; height:710px; overflow: hidden;">
+
+[#list list as item]
+    [#assign size=item_index?length]
+    [#assign chindex4=item_index%4]
+    [#assign chindex=item_index%2]
+ 	 [#if chindex4==0]<div><table align="center" cellpadding=2 cellspacing=2>[/#if]
+        [#assign parts = item.season_desc?split(" ")]
+     	[#assign url="run.app?id=${ctx.getParameter('child_id')}&season_number=${item.season_id}&collection=${item.collection_id}&line_id=${item.line_id}&forceExecutionName=setFlavour.txt&flavour=grid&brand=${brand}"]
+ 	    [#assign url2="run.app?id=${ctx.getParameter('child_id')}&collection=${item.collection_id}&year=${parts[1]?trim}&line_id=${item.line_id}&forceExecutionName=setFlavour.txt&flavour=grid&brand=${brand}&type=accessories"]
+     	   [#if chindex==0 ]   <tr>[/#if]
+        		    <td [#if item.line_desc=='Accessories']onclick="navStack.navigate({
+					  url:'${url2}',
+					  label:'${item.season_desc} ${item.collection_desc} ${item.line_desc!}',
+					  type:'lines',
+				  })"[#else]onclick="navStack.navigate({
+					  url:'${url}',
+					  label:'${item.season_desc} ${item.collection_desc} ${item.line_desc!}',
+					  type:'lines',
+				  })"[/#if]>
+        		   
+        		    <img style="width:230px;height:355px;" src="${item.staticUrl!}"/>
+        		    <span class="description_collection" style="text-transform: uppercase;">${item.line_desc} </span>
+        		    </td>
+           		    
+        		 [#if size==1]
+        		  
+        		    </tr>
+        		    [/#if]
+				[#if chindex!=0 ]
+				</tr>
+				[/#if]
+                
+                
+             
+                [#if chindex4==3]
+                </table>
+                </div>
+                [/#if]
+     
+[/#list]
+</div>
+[boundary]script[/boundary]
+[#if list?size>4]
+$('#frecciaScroll').show();
+jssor_slider1_starter('slider_elementx4');
+[#else]
+$('#frecciaScroll').hide();
+
+[/#if]
+
+
+
+[#else]
+
+
+<div u="slides" style="position: absolute; left:0px; top: 200px; width:460px; height:710px; overflow: hidden;">
+
+
+[#list list as item]
+
+ [#assign url="run.app?id=${ctx.getParameter('child_id')}&season_number=${item.season_id}&collection=${item.collection_id}&line_id=${item.line_id}&forceExecutionName=setFlavour.txt&flavour=full&brand=${brand}"]
+ 	
+ 
+        		    <div onclick="navStack.navigate({
+					  url:'${url}',
+					  label:'${item.season_desc} ${item.collection_desc} ${item.line_desc!}',
+					  type:'lines',
+				  })">
+        		    <img style="width:460px;height:710px;" src="${item.staticUrl!}"/><span class="description_collection" >${item.line_desc!}</span>
+        		    </div>
+
+[/#list]
+</div>
+[boundary]script[/boundary]
+jssor_slider1_starter('slider_elementx4');
+[/#if]
+[#if list?size<=0]
+[boundary]script[/boundary]
+showBasicDialog('No line available','goBack()');
+
+[/#if]
+[boundary]script[/boundary]
+hideActInd();

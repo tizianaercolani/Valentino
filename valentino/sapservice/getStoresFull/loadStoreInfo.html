@@ -1,0 +1,19 @@
+[#if  info?has_content]
+[#assign row= info.get(0)]
+
+[boundary]inner:infoStore[/boundary]
+
+<table border="0" cellpadding="0">
+		<tr><td>${row.get("KUNWE_INSEGNA")!}</td></tr>		
+		<tr><td>${row.get("KUNWE_STRAS")!}</td></tr>	
+		<tr><td>${row.get("ID_REGION")!}</td></tr>			
+</table>
+[boundary]script[/boundary]	 
+
+productHandler.storeInfo={
+            store_retail: "${row.get("STO_RETAIL")}",//region dello store
+			wsRetailPro: "${row.get("ZIND_WEBSERVICE")}",//codice sap retail dello store;
+			region: "${row.get("ID_REGION")}"// url incompleto del ws di retail pro
+}
+
+[/#if]

@@ -1,0 +1,66 @@
+[#include "../../TENANT-INF/macro.html"]
+[#assign childs=renderItem.children]
+<script src="${this.request.contextPath}/res/widget.js"></script>
+[@page]
+
+[#assign brand=ctx.getParameter('brand')!'VAL']
+[#if brand=='RED']
+<style>
+#logo{
+	position : fixed;
+	z-index:11;
+	width:20px;
+	top:50px;
+	left:23%;
+	color:white;
+	font-size: 600%;
+	-webkit-animation: fadeIn 1s;
+}
+#logo img{
+width:500px;
+}
+</style>
+[#else]
+<style>
+#logo{
+	position : fixed;
+	z-index:11;
+	width:20%;
+	top:50px;
+	left:23%;
+	color:white;
+	font-size: 600%;
+	-webkit-animation: fadeIn 1s;
+}
+</style>
+[/#if]
+    <div id="container">
+         <center>	 <div id="logo" onclick="window.location.assign('run.app')">
+        		<span><img src="${widget.tenantBaseUrl}store_app/${brand}-logo.png" /></span>
+        	</div>   </center>
+ <div id="background_image">
+        	<img src="${widget.tenantBaseUrl}store_app/wallpaper.jpg" />
+ </div>
+        [#list childs as child]
+         [#assign child_id=child.id]
+             [#assign flavour="grid"]
+        
+		         
+		
+        <center>
+        	<div id="slider_elementx4"  style="position: relative; width: 460px; height: 710px; z-index:10;">
+        	 	
+     		</div>
+     		</center>
+     	[/#list]
+       </div>
+       <div id="frecciaScroll"><img src="${widget.tenantBaseUrl}store_app/tap_to_check.png"></div>
+<script>
+getLines(
+		{
+			collection: "${ctx.getParameter('collection')!}",
+			season_number:"${ctx.getParameter('season_number')!}"
+			
+		},${child_id},"first_view",'${brand}');
+</script>
+[/@page]

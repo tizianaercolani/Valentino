@@ -1,0 +1,443 @@
+
+
+@-webkit-keyframes enterBottom {
+   0% {
+    -webkit-transform: translateY(100px);
+    
+    -ms-transform: translateY(100px);
+    transform: translateY(100px); }
+
+  100% {
+    -webkit-transform: translateY(0px);
+   
+    -ms-transform: translateY(0px);
+    transform: translateY(0px); 
+    } 
+
+}
+
+#logo{
+	position : fixed;
+	z-index:11;
+	width:10%;
+	top:10px;
+	left:10px;
+	color:white;
+	font-size: 200%;
+	-webkit-animation: fadeIn 1s;
+}
+
+
+#cardHeader
+{
+	background-color:transparent;
+	
+	height: 50px;
+	position:absolute;
+		font-family: 'DIN_Medium' ;
+	
+	font-size:30px;
+	top:0;
+	right:0px;
+	left:256px;
+}
+
+#cardTitle
+{
+	text-align: center;
+	
+	margin-top:12px;
+}
+
+#cardFooter
+{
+	background-color:white;
+	width:100%;
+	height: 10%;
+	position:absolute;
+	bottom:0;
+}
+
+#cardContent
+{
+	position:absolute;
+	top:50px;
+	left:0;
+	height: 95%;
+    width: 100%;
+	bottom:10%;
+	
+}
+#menu
+{
+	width: 30%
+}
+
+#leftMenu
+{
+	width:100%;
+	height:100%;
+	background-color:#bdb8b8;
+	overflow:scroll;
+}
+
+#leftMenu td{
+	width: 100%;
+    height: 70px;
+    text-align: center;
+    background-color:transparent;
+    padding-left:35px;
+    padding-right:35px;
+    border: 0;
+}
+#leftMenu table{
+	width: 100%;
+  height:100%;
+ 
+  
+}
+.active{
+
+  color:white;
+
+
+}
+
+.disabled{
+
+  
+  opacity:0.2
+
+
+}
+
+#bgDivCC{
+	
+  content: "";
+ 
+  background-size: 1000px 1348px;
+background-repeat: no-repeat;
+background-position: 60px 0px;
+   
+  top: 50;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;  
+  opacity: 0.3;
+ 
+
+}
+#mainContent
+{
+	height:745px;	
+	overflow:scroll;
+	
+}
+#productFooter
+{
+	-webkit-animation: enterBottom 1s;
+	-webkit-overflow-scrolling: touch;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(229,229,229,1)));
+	border: 5px solid black;
+	position: absolute;
+	bottom:0;
+	overflow-y:hidden;
+	overflow-x: scroll;
+	width:528px;
+	height:205px;
+	
+right: 0;
+}
+.productImage{
+	
+	width:110px;
+	height:165px;
+  
+   overflow:hidden;
+   text-align:center;
+}
+.productImage img{
+	width:110px;
+}
+
+
+.imageHolder{
+	padding-right:10px;
+	text-align:center;
+}
+.imageHolder:first-child{
+	padding-left:10px;
+}
+.caption{
+	font-size:15px;
+}
+
+#mainTd{
+	
+	vertical-align:top;
+}
+
+#segnalibro
+{
+	position:absolute;
+	top:330px;
+	width:100%;
+	height:57px;
+	opacity:0.5;
+	left:0;
+	background-color:black;
+	z-index:9;
+	width: 30%;
+	text-align:right;
+    padding-top: 13px
+}
+#cardEdit {
+	position:absolute;
+top:345px;
+left:193px;
+width:35;
+height:37;
+z-index:20;
+background-size: 35px 37px;
+background-image:url(../store_app/cardEditOFF.png);
+}
+.editON{
+	background-image:url(../store_app/cardEditON.png) !IMPORTANT;
+}
+
+
+.menuButton{
+	text-align:center;
+	width:100%;
+	border:1px solid black;
+	height: 15%;
+}
+.card{
+	display:none;
+	-webkit-animation: fadeIn 300ms;
+	z-index: 1000;
+	border: 5px solid black;
+	background-color:white;
+	
+}
+.innerTable{
+	width:100%;
+	border-collapse:collapse;
+	font-size: 14px;
+	font-family:Arial;
+	border-top:1px solid black;
+}
+
+.innerTable tr{
+	border-bottom: 1px solid black;
+	height: 45px;
+	
+}
+
+.innerTable tr td:first-child {
+	text-align:right;
+	padding-right: 20px;
+	text-transform: uppercase;
+	width: 220px;
+	
+}
+
+.innerTable tr td:nth-child(2) {
+	
+	padding-left: 5px;
+
+	
+	
+}
+
+.innerTable label{
+	
+	
+}
+.innerTable input {
+	font-size: 14px;
+height: 100%;
+width: 90%;
+font-family:Arial;
+
+border: 0;
+background-color: transparent;
+-webkit-appearance: none;
+padding:0;
+    border-radius: 0;
+}
+
+.innerTable select {
+	font-size: 14px;
+height: 100%;
+width: 90%;
+font-family:Arial;
+margin-left:0;
+padding-left:0;
+border: 0;
+background-color: transparent;
+-webkit-appearance: none;
+    border-radius: 0;
+}
+
+.checkbox{
+	background-image:url(checkbox-false.png);
+	width:30px;
+	height:30px;
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+.checkbox.checked{
+	background-image:url(checkbox-true.png);
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+	
+}
+.monetaryVisual{
+	width:60px;
+	height:30px;
+	background-image:url(sun_7.png);
+	background-size: 100% 100%;
+    background-repeat: no-repeat;
+    font-size:0;
+}
+
+#dateContainer {
+    width: 100px;
+    height: 45px;
+    position: relative;
+}
+
+
+.editableMode{
+	background-color: rgba(189, 184, 184, 0.28);
+}
+
+#fake, 
+#real {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 13;
+    left: 0;
+}
+
+#real{
+    z-index: 10;
+    background-color:transparent;
+color:transparent
+}
+#Birthdt{
+width:100px;
+height: 45px;
+
+background-color:transparent;
+color:transparent
+}
+
+#BirthdtCheck{
+	position: absolute;
+    top: 6;
+    z-index: 20;
+    left: 100px;
+}
+
+
+
+#productDetail{
+	display:none;
+	-webkit-animation: fadeIn 500ms;
+	position:absolute;
+z-index:22;
+width:530px;
+height:680px;
+top:18%;
+left:15%;
+background-color:black;
+color: white;
+}
+#listDetail table{
+	color:white;
+	width:90%;
+}
+#productName{
+	position:relative;
+margin-top:100px;
+text-align:center;
+   color:white;
+font-family: 'DIN_Medium'; 
+font-size:32px;	
+}
+#img-detail{
+	position: absolute;
+height: 150px;
+width:100px;
+left:10px;
+top:10px;
+}
+#img-detail img{
+	max-height:150px;
+	max-width:100px;
+}
+#close-detail{
+	position:absolute;
+	top:10px;
+	right:-5px;
+	width:10%;
+}
+/***WISHLIST */
+#manageWishlist{
+	background-color:#bdb8b8;
+}
+#wishTableHeader{
+height:55px;
+padding-top:10px;
+position:absolute;
+width: 528px;
+background-color:black;
+color:white;
+}
+#wishTableHeader td:nth-child(even){
+width:120px;
+font-size:12px;
+color:white;
+}
+#wishTable{
+	color:white;
+	width:100%;
+	-webkit-overflow-scrolling: touch;
+	margin-top:70px;
+
+	
+	
+}
+#wishTable td.outerTd {
+	width:50%
+	
+}
+
+.wishTitle{
+	color:white;
+	font-size: 18px;
+	margin-left:5px;
+}
+.wishInnerTable
+{
+	color:white;
+	font-size: 14px;
+	margin-left:5px;
+}
+.wishInnerTable tr td:first-child
+{
+	width:30px;
+}
+
+.wishListThumbContainer{
+	width:80px;
+   height:130px;
+}
+.wishListThumbContainer img{
+	width:80px;
+}

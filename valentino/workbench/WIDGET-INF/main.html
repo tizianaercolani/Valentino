@@ -1,0 +1,144 @@
+<html>
+<head>
+<link href="${widget.tenantBaseUrl}render.css" rel="stylesheet">
+<script src="${this.request.contextPath}/res/jquery/jquery.min.js"></script>
+	<script src="${this.request.contextPath}/res/widget.js"></script>
+     
+    <script src="${widget.tenantBaseUrl}jquery.doubletap.js"></script>
+	<link href="${this.request.contextPath}/res/font-awesome.css" rel="stylesheet">
+	<link href="${widget.tenantBaseUrl}render.css" rel="stylesheet">
+	<script src="${widget.tenantBaseUrl}script.js"></script>
+	<link href="${widget.baseUrl}render.css?v=s1" rel="stylesheet">
+	<script src="${widget.baseUrl}script.js?v=3"></script>
+	<script src="${widget.tenantBaseUrl}roller.js?v=3"></script>
+	<script>
+		var WarpWindowId = '${this.warpWindowId!}';
+		var baseUrl = '${widget.tenantBaseUrl}';
+		var renderId = ${renderItem.id};
+		var userId = ${userItem.id};
+
+		
+		var preview = [#if renderItem.previewMode()]true[#else]false[/#if];
+		 $(document).ready(function() {
+		    roller.init(
+		    {
+		    tableId:"rollingTable",
+		    scrollingId:"leftMenu",
+		     //opzionali
+		    scrollType:"vertical",
+		    callback:function(activeElement)
+		    {
+		    	var target= activeElement.cells[0].getAttribute("target");
+		    	document.getElementById("labelTarget").innerHTML="My target is "+target
+		    	
+		    },
+		     cellDimension:70
+		     }	
+		    );
+		 })
+		
+		
+		[#include "../../TENANT-INF/dialogs.html"]
+		
+		
+	</script>
+<style>
+body {
+	border:0;
+	margin:0;
+	padding:0;
+	background-color:white;
+}
+#leftMenu
+{
+	width:30%;
+	height:500px;
+	background-color:#bdb8b8;
+	overflow:scroll;
+}
+
+#productStock
+{
+	width:70%;
+	height:150px;
+	background-color:#bdb8b8;
+	overflow:scroll;
+	border: 1px solid black;
+}
+
+#rollingTable td{
+	width: 100%;
+    height: 70px;
+    padding:0;
+    margin:0;
+    text-align: center;
+   border: 1px solid black;
+}
+#rollingTable{
+	width: 100%;
+  height:200px;
+  
+}
+.active{
+
+background-color:black;
+color:white;
+
+}
+
+</style>
+</head>
+<body >
+	<h1>Workbench</h1>
+	<p>Stock prodotto 
+	<br>Material: <input type="text" name="material" id="material" value="FWS00376-ABLV01"/>Store: <input type="text" name="store" id="store" value="H001"/><button onclick="testSearchStock_SAP_Retail()">Stock SAP Retail</button>
+	<br>Material: <input type="text" name="materialRPro" id="materialRPro" value="EBC80255-VC5045B"/>Store: <input type="text" name="storeRPro" id="storeRPro" value="HTTP://10.52.16.244/INETRETAIL-WS/INETRETAILWS.SVC"/><button onclick="testSearchStock_Retail_Pro()">Stock Retail Pro</button>
+	<div id="productStock"></div>
+	</p>
+	<p>Test scheda cliente 
+	<br>Client id: <input type="text" name="clientId" id="clientId" value="112"/><button onclick="testGetClientData()">Test scheda</button>
+	<button onclick="testPurchaseSummary()">Test purchase</button>
+	<button onclick="testPurchaseDetail()">Test details</button>
+	<button onclick="testSearchCustomers()">testSearchCustomers</button>
+	<button onclick="testCreateCustomer()">testCreateCustomer()</button>
+	</p>
+	<p>URL<button onclick="testFourMeClient()">Click!</button></p>
+	<div id="labelTarget">No target</div>
+<div id="leftMenu" onScroll="roller.onScroll()">
+<table id="rollingTable" cellpadding=0 cellspacing=0>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" target="generalData">GENERAL DATA</td></tr>
+<tr><td class="menuItem" target="redVsVal">PURCHASING DATA Red vs Valentino</td></tr>
+<tr><td class="menuItem" target="purchaseSummary">PURCHASE YEAR/SEASON</td></tr>
+<tr><td class="menuItem" target="purchaseDetail">PURCHASE DATA - DETAILS</td></tr>
+<tr><td class="menuItem" target="purchasingGlobal">PURCHASING DATA GLOBAL</td></tr>
+<tr><td class="menuItem" target="sizeAtt">SIZE ATTRIBUTES</td></tr>
+<tr><td class="menuItem" target="tailor">TAILOR</td></tr>
+<tr><td class="menuItem" target="interactions">INTERACTION HISTORY</td></tr>
+<tr><td class="menuItem" target="check">CHECK</td></tr>
+<tr><td class="menuItem" target="contactInfo">CONTACT INFO</td></tr>
+<tr><td class="menuItem" target="highlights">HIGHLIGHTS</td></tr>
+<tr><td class="menuItem" target="activities">PLANNED ACTIVITIES</td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+<tr><td class="menuItem" ></td></tr>
+
+</table>
+</div>	
+	
+	<div id="purchaseSummary"></div>
+	<div id="purchaseDetail"></div>
+	<div id="results"></div>
+	
+	<div id="modal"><div id="modal-content"></div></div>
+</body>
+</html>
+

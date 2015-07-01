@@ -1,0 +1,15 @@
+
+[#if exist==true]
+   [boundary]script[/boundary]
+   hideActInd();
+     goToProduct('${sapid}');
+     
+[#else]
+     [boundary]script[/boundary]
+     hideActInd();
+  		showBasicDialog("Product Code Not Found");
+  		$('#inputcode').blur();
+  		  
+[/#if]
+
+

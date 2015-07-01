@@ -1,0 +1,67 @@
+
+<br>${ctx.getParameter("body")!}
+<br>Wishlist shared by ${ctx.getParameter("from")!}
+<br><img src="${ctx.getParameter("imageUrl")!}" />
+
+[#assign cli= ctx.getParameter("clientId")!]
+[#assign username= ctx.getParameter("username")!]
+
+[#if cli?? && username??]
+[#assign lookCriteria]
+{
+        "type":"wishitem",
+		"parentId":${serviceItem.getIdByPath("wishlist")!0},
+		"order":
+    	{
+    	"name":"insertionDate",
+    	 "direction":"desc"
+    	},
+    	attributes:
+    	[
+	    	
+	    	{
+			        "name":"clientId",
+			        "string_value": "${cli!}"
+			},
+			{
+			        "name":"username",
+			        "string_value": "${username!}"
+			}
+			
+		]
+}
+
+[/#assign]
+
+<!-- ${lookCriteria} -->
+${serviceItem.setCriteriaJson(lookCriteria)!}
+${serviceItem.setLimit(-1)!}
+[#assign wishlist= serviceItem.search]
+
+
+<table id="wishTable" >
+[#if wishlist.size()==0]
+<tr><td>NO ITEM IN WISHLIST FOR THIS CUSTOMER</td></tr>
+
+[#else]
+
+
+[#list wishlist as wish]
+<tr>
+<td class="outerTd">
+<div class="wishTitle">${wish.prodId!}</div>
+<table class="wishInnerTable">
+<tr>
+					<td class="wishListThumbContainer"><img  src="${wish.thumbUrl}"></td>
+					<td>COLOR:${wish.color!}<br> SIZE:${wish.size!}<br>STATUS:${wish.status!}  </td>
+				</tr>
+</table>
+
+</td>
+</tr>
+[/#list]
+[/#if]
+</table>
+[#else]
+No client id or username specified
+[/#if]

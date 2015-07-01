@@ -1,0 +1,57 @@
+[boundary]inner:choseAccessories[/boundary]
+[#assign year=ctx.getParameter('year')]
+[#assign collection=ctx.getParameter('collection')]
+[#assign child_id=ctx.getParameter('child_id')]
+[#assign _page=ctx.getParameter('page')?number]
+<ul>
+[#list list as count]
+
+            <span id='acc'>ACCESSORIES</span>
+        	 <li><hr width='80%'></li>
+        	 
+        	 
+        	      [#if count.allitem!=0]
+                  <li onclick='setViewerSelection("${year}","${collection}","allitems","${child_id}",0)'>all items</li>
+                  <li><hr width='80%'></li>
+                  [/#if]
+                  [#if count.bags!=0]
+			      <li onclick='setViewerSelection("${year}","${collection}","bags","${child_id}",0)'>bags</li>
+			      <li><hr width='80%'></li>
+			      [/#if]
+			      [#if count.belts!=0]
+			      <li onclick='setViewerSelection("${year}","${collection}","belts","${child_id}",0)'>belts</li>
+			      <li><hr width='80%'></li>
+			      [/#if]
+			      [#if count.jewelry!=0]
+			      <li onclick='setViewerSelection("${year}","${collection}","jewelry","${child_id}",0)'>fashion jewelry</li>
+			      <li><hr width='80%'></li>
+			      [/#if]
+			      [#if count.gloves!=0]
+		          <li onclick='setViewerSelection("${year}","${collection}","gloves","${child_id}",0)'>gloves</li>
+		          <li><hr width='80%'></li>
+		          [/#if]
+		          [#if count.small!=0]
+			      <li onclick='setViewerSelection("${year}","${collection}","small","${child_id}",0)'>small leather goods</li>
+			      <li><hr width='80%'></li>
+			      [/#if]
+			      [#if count.shoes!=0]
+			      <li onclick='setViewerSelection("${year}","${collection}","shoes","${child_id}",0)'>shoes</li>
+			      <li><hr width='80%'></li>
+			      [/#if]
+			      [#if count.soft!=0]
+			      <li onclick='setViewerSelection("${year}","${collection}","soft","${child_id}",0)'>soft</li>
+			      <li><hr width='80%'></li>
+			      [/#if]
+			      [#if count.hats!=0]
+			      <li onclick='setViewerSelection("${year}","${collection}","hats","${child_id}",0)'>hats</li>
+			      <li><hr width='80%'></li>
+			      [/#if]
+			      [#if count.others!=0]
+			      <li onclick='setViewerSelection("${year}","${collection}","others","${child_id}",0)'>others</li>
+			       <li><hr width='80%'></li>
+			       [/#if]  
+ [/#list]
+
+			  </ul>
+
+			  

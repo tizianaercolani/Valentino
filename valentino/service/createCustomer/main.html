@@ -1,0 +1,19 @@
+[#assign now = new("it.dsgroup.warp.util.Datetime")]
+
+<!-- ${now.get("dd-MM-yyyy HH:mm:ss")} 
+
+RESPONSE
+
+result:  ${resp.getResult()?string!}
+code: ${resp.getCode()!}
+description: ${resp.getDescription()!}
+
+-->
+[boundary]script[/boundary]
+hideActInd();
+[#if resp.getResult()]
+showBasicDialog("${resp.getDescription()!}", "goBack()");
+[#else]
+showBasicDialog("${resp.getDescription()!}");
+[/#if]
+
